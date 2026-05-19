@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О Ривьере — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+.about-hero{padding:64px 0 56px;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.about-hero__inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about-hero__label{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.about-hero__title{margin-bottom:6px}
+.about-hero__subtitle{font-family:var(--font-head);font-size:clamp(20px,3vw,36px);color:var(--lt-teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.about-hero__desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.7;max-width:500px}
+.about-hero__wave{display:flex;align-items:center;justify-content:center}
+.mission-card{background:var(--coral);border-radius:var(--radius-lg);padding:32px;margin-bottom:0}
+.mission-card__label{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px}
+.mission-card__text{font-family:var(--font-head);font-size:20px;color:#fff;line-height:1.45;letter-spacing:.5px}
+.val-card{background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:24px;transition:var(--transition)}
+.val-card:hover{box-shadow:0 8px 30px rgba(0,46,163,.1);transform:translateY(-3px)}
+.val-card__icon{font-size:32px;margin-bottom:12px}
+.val-card__title{font-family:var(--font-head);font-size:14px;color:var(--blue);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.val-card__desc{font-size:13px;color:#666;line-height:1.6}
+.numbers-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.num-card{border-radius:var(--radius-lg);padding:24px;text-align:center;color:#fff}
+.num-card__n{font-family:var(--font-head);font-size:36px;letter-spacing:1px}
+.num-card__l{font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+.voice-card{background:#fff;border-radius:var(--radius-lg);border-left:5px solid var(--blue);padding:24px;font-size:15px;color:#333;line-height:1.7;font-style:italic}
+.voice-card__label{font-size:11px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;font-style:normal}
+@media(max-width:900px){.about-hero__inner{grid-template-columns:1fr}.about-hero__wave{display:none}.numbers-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.numbers-row{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="about-hero hero-grad--dark">
+  <div class="container">
+    <div class="about-hero__inner">
+      <div>
+        <div class="about-hero__label">Платформа бренда</div>
+        <div class="about-hero__title h1 text-white">Ривьера.</div>
+        <div class="about-hero__subtitle">Вспоминая будущее</div>
+        <div class="about-hero__desc">Торгово-развлекательное пространство, которое возвращает в городской досуг тот энтузиазм, с которым когда-то представляли будущее.</div>
+      </div>
+      <div class="about-hero__wave">
+        <svg width="160" height="200" viewBox="0 0 160 200" fill="none">
+          <path d="M20 160 C50 160 50 40 80 40 C110 40 110 160 140 160" stroke="#C4EBE5" stroke-width="8" stroke-linecap="round" fill="none" opacity=".7"/>
+          <path d="M10 130 C40 130 40 70 80 70 C120 70 120 130 150 130" stroke="#248FEB" stroke-width="5" stroke-linecap="round" fill="none" opacity=".45"/>
+          <path d="M30 190 C55 190 55 100 80 100 C105 100 105 190 130 190" stroke="#FF734D" stroke-width="3" stroke-linecap="round" fill="none" opacity=".4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<!-- MISSION -->
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="grid-2" style="gap:32px;align-items:start">
+      <div class="mission-card">
+        <div class="mission-card__label">Миссия бренда</div>
+        <div class="mission-card__text">Создать пространство, превращающее свободное время человека в жизненную энергию</div>
+      </div>
+      <div>
+        <div class="sec-head__title" style="font-family:var(--font-head);font-size:22px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:16px">Суть бренда</div>
+        <div style="font-size:15px;color:#444;line-height:1.75">
+          Ривьера соединяет энергию спорта, открытость культуры, радость отдыха и удовольствие от шопинга в одном маршруте — живом, насыщенном и собранном вокруг движения, впечатлений и интереса к жизни.
+        </div>
+        <div style="margin-top:16px;font-size:15px;color:#444;line-height:1.75">
+          Ривьера возвращает человеку ощущение подъёма и вкус к завтрашнему дню.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Ценности бренда</div></div>
+    <div class="grid-3">
+      <div class="val-card">
+        <div class="val-card__icon">⚡</div>
+        <div class="val-card__title">Энергия движения</div>
+        <div class="val-card__desc">Спорт, прогулка, смена ритма воспринимается не как дисциплина, а как естественная часть насыщенной и приятной жизни. Ривьера поддерживает состояние, в котором человеку хочется быть включённым и открытым.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-card__icon">🎭</div>
+        <div class="val-card__title">Культура без дистанции</div>
+        <div class="val-card__desc">Культура в Ривьере не отделена от повседневности и не требует специальной подготовки. Она встроена в маршрут, атмосферу, события — доступная, вовлекающая, живая.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-card__icon">🔗</div>
+        <div class="val-card__title">Синергия</div>
+        <div class="val-card__desc">Ривьера соединяет сценарии, которые обычно существуют по отдельности: шопинг, еду, движение, отдых, впечатления. Здесь не нужно выбирать что-то одно.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-card__icon">🚀</div>
+        <div class="val-card__title">Оптимизм</div>
+        <div class="val-card__desc">Ривьера исходит из идеи, что будущее должно ощущаться как возможность. Бренд поддерживает веру в движение вперёд, обновление и энергию действия.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-card__icon">👨‍👩‍👧‍👦</div>
+        <div class="val-card__title">Диалог поколений</div>
+        <div class="val-card__desc">Ривьера — место, где разные поколения могут совместно проводить время с уважением к интересам каждого в рамках одного живого опыта.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-card__icon">✨</div>
+        <div class="val-card__title">Актуальный стиль</div>
+        <div class="val-card__desc">Стильность без перегиба, современность без снобизма, актуальность без гонки за хайпом. Ривьера берёт лучшее из нового — проверенное и востребованное.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Ривьера в цифрах</div></div>
+    <div class="numbers-row">
+      <div class="num-card" style="background:var(--blue)"><div class="num-card__n">200+</div><div class="num-card__l">Магазинов</div></div>
+      <div class="num-card" style="background:var(--teal)"><div class="num-card__n">3</div><div class="num-card__l">Этажа</div></div>
+      <div class="num-card" style="background:var(--coral)"><div class="num-card__n">12</div><div class="num-card__l">Событий в мае</div></div>
+      <div class="num-card" style="background:var(--navy)"><div class="num-card__n">1000+</div><div class="num-card__l">Мест паркинг</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section class="section--sm" style="background:#fff">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Характер речи бренда</div></div>
+    <div class="grid-2" style="gap:20px">
+      <div class="voice-card">
+        <div class="voice-card__label">Как звучит Ривьера</div>
+        Ривьера говорит как место, в котором есть движение, свет, стиль и ощущение хорошего дня. Собранный, живой, уверенный. Иногда — короткий и почти плакатный. Но всегда человеческий.
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:var(--blue);border-radius:var(--radius-lg);padding:16px 20px;color:#fff">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Энергично</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8)">В текстах чувствуется ритм, внутренняя собранность и движение.</div>
+        </div>
+        <div style="background:var(--teal);border-radius:var(--radius-lg);padding:16px 20px;color:#fff">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Современно</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8)">Речь сегодняшняя, без тяжёлых оборотов и попытки казаться «в теме».</div>
+        </div>
+        <div style="background:var(--mid);border-radius:var(--radius-lg);padding:16px 20px;color:#fff">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Открыто</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8)">Нет высокомерия. Обращается к людям прямо и спокойно, без дистанции.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>renderNav('about');renderFooter();</script>
+</body></html>

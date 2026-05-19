@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Схема ТРЦ — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+.map-hero{padding:40px 0 32px}
+.floor-tabs{display:flex;gap:0;border-bottom:2px solid var(--gray);margin-bottom:24px}
+.floor-tab{font-family:var(--font-head);font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;cursor:pointer;color:#888;border-bottom:3px solid transparent;margin-bottom:-2px;transition:var(--transition)}
+.floor-tab:hover{color:var(--blue)}
+.floor-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.map-container{background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:20px;overflow:hidden}
+.map-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.leg-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+.leg-dot{width:12px;height:12px;border-radius:var(--radius);flex-shrink:0}
+.map-sidebar{display:flex;flex-direction:column;gap:12px}
+.map-info-card{background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:16px}
+.map-info-card__title{font-family:var(--font-head);font-size:13px;color:var(--blue);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.map-shop-mini{font-size:13px;color:#333;padding:6px 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between}
+.map-shop-mini:last-child{border:none}
+.map-shop-mini__floor{font-size:11px;color:var(--bright);font-weight:700}
+.map-wrap{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
+@media(max-width:900px){.map-wrap{grid-template-columns:1fr}.map-sidebar{display:none}.map-legend{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="map-hero hero-grad--teal">
+  <div class="container">
+    <div class="label mb-8" style="color:rgba(0,46,163,.6)">Торгово-развлекательный центр</div>
+    <div class="h1" style="color:var(--blue);margin-bottom:8px">Схема ТРЦ</div>
+    <div style="font-size:14px;color:rgba(0,46,163,.7)">3 этажа · 200+ магазинов · Автозаводская 18</div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="floor-tabs">
+      <div class="floor-tab active" onclick="showFloor(this,'f1')">1 этаж</div>
+      <div class="floor-tab" onclick="showFloor(this,'f2')">2 этаж</div>
+      <div class="floor-tab" onclick="showFloor(this,'f3')">3 этаж</div>
+      <div class="floor-tab" onclick="showFloor(this,'fp')">−1 Паркинг</div>
+      <div class="floor-tab" onclick="showFloor(this,'fp2')">−2 Паркинг</div>
+    </div>
+    <div class="map-wrap">
+      <div>
+        <div class="map-container">
+          <svg id="mapsvg" viewBox="0 0 640 380" width="100%" style="display:block">
+            <!-- Floor outline -->
+            <rect x="12" y="12" width="616" height="356" rx="8" fill="#EEF4FF" stroke="#C4EBE5" stroke-width="2"/>
+            <!-- Atrium center -->
+            <rect x="220" y="120" width="200" height="140" rx="6" fill="white" stroke="#248FEB" stroke-width="2"/>
+            <text x="320" y="195" text-anchor="middle" fill="#248FEB" font-family="Arial" font-size="13" font-weight="bold">АТРИУМ</text>
+            <!-- Row 1 shops -->
+            <rect x="24" y="24" width="100" height="70" rx="5" fill="#002EA3" opacity=".85"/>
+            <text x="74" y="63" text-anchor="middle" fill="white" font-family="Arial" font-size="10">EKONIKA</text>
+            <rect x="134" y="24" width="80" height="70" rx="5" fill="#002EA3" opacity=".75"/>
+            <text x="174" y="63" text-anchor="middle" fill="white" font-family="Arial" font-size="10">SELA</text>
+            <rect x="430" y="24" width="90" height="70" rx="5" fill="#FF734D" opacity=".85"/>
+            <text x="475" y="63" text-anchor="middle" fill="white" font-family="Arial" font-size="10">Л'ОКСИТАН</text>
+            <rect x="530" y="24" width="98" height="70" rx="5" fill="#FF734D" opacity=".75"/>
+            <text x="579" y="63" text-anchor="middle" fill="white" font-family="Arial" font-size="10">belle you</text>
+            <!-- Row 2 shops -->
+            <rect x="24" y="104" width="100" height="156" rx="5" fill="#248FEB" opacity=".8"/>
+            <text x="74" y="185" text-anchor="middle" fill="white" font-family="Arial" font-size="10">LIMÉ</text>
+            <rect x="134" y="104" width="80" height="70" rx="5" fill="#4A429E" opacity=".8"/>
+            <text x="174" y="143" text-anchor="middle" fill="white" font-family="Arial" font-size="10">Samsung</text>
+            <rect x="134" y="184" width="80" height="76" rx="5" fill="#29C9C9" opacity=".8"/>
+            <text x="174" y="225" text-anchor="middle" fill="white" font-family="Arial" font-size="10">Restore:</text>
+            <rect x="430" y="104" width="90" height="156" rx="5" fill="#533258" opacity=".75"/>
+            <text x="475" y="185" text-anchor="middle" fill="white" font-family="Arial" font-size="10">Befree</text>
+            <rect x="530" y="104" width="98" height="76" rx="5" fill="#D6B200" opacity=".85"/>
+            <text x="579" y="143" text-anchor="middle" fill="#242E7D" font-family="Arial" font-size="10">Casio</text>
+            <rect x="530" y="190" width="98" height="70" rx="5" fill="#002EA3" opacity=".7"/>
+            <text x="579" y="229" text-anchor="middle" fill="white" font-family="Arial" font-size="9">Билайн</text>
+            <!-- Bottom shops -->
+            <rect x="24" y="270" width="180" height="98" rx="5" fill="#D6B200" opacity=".85"/>
+            <text x="114" y="323" text-anchor="middle" fill="#242E7D" font-family="Arial" font-size="11" font-weight="bold">ФУДКОРТ</text>
+            <rect x="214" y="270" width="200" height="98" rx="5" fill="#C4EBE5" stroke="#2994BD" stroke-width="1"/>
+            <text x="314" y="323" text-anchor="middle" fill="#002EA3" font-family="Arial" font-size="10">INFO / СЕРВИСЫ</text>
+            <rect x="424" y="270" width="204" height="98" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+            <text x="526" y="323" text-anchor="middle" fill="#3B6D11" font-family="Arial" font-size="10">Мир Кубиков</text>
+            <!-- Escalators -->
+            <circle cx="216" cy="104" r="12" fill="#FF734D"/>
+            <text x="216" y="108" text-anchor="middle" fill="white" font-family="Arial" font-size="9">↑↓</text>
+            <circle cx="216" cy="270" r="12" fill="#FF734D"/>
+            <text x="216" y="274" text-anchor="middle" fill="white" font-family="Arial" font-size="9">↑↓</text>
+            <circle cx="424" cy="104" r="12" fill="#FF734D"/>
+            <text x="424" y="108" text-anchor="middle" fill="white" font-family="Arial" font-size="9">↑↓</text>
+            <!-- Entry -->
+            <rect x="280" y="358" width="80" height="10" rx="4" fill="#002EA3"/>
+            <text x="320" y="368" text-anchor="middle" fill="#002EA3" font-family="Arial" font-size="9">ВХОД</text>
+          </svg>
+        </div>
+        <div class="map-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:#002EA3"></div>Одежда и обувь</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#FF734D"></div>Красота</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#D6B200"></div>Еда</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#4A429E"></div>Электроника</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#248FEB"></div>Fashion</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#29C9C9"></div>Сервисы</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#FF734D;border-radius:50%"></div>Лифты/Эскалаторы</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#C4EBE5"></div>Общие зоны</div>
+        </div>
+      </div>
+      <div class="map-sidebar">
+        <div class="map-info-card">
+          <div class="map-info-card__title"><i class="ti ti-clock"></i> Режим работы</div>
+          <div style="font-size:13px;color:#333;line-height:1.8">
+            <div>Пн–Чт: <strong>10:00–22:00</strong></div>
+            <div>Пт–Сб: <strong>10:00–23:00</strong></div>
+            <div>Вс: <strong>10:00–22:00</strong></div>
+          </div>
+        </div>
+        <div class="map-info-card">
+          <div class="map-info-card__title"><i class="ti ti-building-store"></i> Магазины · 1 этаж</div>
+          <div>
+            <div class="map-shop-mini">EKONIKA<span class="map-shop-mini__floor">1 эт.</span></div>
+            <div class="map-shop-mini">SELA<span class="map-shop-mini__floor">1 эт.</span></div>
+            <div class="map-shop-mini">LIMÉ<span class="map-shop-mini__floor">1 эт.</span></div>
+            <div class="map-shop-mini">Samsung<span class="map-shop-mini__floor">1 эт.</span></div>
+            <div class="map-shop-mini">Restore:<span class="map-shop-mini__floor">1 эт.</span></div>
+            <div class="map-shop-mini">Л'Окситан<span class="map-shop-mini__floor">1 эт.</span></div>
+            <a href="shops.html" class="btn btn--outline-blue btn--sm" style="margin-top:10px;display:inline-flex">Все магазины →</a>
+          </div>
+        </div>
+        <div class="map-info-card">
+          <div class="map-info-card__title"><i class="ti ti-parking"></i> Парковка</div>
+          <div style="font-size:13px;color:#555;line-height:1.7">
+            1000+ мест<br>Уровни −1 и −2<br><strong style="color:#1a7a3f">Бесплатно</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>renderNav('map');renderFooter();</script>
+</body></html>
+<script>
+function showFloor(el, floor) {
+  document.querySelectorAll('.floor-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  // In a real implementation, different SVG content would load per floor
+}
+</script>

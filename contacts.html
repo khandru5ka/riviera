@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+.contacts-hero{padding:48px 0 40px}
+.contact-card{background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:28px;transition:var(--transition)}
+.contact-card:hover{box-shadow:0 8px 30px rgba(0,46,163,.1)}
+.contact-card__icon{width:52px;height:52px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;color:#fff}
+.contact-card__title{font-family:var(--font-head);font-size:14px;color:var(--blue);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.contact-card__val{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.contact-card__sub{font-size:13px;color:#777;line-height:1.6}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table td{padding:8px 0;font-size:14px;border-bottom:1px solid #f0f0f0}
+.hours-table tr:last-child td{border:none}
+.hours-table td:first-child{color:#777}
+.hours-table td:last-child{font-weight:700;text-align:right}
+.map-embed{background:linear-gradient(135deg,var(--teal),var(--lt-teal));border-radius:var(--radius-lg);height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.map-embed__icon{font-size:64px;color:var(--blue);opacity:.4}
+.map-embed__label{position:absolute;bottom:20px;left:20px;background:var(--blue);color:#fff;padding:8px 16px;border-radius:var(--radius);font-family:var(--font-head);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.faq-item{background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:0;overflow:hidden;margin-bottom:8px}
+.faq-q{padding:18px 20px;font-size:14px;font-weight:700;color:#1a1a2e;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:var(--transition)}
+.faq-q:hover{background:#f8f9ff}
+.faq-a{padding:0 20px 16px;font-size:13px;color:#666;line-height:1.65;display:none}
+.faq-a.open{display:block}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="contacts-hero hero-grad--blue">
+  <div class="container">
+    <div class="label label--light mb-8">Торгово-развлекательный центр</div>
+    <div class="h1 text-white mb-12">Контакты</div>
+    <div style="font-size:15px;color:rgba(255,255,255,.7)">Москва, Автозаводская 18 · Открыто сегодня до 22:00</div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="grid-4" style="margin-bottom:40px">
+      <div class="contact-card">
+        <div class="contact-card__icon" style="background:var(--blue)"><i class="ti ti-phone"></i></div>
+        <div class="contact-card__title">Телефон</div>
+        <div class="contact-card__val">+7 495 269-99-99</div>
+        <div class="contact-card__sub">Общие вопросы<br>Пн–Вс 9:00–22:00</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon" style="background:var(--teal)"><i class="ti ti-building-store"></i></div>
+        <div class="contact-card__title">Аренда</div>
+        <div class="contact-card__val">+7 495 269-00-08</div>
+        <div class="contact-card__sub">Коммерческий отдел<br>Пн–Пт 9:00–18:00</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon" style="background:var(--coral)"><i class="ti ti-mail"></i></div>
+        <div class="contact-card__title">E-mail</div>
+        <div class="contact-card__val" style="font-size:13px">info@riviera.su</div>
+        <div class="contact-card__sub">Ответим в течение<br>одного рабочего дня</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__icon" style="background:var(--navy)"><i class="ti ti-map-pin"></i></div>
+        <div class="contact-card__title">Адрес</div>
+        <div class="contact-card__val">Автозаводская, 18</div>
+        <div class="contact-card__sub">Москва<br>ст. м. Автозаводская</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="gap:32px;align-items:start">
+      <div>
+        <div class="sec-head"><div class="sec-head__title">Режим работы</div></div>
+        <div style="background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:24px">
+          <table class="hours-table">
+            <tr><td>Понедельник–Четверг</td><td>10:00 – 22:00</td></tr>
+            <tr><td>Пятница</td><td>10:00 – 23:00</td></tr>
+            <tr><td>Суббота</td><td>10:00 – 23:00</td></tr>
+            <tr><td>Воскресенье</td><td>10:00 – 22:00</td></tr>
+          </table>
+          <div style="margin-top:16px;padding:12px 16px;background:#EAF3DE;border-radius:var(--radius);font-size:13px;color:#3B6D11">
+            <strong>Праздничные дни:</strong> уточняйте режим работы по телефону или в соцсетях.
+          </div>
+        </div>
+
+        <div class="sec-head" style="margin-top:32px"><div class="sec-head__title">Как добраться</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:16px 20px;display:flex;gap:14px;align-items:flex-start">
+            <div style="font-size:28px;flex-shrink:0">🚇</div>
+            <div><div style="font-family:var(--font-head);font-size:13px;color:var(--blue);margin-bottom:4px;text-transform:uppercase">Метро</div><div style="font-size:13px;color:#666">Ст. Автозаводская (Замоскворецкая). Выход № 1, 5 минут пешком.</div></div>
+          </div>
+          <div style="background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:16px 20px;display:flex;gap:14px;align-items:flex-start">
+            <div style="font-size:28px;flex-shrink:0">🚗</div>
+            <div><div style="font-family:var(--font-head);font-size:13px;color:var(--blue);margin-bottom:4px;text-transform:uppercase">Автомобиль</div><div style="font-size:13px;color:#666">Бесплатный паркинг 1000+ мест на уровнях −1 и −2. Въезд с Автозаводской улицы.</div></div>
+          </div>
+          <div style="background:#fff;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.07);padding:16px 20px;display:flex;gap:14px;align-items:flex-start">
+            <div style="font-size:28px;flex-shrink:0">🚌</div>
+            <div><div style="font-family:var(--font-head);font-size:13px;color:var(--blue);margin-bottom:4px;text-transform:uppercase">Автобус</div><div style="font-size:13px;color:#666">Маршруты 632, 674, 901. Остановка «Автозаводская улица».</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><div class="sec-head__title">На карте</div></div>
+        <div class="map-embed">
+          <i class="ti ti-map-2 map-embed__icon"></i>
+          <div class="map-embed__label"><i class="ti ti-external-link"></i> Открыть в Яндекс.Картах</div>
+        </div>
+        <div style="margin-top:32px">
+          <div class="sec-head"><div class="sec-head__title">FAQ</div></div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Платная ли парковка? <i class="ti ti-chevron-down"></i></div>
+            <div class="faq-a">Парковка бесплатная для всех посетителей ТРЦ на уровнях −1 и −2. Более 1000 мест.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Есть ли точка выдачи Сбера/банков? <i class="ti ti-chevron-down"></i></div>
+            <div class="faq-a">На первом этаже ТРЦ расположены банкоматы и офис обслуживания. Уточняйте на стойке информации.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Как попасть на событие? <i class="ti ti-chevron-down"></i></div>
+            <div class="faq-a">Большинство событий бесплатные и не требуют регистрации. Для некоторых мероприятий нужна предварительная запись — уточняйте на странице события.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Можно ли разместить рекламу? <i class="ti ti-chevron-down"></i></div>
+            <div class="faq-a">Да, свяжитесь с отделом маркетинга по телефону +7 495 269-99-99 или по email info@riviera.su.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Как арендовать площадь? <i class="ti ti-chevron-down"></i></div>
+            <div class="faq-a">Позвоните в коммерческий отдел: +7 495 269-00-08 (пн–пт, 9:00–18:00) или оставьте заявку на странице «Аренда».</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="section--sm" style="background:#fff">
+  <div class="container">
+    <div class="subscribe">
+      <div class="grid-2" style="gap:32px;align-items:center">
+        <div>
+          <div class="subscribe__title">Следите за нами</div>
+          <div class="subscribe__sub">Анонсы событий, акции и новости — в соцсетях каждый день</div>
+          <div class="subscribe__socials" style="margin-top:16px">
+            <a class="soc-link" href="https://t.me/rivieramoscow" target="_blank" style="padding:12px 20px;font-size:14px"><i class="ti ti-brand-telegram"></i>Telegram</a>
+            <a class="soc-link" href="https://vk.com/rivieramoscow" target="_blank" style="padding:12px 20px;font-size:14px"><i class="ti ti-brand-vk"></i>ВКонтакте</a>
+          </div>
+        </div>
+        <div>
+          <div class="subscribe__title">Напишите нам</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+            <input class="subscribe__input" type="text" placeholder="Ваше имя">
+            <input class="subscribe__input" type="email" placeholder="E-mail">
+            <textarea class="subscribe__input" rows="3" placeholder="Сообщение..." style="resize:vertical"></textarea>
+            <button class="subscribe__btn" style="align-self:flex-start;padding:12px 24px">Отправить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>renderNav('contacts');renderFooter();</script>
+</body></html>
+<script>
+function toggleFaq(el) {
+  const ans = el.nextElementSibling;
+  ans.classList.toggle('open');
+  const icon = el.querySelector('i');
+  icon.style.transform = ans.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+</script>

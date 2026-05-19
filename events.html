@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>События и афиша — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+    .events-hero { padding: 56px 0 48px; }
+    .events-hero__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .events-hero__eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .live-dot { width: 8px; height: 8px; background: var(--coral); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .events-hero__title { margin-bottom: 14px; }
+    .events-hero__desc { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 24px; }
+    .events-hero__tag-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-chip {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 6px 14px; border-radius: var(--radius);
+      border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7);
+      cursor: pointer; transition: var(--transition); background: transparent;
+    }
+    .hero-chip:hover, .hero-chip.on { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.6); }
+    .events-hero__cal { background: rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 20px; }
+    .events-hero__cal .cal__month { color: #fff; }
+    .events-hero__cal .cal__dow   { color: rgba(255,255,255,0.4); }
+    .events-hero__cal .cal__day   { color: rgba(255,255,255,0.7); }
+    .events-hero__cal .cal__day:hover:not(.cal__day--today) { background: rgba(255,255,255,0.15); }
+    .events-hero__cal .cal__day--event { background: rgba(255,115,77,0.3); color: #fff; font-weight: 700; }
+    .events-hero__cal .cal__day--today { background: var(--coral); color: #fff; }
+    .events-hero__cal .cal__day--past  { color: rgba(255,255,255,0.25); }
+
+    .event-card__img--concert { background: linear-gradient(135deg,var(--mid),var(--pink)); }
+    .event-card__img--sport   { background: linear-gradient(135deg,var(--teal),var(--lt-teal)); }
+    .event-card__img--kids    { background: linear-gradient(135deg,var(--dark-purple),var(--pink)); }
+    .event-card__img--expo    { background: linear-gradient(135deg,var(--navy),var(--mid)); }
+    .event-card__img--retro   { background: linear-gradient(135deg,var(--navy),var(--coral)); }
+    .event-card__img--fashion { background: linear-gradient(135deg,var(--dark-purple),var(--coral)); }
+
+    .events-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    .featured-row {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      border: 1px solid rgba(0,0,0,0.07);
+      transition: var(--transition);
+    }
+    .featured-row:hover { box-shadow: 0 12px 40px rgba(0,46,163,0.15); }
+    .featured-row__img {
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      position: relative;
+    }
+    .featured-row__body { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+    .featured-row__title { font-family: var(--font-head); font-size: 26px; text-transform: uppercase; letter-spacing: 1px; color: #1a1a2e; margin-bottom: 8px; }
+    .featured-row__desc { font-size: 14px; color: #666; line-height: 1.6; }
+    .featured-row__meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+    .featured-row__meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; }
+    .featured-row__date-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(0,0,0,0.45); color: #fff;
+      font-size: 13px; font-weight: 700; padding: 6px 12px;
+      border-radius: var(--radius); text-align: center; line-height: 1.5;
+    }
+
+    @media(max-width:900px){
+      .events-hero__inner { grid-template-columns: 1fr; }
+      .events-hero__cal   { display: none; }
+      .events-grid { grid-template-columns: repeat(2,1fr); }
+      .featured-row { grid-template-columns: 1fr; }
+      .featured-row__img { height: 200px; }
+    }
+    @media(max-width:600px){ .events-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="events-hero hero-grad--blue">
+  <div class="container">
+    <div class="events-hero__inner">
+      <div>
+        <div class="events-hero__eyebrow">
+          <span class="live-dot"></span>
+          <span class="label label--light">Афиша событий</span>
+        </div>
+        <div class="events-hero__title h1 text-white">Всё лето — в движении</div>
+        <div class="events-hero__desc">
+          Концерты, спортивные фестивали, выставки, детские конкурсы и fashion-дни. Что-то происходит каждые выходные.
+        </div>
+        <div class="events-hero__tag-filters">
+          <div class="hero-chip on" onclick="filterEvents(this,'all')">Все</div>
+          <div class="hero-chip" onclick="filterEvents(this,'concert')">Концерты</div>
+          <div class="hero-chip" onclick="filterEvents(this,'sport')">Спорт</div>
+          <div class="hero-chip" onclick="filterEvents(this,'kids')">Для детей</div>
+          <div class="hero-chip" onclick="filterEvents(this,'expo')">Выставки</div>
+          <div class="hero-chip" onclick="filterEvents(this,'fashion')">Фэшн</div>
+        </div>
+      </div>
+      <div class="events-hero__cal cal">
+        <div class="cal__head"><div class="cal__month">Май 2026</div></div>
+        <div class="cal__grid">
+          <div class="cal__dow">Пн</div><div class="cal__dow">Вт</div><div class="cal__dow">Ср</div>
+          <div class="cal__dow">Чт</div><div class="cal__dow">Пт</div><div class="cal__dow">Сб</div><div class="cal__dow">Вс</div>
+          <div class="cal__day cal__day--past"></div><div class="cal__day cal__day--past"></div><div class="cal__day cal__day--past"></div>
+          <div class="cal__day cal__day--past">1</div><div class="cal__day cal__day--past">2</div><div class="cal__day cal__day--past">3</div><div class="cal__day cal__day--past">4</div>
+          <div class="cal__day cal__day--past">5</div><div class="cal__day cal__day--past">6</div><div class="cal__day cal__day--past">7</div>
+          <div class="cal__day cal__day--event cal__day--past">8</div><div class="cal__day cal__day--past">9</div>
+          <div class="cal__day cal__day--event cal__day--past">10</div><div class="cal__day cal__day--past">11</div>
+          <div class="cal__day cal__day--past">12</div><div class="cal__day cal__day--past">13</div><div class="cal__day cal__day--past">14</div>
+          <div class="cal__day cal__day--past">15</div>
+          <div class="cal__day cal__day--event cal__day--past">16</div>
+          <div class="cal__day cal__day--past">17</div><div class="cal__day cal__day--past">18</div>
+          <div class="cal__day cal__day--today">19</div>
+          <div class="cal__day">20</div><div class="cal__day">21</div>
+          <div class="cal__day cal__day--event">22</div><div class="cal__day">23</div>
+          <a href="event-open-air.html" class="cal__day cal__day--event" style="text-decoration:none">24</a>
+          <div class="cal__day">25</div>
+          <div class="cal__day">26</div><div class="cal__day">27</div>
+          <div class="cal__day cal__day--event">28</div>
+          <div class="cal__day">29</div><div class="cal__day">30</div>
+          <div class="cal__day cal__day--event">31</div><div class="cal__day"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<!-- FEATURED -->
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Событие недели</div></div>
+    <a href="event-open-air.html" class="featured-row" data-cat="concert" style="text-decoration:none;margin-bottom:0">
+      <div class="featured-row__img event-card__img--concert">
+        <div class="tag tag--concert mb-8">Концерт · Вход свободный</div>
+        <div style="font-family:var(--font-head);font-size:24px;color:#fff;text-transform:uppercase;letter-spacing:1px">Летний Open-Air</div>
+        <div class="featured-row__date-badge">24 МАЯ<br>19:00</div>
+      </div>
+      <div class="featured-row__body">
+        <div>
+          <div class="featured-row__title">Летний Open-Air в атриуме</div>
+          <div class="featured-row__desc">Большой летний концерт с несколькими исполнителями — живая музыка, диджей-сет и файер-шоу в завершение. Бесплатно для всех посетителей ТРЦ.</div>
+          <div class="featured-row__meta">
+            <span class="featured-row__meta-item"><i class="ti ti-map-pin"></i>Атриум, 2 этаж</span>
+            <span class="featured-row__meta-item"><i class="ti ti-users"></i>Свободный вход</span>
+            <span class="featured-row__meta-item"><i class="ti ti-clock"></i>3 часа</span>
+            <span class="featured-row__meta-item"><i class="ti ti-microphone"></i>3 исполнителя</span>
+          </div>
+        </div>
+        <a href="event-open-air.html" class="btn btn--primary" style="align-self:flex-start;margin-top:16px">Подробнее →</a>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ALL EVENTS -->
+<section class="section" style="background:#fff" id="all-events">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Все события</div></div>
+    <div class="events-grid" id="events-grid">
+
+      <a href="event-open-air.html" class="event-card" data-cat="concert" style="text-decoration:none">
+        <div class="event-card__img event-card__img--concert">
+          <div class="tag tag--concert mb-8">Концерт</div>
+          <div class="event-card__title">Летний Open-Air</div>
+          <div class="event-card__date-badge">24 МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Живая музыка, DJ-сет и файер-шоу в атриуме ТРЦ. Бесплатно.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-users"></i>Свободный вход</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="event-card" data-cat="sport">
+        <div class="event-card__img event-card__img--sport">
+          <div class="tag tag--sport mb-8">Спорт</div>
+          <div class="event-card__title">Спортивный Фестиваль</div>
+          <div class="event-card__date-badge">16 МАЯ –<br>14 АВГ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Тренировки, мастер-классы и соревнования на площадках ТРЦ всё лето.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-users"></i>Все возрасты</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="kids">
+        <div class="event-card__img event-card__img--kids">
+          <div class="tag tag--kids mb-8">Дети</div>
+          <div class="event-card__title">Конкурс «Моё Лето»</div>
+          <div class="event-card__date-badge">20–31<br>МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Конкурс детских рисунков, лучшие работы украсят стены ТРЦ. Призы!</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-palette"></i>до 12 лет</span>
+            <span class="event-card__meta-item"><i class="ti ti-gift"></i>Призы</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="expo">
+        <div class="event-card__img event-card__img--expo">
+          <div class="tag tag--expo mb-8">Выставка</div>
+          <div class="event-card__title">Выставка Динозавров</div>
+          <div class="event-card__date-badge">Постоянно</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Интерактивная выставка с движущимися фигурами динозавров. 3 этаж.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-map-pin"></i>3 этаж</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="concert">
+        <div class="event-card__img event-card__img--retro">
+          <div class="tag tag--concert mb-8">Авто-шоу</div>
+          <div class="event-card__title">Ретро-пробег «Круг Победы»</div>
+          <div class="event-card__date-badge">10 МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Парад ретро-автомобилей на парковке ТРЦ. Фото с легендарными машинами.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-car"></i>Парковка</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="fashion">
+        <div class="event-card__img event-card__img--fashion">
+          <div class="tag tag--fashion mb-8">Фэшн</div>
+          <div class="event-card__title">Fashion Day в Ривьере</div>
+          <div class="event-card__date-badge">28 МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Показ новых коллекций от брендов ТРЦ. Стилисты, фотографы, скидки.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-shirt"></i>Все этажи</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="kids">
+        <div class="event-card__img" style="background:linear-gradient(135deg,#29C9C9,var(--teal))">
+          <div class="tag tag--kids mb-8">Дети</div>
+          <div class="event-card__title">Мастер-класс LEGO</div>
+          <div class="event-card__date-badge">31 МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Строим вместе! Мастер-класс для детей 5–12 лет в Мире Кубиков.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-map-pin"></i>Мир Кубиков 3 эт.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="sport">
+        <div class="event-card__img" style="background:linear-gradient(135deg,var(--mid),var(--bright))">
+          <div class="tag tag--sport mb-8">Спорт</div>
+          <div class="event-card__title">Открытый Падел-Турнир</div>
+          <div class="event-card__date-badge">ИЮНЬ<br>2026</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Первый турнир клуба Nevel. Регистрация открыта. Призовой фонд 50 000 ₽.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-tennis"></i>Nevel. 3 эт.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-cat="concert">
+        <div class="event-card__img" style="background:linear-gradient(135deg,var(--yellow),var(--coral))">
+          <div class="tag tag--concert mb-8">Стендап</div>
+          <div class="event-card__title">Вечер стендапа в атриуме</div>
+          <div class="event-card__date-badge">22 МАЯ</div>
+        </div>
+        <div class="event-card__body">
+          <div class="event-card__desc">Смешной вечер с лучшими комиками Москвы. Вход свободный.</div>
+          <div class="event-card__meta">
+            <span class="event-card__meta-item"><i class="ti ti-users"></i>Свободный вход</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="section--sm" style="background:#f5f5f7">
+  <div class="container">
+    <div class="subscribe">
+      <div class="subscribe__title">Подпишитесь на афишу</div>
+      <div class="subscribe__sub">Уведомление о новых событиях — раз в неделю, без спама</div>
+      <div class="subscribe__form">
+        <input class="subscribe__input" type="email" placeholder="ваш e-mail">
+        <button class="subscribe__btn">Подписаться</button>
+      </div>
+      <div class="subscribe__socials">
+        <a class="soc-link" href="https://t.me/rivieramoscow" target="_blank"><i class="ti ti-brand-telegram"></i>Telegram</a>
+        <a class="soc-link" href="https://vk.com/rivieramoscow" target="_blank"><i class="ti ti-brand-vk"></i>ВКонтакте</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+  renderNav('events');
+  renderFooter();
+  function filterEvents(el, cat) {
+    document.querySelectorAll('.hero-chip').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+    document.querySelectorAll('#events-grid .event-card,[data-cat]').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазины — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+.shops-hero{padding:48px 0 40px}
+.shops-hero__inner{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:center}
+.shops-hero__title{margin-bottom:8px}
+.shops-hero__desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:20px}
+.shops-search{display:flex;gap:8px}
+.shops-search__input{flex:1;font-size:14px;padding:12px 16px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:#fff}
+.shops-search__input::placeholder{color:rgba(255,255,255,.4)}
+.shops-search__btn{background:var(--coral);color:#fff;border:none;border-radius:var(--radius);padding:12px 18px;font-size:20px;cursor:pointer}
+.shops-hero__right{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-lg);padding:20px}
+.shops-hero__right-title{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.shops-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.shops-stat{background:rgba(255,255,255,.1);border-radius:var(--radius);padding:12px;text-align:center}
+.shops-stat__n{font-family:var(--font-head);font-size:24px;color:#fff}
+.shops-stat__l{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.new-badge{background:var(--coral);color:#fff;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:var(--radius);margin-left:6px;vertical-align:middle}
+@media(max-width:900px){.shops-hero__inner{grid-template-columns:1fr}.shops-hero__right{display:none}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="shops-hero hero-grad--blue">
+  <div class="container">
+    <div class="shops-hero__inner">
+      <div>
+        <div class="label label--light mb-8">ТРЦ Ривьера · 3 этажа</div>
+        <div class="shops-hero__title h1 text-white">Магазины</div>
+        <div class="shops-hero__desc">200+ брендов: одежда, обувь, красота, электроника, еда, развлечения. Всё под одной крышей.</div>
+        <div class="shops-search">
+          <input class="shops-search__input" type="text" id="search-input" placeholder="Найти магазин..." oninput="searchShops(this.value)">
+          <button class="shops-search__btn"><i class="ti ti-search"></i></button>
+        </div>
+      </div>
+      <div class="shops-hero__right">
+        <div class="shops-hero__right-title">Статистика ТРЦ</div>
+        <div class="shops-stat-grid">
+          <div class="shops-stat"><div class="shops-stat__n">200+</div><div class="shops-stat__l">Магазинов</div></div>
+          <div class="shops-stat"><div class="shops-stat__n">3</div><div class="shops-stat__l">Этажа</div></div>
+          <div class="shops-stat"><div class="shops-stat__n">4</div><div class="shops-stat__l">Новых</div></div>
+          <div class="shops-stat"><div class="shops-stat__n">Free</div><div class="shops-stat__l">Парковка</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <!-- NEW SHOPS -->
+    <div class="sec-head"><div class="sec-head__title">Новые магазины</div></div>
+    <div class="grid-4" style="margin-bottom:40px">
+      <div style="background:var(--blue);border-radius:var(--radius-lg);padding:22px;color:#fff">
+        <div class="tag tag--new" style="margin-bottom:10px">Новый</div>
+        <div style="font-family:var(--font-head);font-size:20px;letter-spacing:2px">EKONIKA</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Обувь и аксессуары · 1 этаж</div>
+      </div>
+      <div style="background:var(--teal);border-radius:var(--radius-lg);padding:22px;color:#fff">
+        <div class="tag tag--new" style="margin-bottom:10px">Новый</div>
+        <div style="font-family:var(--font-head);font-size:20px;letter-spacing:2px">STICKS SUSHI</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Ресторан · 3 этаж</div>
+      </div>
+      <div style="background:var(--mid);border-radius:var(--radius-lg);padding:22px;color:#fff">
+        <div class="tag tag--new" style="margin-bottom:10px">Новый</div>
+        <div style="font-family:var(--font-head);font-size:20px;letter-spacing:2px">NEVEL.</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Падел-клуб · 3 этаж</div>
+      </div>
+      <div style="background:var(--navy);border-radius:var(--radius-lg);padding:22px;color:#fff">
+        <div class="tag tag--new" style="margin-bottom:10px">Новый</div>
+        <div style="font-family:var(--font-head);font-size:20px;letter-spacing:2px">SELA</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Одежда · 1–2 этаж</div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="sec-head"><div class="sec-head__title">Все магазины</div></div>
+    <div class="filter-row" id="cat-filters">
+      <div class="chip active" data-filter="all" onclick="filterShops(this,'all')">Все</div>
+      <div class="chip" data-filter="clothes" onclick="filterShops(this,'clothes')">Одежда</div>
+      <div class="chip" data-filter="shoes" onclick="filterShops(this,'shoes')">Обувь</div>
+      <div class="chip" data-filter="beauty" onclick="filterShops(this,'beauty')">Красота</div>
+      <div class="chip" data-filter="food" onclick="filterShops(this,'food')">Еда</div>
+      <div class="chip" data-filter="tech" onclick="filterShops(this,'tech')">Электроника</div>
+      <div class="chip" data-filter="sport" onclick="filterShops(this,'sport')">Спорт</div>
+      <div class="chip" data-filter="kids" onclick="filterShops(this,'kids')">Дети</div>
+      <div class="chip" data-filter="entertainment" onclick="filterShops(this,'entertainment')">Развлечения</div>
+    </div>
+
+    <div class="flex-col" id="shops-list">
+      <div class="shop-row" data-cat="shoes" data-name="ekonika"><div class="shop-row__icon" style="background:var(--blue)">ЭК</div><div><div class="shop-row__name">EKONIKA <span class="new-badge">Новый</span></div><div class="shop-row__cat">Обувь и аксессуары</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="clothes" data-name="sela"><div class="shop-row__icon" style="background:var(--navy)">SE</div><div><div class="shop-row__name">SELA <span class="new-badge">Новый</span></div><div class="shop-row__cat">Одежда для всей семьи</div></div><div class="shop-row__floor">1–2 этаж</div></div>
+      <div class="shop-row" data-cat="clothes" data-name="lime"><div class="shop-row__icon" style="background:var(--coral)">LM</div><div><div class="shop-row__name">LIMÉ</div><div class="shop-row__cat">Женская одежда</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="clothes" data-name="befree"><div class="shop-row__icon" style="background:var(--dark-purple)">BF</div><div><div class="shop-row__name">Befree</div><div class="shop-row__cat">Молодёжная одежда</div></div><div class="shop-row__floor">2 этаж</div></div>
+      <div class="shop-row" data-cat="clothes" data-name="original marines"><div class="shop-row__icon" style="background:var(--teal)">OM</div><div><div class="shop-row__name">Original Marines</div><div class="shop-row__cat">Одежда · Семейный бренд</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="clothes" data-name="choupette"><div class="shop-row__icon" style="background:var(--pink)">CH</div><div><div class="shop-row__name">Choupette</div><div class="shop-row__cat">Детская одежда</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="food" data-name="sticks sushi"><div class="shop-row__icon" style="background:var(--yellow);color:var(--navy)">SS</div><div><div class="shop-row__name">STICKS SUSHI <span class="new-badge">Новый</span></div><div class="shop-row__cat">Японский ресторан</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="food" data-name="asian street food"><div class="shop-row__icon" style="background:var(--coral)">AS</div><div><div class="shop-row__name">Asian Street Food</div><div class="shop-row__cat">Азиатская кухня · Фудкорт</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="sport" data-name="nevel"><div class="shop-row__icon" style="background:var(--mid)">NV</div><div><div class="shop-row__name">Падел клуб Nevel. <span class="new-badge">Новый</span></div><div class="shop-row__cat">Падел-теннис · Тренировки</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="tech" data-name="samsung"><div class="shop-row__icon" style="background:var(--blue)">SA</div><div><div class="shop-row__name">Samsung</div><div class="shop-row__cat">Фирменный магазин · Гаджеты</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="tech" data-name="restore"><div class="shop-row__icon" style="background:#29C9C9">RE</div><div><div class="shop-row__name">Restore:</div><div class="shop-row__cat">Apple Premium Reseller</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="beauty" data-name="локситан"><div class="shop-row__icon" style="background:var(--pink)">LO</div><div><div class="shop-row__name">Л'Окситан</div><div class="shop-row__cat">Косметика и парфюмерия</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="beauty" data-name="belle you"><div class="shop-row__icon" style="background:var(--dark-purple)">BY</div><div><div class="shop-row__name">belle you</div><div class="shop-row__cat">Бельё и купальники</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="beauty" data-name="эстель адони"><div class="shop-row__icon" style="background:var(--coral)">ЭА</div><div><div class="shop-row__name">Эстель Адони</div><div class="shop-row__cat">Салон красоты</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="entertainment" data-name="bigvol"><div class="shop-row__icon" style="background:var(--navy)">БВ</div><div><div class="shop-row__name">БИГВОЛ</div><div class="shop-row__cat">Лазертаг · Развлечения</div></div><div class="shop-row__floor">2 этаж</div></div>
+      <div class="shop-row" data-cat="entertainment" data-name="unreal place"><div class="shop-row__icon" style="background:var(--mid)">UP</div><div><div class="shop-row__name">Unreal Place</div><div class="shop-row__cat">VR-аттракционы</div></div><div class="shop-row__floor">2 этаж</div></div>
+      <div class="shop-row" data-cat="entertainment" data-name="happy city"><div class="shop-row__icon" style="background:var(--teal)">HC</div><div><div class="shop-row__name">Happy City</div><div class="shop-row__cat">Развлекательный центр</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="kids" data-name="мир кубиков"><div class="shop-row__icon" style="background:var(--yellow);color:var(--navy)">МК</div><div><div class="shop-row__name">Мир Кубиков</div><div class="shop-row__cat">LEGO · Конструкторы</div></div><div class="shop-row__floor">3 этаж</div></div>
+      <div class="shop-row" data-cat="shoes" data-name="casio"><div class="shop-row__icon" style="background:#444441;color:#fff">CA</div><div><div class="shop-row__name">Casio</div><div class="shop-row__cat">Часы и аксессуары</div></div><div class="shop-row__floor">1 этаж</div></div>
+      <div class="shop-row" data-cat="tech" data-name="билайн"><div class="shop-row__icon" style="background:var(--yellow);color:var(--navy)">БЛ</div><div><div class="shop-row__name">Билайн</div><div class="shop-row__cat">Связь и гаджеты</div></div><div class="shop-row__floor">1 этаж</div></div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>renderNav('shops');renderFooter();</script>
+</body></html>
+<script>
+function filterShops(el, cat) {
+  document.querySelectorAll('#cat-filters .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#shops-list .shop-row').forEach(r => {
+    r.style.display = (cat === 'all' || r.dataset.cat === cat) ? '' : 'none';
+  });
+}
+function searchShops(q) {
+  const lq = q.toLowerCase();
+  document.querySelectorAll('#shops-list .shop-row').forEach(r => {
+    r.style.display = r.dataset.name.toLowerCase().includes(lq) ? '' : 'none';
+  });
+  if (!q) { document.querySelectorAll('#cat-filters .chip').forEach(c => c.classList.remove('active')); document.querySelector('[data-filter="all"]').classList.add('active'); }
+}
+</script>

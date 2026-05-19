@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Акции и новости — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+.news-hero{padding:48px 0 40px}
+.news-item{background:#fff;border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(0,0,0,.07);display:grid;grid-template-columns:220px 1fr;transition:var(--transition)}
+.news-item:hover{box-shadow:0 8px 30px rgba(0,46,163,.12);transform:translateY(-2px)}
+.news-item__img{min-height:160px;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+.news-item__body{padding:20px}
+.news-item__date{font-size:12px;color:#aaa;margin-bottom:6px;letter-spacing:.3px}
+.news-item__title{font-family:var(--font-head);font-size:17px;color:#1a1a2e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.news-item__desc{font-size:13px;color:#666;line-height:1.6}
+.news-item__store{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+@media(max-width:600px){.news-item{grid-template-columns:1fr}.news-item__img{min-height:140px}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="news-hero hero-grad--dark">
+  <div class="container">
+    <div class="label label--light mb-8">Акции, новости, мероприятия</div>
+    <div class="h1 text-white mb-12">Актуальное</div>
+    <div style="font-size:15px;color:rgba(255,255,255,.7);max-width:560px">Скидки, новинки, события — всё, что сейчас происходит в ТРЦ Ривьера.</div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<section class="section" style="background:#f5f5f7">
+  <div class="container">
+    <div class="filter-row">
+      <div class="chip active" onclick="filterNews(this,'all')">Все</div>
+      <div class="chip" onclick="filterNews(this,'promo')">Акции</div>
+      <div class="chip" onclick="filterNews(this,'event')">Мероприятия</div>
+      <div class="chip" onclick="filterNews(this,'news')">Новости</div>
+    </div>
+    <div class="flex-col" id="news-list">
+      <div class="news-item" data-type="promo">
+        <div class="news-item__img" style="background:linear-gradient(135deg,var(--blue),var(--bright))">
+          <div class="tag tag--promo">Акция</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">19–25 мая 2026</div>
+          <div class="news-item__title">Клиентские дни в Original Marines — скидки до 40%</div>
+          <div class="news-item__desc">Специальные цены на весь ассортимент в дни клиентской акции. Скидки действуют на одежду, обувь и аксессуары для всей семьи.</div>
+          <div class="news-item__store">Original Marines · 3 этаж</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="event">
+        <div class="news-item__img" style="background:linear-gradient(135deg,var(--mid),var(--pink))">
+          <div class="tag tag--concert">Мероприятие</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">24 мая 2026 · 19:00</div>
+          <div class="news-item__title">Летний Open-Air — концерт в атриуме</div>
+          <div class="news-item__desc">Большой летний концерт с несколькими исполнителями. Живая музыка, DJ-сет и огненное шоу. Вход свободный.</div>
+          <div class="news-item__store">ТРЦ Ривьера · Атриум 2 этаж</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="promo">
+        <div class="news-item__img" style="background:linear-gradient(135deg,#1a7a3f,var(--teal))">
+          <div class="tag tag--free">Акция</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">16 мая – 14 августа 2026</div>
+          <div class="news-item__title">Акция «Лето в движении»</div>
+          <div class="news-item__desc">Накапливайте баллы за посещение ТРЦ и получайте призы. Регистрируйся на стойке информации.</div>
+          <div class="news-item__store">ТРЦ Ривьера</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="news">
+        <div class="news-item__img" style="background:linear-gradient(135deg,var(--yellow),var(--coral))">
+          <div class="tag tag--sport">Новости</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">18–31 мая 2026</div>
+          <div class="news-item__title">Новинки LEGO в «Мире Кубиков»</div>
+          <div class="news-item__desc">Самые свежие наборы LEGO Technic, City и Icons уже в продаже. Первые в Москве — только в Мире Кубиков на 3 этаже.</div>
+          <div class="news-item__store">Мир Кубиков · 3 этаж</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="promo">
+        <div class="news-item__img" style="background:linear-gradient(135deg,var(--dark-purple),var(--pink))">
+          <div class="tag tag--fashion">Акция</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">до 11 мая 2026</div>
+          <div class="news-item__title">1+1=3 на бельё в belle you</div>
+          <div class="news-item__desc">При покупке двух вещей — третья в подарок. Акция распространяется на весь ассортимент магазина.</div>
+          <div class="news-item__store">belle you · 1 этаж</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="promo">
+        <div class="news-item__img" style="background:linear-gradient(135deg,#3B6D11,var(--teal))">
+          <div class="tag tag--promo">Акция</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">15–31 мая 2026</div>
+          <div class="news-item__title">Миндаль — для истинных гурманов · Л'Окситан</div>
+          <div class="news-item__desc">Специальные цены на знаменитую миндальную коллекцию L'Occitane. Уход за телом и кожей с насыщенным ароматом.</div>
+          <div class="news-item__store">Л'Окситан · 1 этаж</div>
+        </div>
+      </div>
+      <div class="news-item" data-type="news">
+        <div class="news-item__img" style="background:linear-gradient(135deg,var(--teal),var(--lt-teal))">
+          <div class="tag tag--expo">Новости</div>
+        </div>
+        <div class="news-item__body">
+          <div class="news-item__date">Открытие</div>
+          <div class="news-item__title">Падел клуб Nevel. — новое пространство для спорта</div>
+          <div class="news-item__desc">На 3 этаже ТРЦ открылся современный падел-клуб с профессиональными кортами. Запись на тренировки уже открыта.</div>
+          <div class="news-item__store">Nevel. · 3 этаж</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>renderNav('news');renderFooter();</script>
+</body></html>
+<script>
+function filterNews(el, type) {
+  document.querySelectorAll('.filter-row .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#news-list .news-item').forEach(item => {
+    item.style.display = (type === 'all' || item.dataset.type === type) ? '' : 'none';
+  });
+}
+</script>
