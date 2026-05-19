@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта сайта — Венеция. Велнес</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #f0ebe1;
+  --bg2:    #e8e2d6;
+  --card:   #ebe5da;
+  --ink:    #2a2018;
+  --gold:   #b8924a;
+  --gold-l: #c9a55a;
+  --muted:  #7a6a55;
+  --brd:    rgba(184,146,74,.2);
+  --brdh:   rgba(184,146,74,.38);
+  --cta:    #8b2020;
+  --serif:  'Cormorant Garamond', serif;
+  --sans:   'Jost', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:rgba(240,235,225,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--brdh)}
+.logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.logo-sub{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px}
+.hdr-r{display:flex;gap:10px;align-items:center}
+.btn-sm{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--ink);color:var(--ink);background:none;padding:9px 20px;cursor:pointer;border-radius:40px;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-sm:hover{background:var(--ink);color:var(--bg)}
+.btn-cta{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;background:var(--cta);color:#fff;border:none;padding:10px 22px;cursor:pointer;border-radius:4px;transition:background .3s;text-decoration:none;display:inline-block}
+.btn-cta:hover{background:#a02828}
+
+.hero{padding:136px 56px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--brdh)}
+.hero-wm{position:absolute;right:32px;bottom:-20px;font-family:var(--serif);font-size:196px;font-weight:300;color:rgba(184,146,74,.045);line-height:1;pointer-events:none;white-space:nowrap;letter-spacing:.08em}
+.eyebrow{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:36px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--serif);font-size:clamp(44px,6vw,80px);font-weight:300;line-height:1.05;color:var(--ink);margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-desc{font-size:13px;font-weight:300;color:var(--muted);max-width:480px;line-height:1.9;margin-bottom:40px}
+.stats{display:flex;gap:48px}
+.stat-n{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+.slabel{padding:32px 56px 16px;font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:16px}
+.slabel::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--brdh),transparent)}
+
+/* Main grid */
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brdh);margin:0 56px;border:1px solid var(--brdh)}
+.mg .c-wide{grid-column:1/3}
+
+.card{background:var(--bg);padding:48px 44px;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .35s;cursor:pointer}
+.card:hover{background:var(--card)}
+.card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .45s}
+.card:hover::after{transform:scaleX(1)}
+.c-num{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(184,146,74,.35);font-family:var(--serif);margin-bottom:10px}
+.c-cat{font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.c-title{font-family:var(--serif);font-size:36px;font-weight:300;line-height:1.08;color:var(--ink);margin-bottom:16px}
+.c-wide .c-title{font-size:50px}
+.c-title em{font-style:italic;color:var(--gold)}
+.c-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.85;max-width:480px;margin-bottom:24px;flex:1}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+.pill{font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--brdh);padding:4px 12px;color:var(--muted);transition:all .3s}
+.card:hover .pill{border-color:rgba(184,146,74,.45);color:var(--gold)}
+.c-link{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;transition:gap .3s}
+.c-link::after{content:'→'}
+.card:hover .c-link{gap:13px}
+
+/* Row 2 */
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brdh);margin:1px 56px 0;border-left:1px solid var(--brdh);border-right:1px solid var(--brdh);border-bottom:1px solid var(--brdh)}
+.csm{background:var(--bg);padding:36px 32px;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .3s;cursor:pointer}
+.csm:hover{background:var(--card)}
+.csm::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s}
+.csm:hover::after{transform:scaleY(1)}
+.csm .c-num{margin-bottom:8px}
+.csm .c-cat{margin-bottom:10px}
+.csm .c-title{font-size:26px;margin-bottom:12px}
+.csm .c-desc{font-size:11.5px;margin-bottom:18px}
+.csm .pills{margin-bottom:18px}
+
+/* Detail panels */
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--brdh);margin:1px 56px 0;border-left:1px solid var(--brdh);border-right:1px solid var(--brdh);border-bottom:1px solid var(--brdh)}
+.dp{padding:36px 40px;background:var(--bg2)}
+.dp-head{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--brdh)}
+.dp-head a{color:var(--gold);text-decoration:none}
+.di{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid rgba(184,146,74,.1);text-decoration:none;color:inherit;transition:padding-left .28s}
+.di:hover{padding-left:6px}
+.di:last-child{border-bottom:none}
+.di-n{font-family:var(--serif);font-size:13px;color:rgba(184,146,74,.35);flex-shrink:0;width:20px;margin-top:1px}
+.di-nm{font-family:var(--serif);font-size:15px;color:var(--ink);margin-bottom:2px}
+.di-d{font-size:11px;color:var(--muted);line-height:1.6}
+
+/* CTA */
+.cta{background:var(--ink);padding:52px 56px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;margin-top:1px}
+.cta h2{font-family:var(--serif);font-size:36px;font-weight:300;color:rgba(240,235,225,.9);margin-bottom:8px}
+.cta h2 em{font-style:italic;color:var(--gold-l)}
+.cta p{font-size:12px;color:rgba(240,235,225,.4)}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gld{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--bg);border:none;padding:14px 32px;cursor:pointer;transition:background .3s;text-decoration:none;display:inline-block}
+.btn-gld:hover{background:var(--gold-l)}
+.btn-out{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;background:none;color:rgba(240,235,225,.65);border:1px solid rgba(240,235,225,.2);padding:14px 32px;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-out:hover{border-color:rgba(240,235,225,.5);color:rgba(240,235,225,.9)}
+
+footer{padding:20px 56px;border-top:1px solid var(--brdh);display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:10px;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none;font-size:10px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeUp .6s ease both}
+.mg .card:nth-child(1){animation-delay:.05s}.mg .card:nth-child(2){animation-delay:.12s}.mg .card:nth-child(3){animation-delay:.18s}.mg .card:nth-child(4){animation-delay:.24s}
+.csm{animation:fadeUp .6s ease both}
+.rg .csm:nth-child(1){animation-delay:.28s}.rg .csm:nth-child(2){animation-delay:.33s}.rg .csm:nth-child(3){animation-delay:.38s}
+
+@media(max-width:1060px){.mg{grid-template-columns:1fr 1fr;margin:0 24px}.mg .c-wide{grid-column:1/3}.rg,.dg{grid-template-columns:1fr 1fr;margin:1px 24px 0}header,.hero,.slabel,.cta,footer{padding-left:24px;padding-right:24px}.stats{gap:28px}.hero-wm{display:none}}
+@media(max-width:680px){.mg{grid-template-columns:1fr}.mg .c-wide{grid-column:1}.rg,.dg{grid-template-columns:1fr}header{padding:0 16px}.hero{padding:110px 16px 48px}.slabel{padding-left:16px;padding-right:16px}.stats{flex-wrap:wrap;gap:20px}.logo-sub{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">В Е Н Е Ц И Я<span class="logo-sub">Велнес клуб &amp; СПА</span></a>
+  <div class="hdr-r">
+    <a href="booking.html" class="btn-sm">Бронирование</a>
+    <a href="account.html" class="btn-cta">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-wm">ВЕНЕЦИЯ</div>
+  <div class="eyebrow">Карта сайта</div>
+  <h1>Всё пространство<br><em>Венеции</em></h1>
+  <p class="hero-desc">Девять страниц — девять миров. Выберите направление и погрузитесь в атмосферу премиального велнеса.</p>
+  <div class="stats">
+    <div><div class="stat-n">9</div><div class="stat-l">страниц</div></div>
+    <div><div class="stat-n">15+</div><div class="stat-l">форматов тренировок</div></div>
+    <div><div class="stat-n">22м</div><div class="stat-l">бассейн</div></div>
+    <div><div class="stat-n">500м²</div><div class="stat-l">тренажёрный зал</div></div>
+  </div>
+</section>
+
+<div class="slabel">Основные направления</div>
+
+<div class="mg">
+  <!-- HOME wide -->
+  <div class="c-wide">
+    <a href="index.html" class="card" style="height:100%">
+      <div class="c-num">01</div>
+      <div class="c-cat">Главная страница</div>
+      <h2 class="c-title">Главная<br><em>страница</em></h2>
+      <p class="c-desc">Точка входа в клуб. Философия Венеции, ключевые направления, шесть карточек услуг и CTA-блок быстрой записи. Здесь формируется первое впечатление и рождается желание прийти.</p>
+      <div class="pills">
+        <span class="pill">Главный герой</span>
+        <span class="pill">Философия клуба</span>
+        <span class="pill">6 карточек услуг</span>
+        <span class="pill">Статистика</span>
+        <span class="pill">CTA-блок</span>
+        <span class="pill">Футер</span>
+      </div>
+      <div class="c-link">Открыть страницу</div>
+    </a>
+  </div>
+
+  <!-- FITNESS -->
+  <a href="fitness.html" class="card">
+    <div class="c-num">03</div>
+    <div class="c-cat">Активность</div>
+    <h2 class="c-title">Фитнес</h2>
+    <p class="c-desc">Полный каталог шести фитнес-зон с оборудованием, восемь форматов групповых тренировок, интерактивное расписание по дням недели и форма быстрого бронирования.</p>
+    <div class="pills">
+      <span class="pill">6 зон клуба</span>
+      <span class="pill">8 типов тренировок</span>
+      <span class="pill">Расписание</span>
+      <span class="pill">Оборудование</span>
+      <span class="pill">Аккордеон FAQ</span>
+    </div>
+    <div class="c-link">Открыть</div>
+  </a>
+
+  <!-- SPA -->
+  <a href="spa.html" class="card">
+    <div class="c-num">04</div>
+    <div class="c-cat">Восстановление</div>
+    <h2 class="c-title">СПА и велнес</h2>
+    <p class="c-desc">Бассейн 22м, джакузи, финская сауна и хамам со звёздным небом. Параметры каждой зоны, тепловые ритуалы, VIP-кабинет и расписание свободного плавания.</p>
+    <div class="pills">
+      <span class="pill">Бассейн 22м</span>
+      <span class="pill">Хамам</span>
+      <span class="pill">Сауна</span>
+      <span class="pill">VIP-кабинет</span>
+    </div>
+    <div class="c-link">Открыть</div>
+  </a>
+
+  <!-- CLINIC -->
+  <a href="clinic.html" class="card">
+    <div class="c-num">05</div>
+    <div class="c-cat">Эстетика</div>
+    <h2 class="c-title">Клиника красоты</h2>
+    <p class="c-desc">Прайс-лист с четырьмя разделами: уход за лицом, уход за телом, инъекционные техники, лазер и аппараты. Кнопка записи к каждой процедуре.</p>
+    <div class="pills">
+      <span class="pill">4 раздела прайса</span>
+      <span class="pill">Инъекции</span>
+      <span class="pill">Лазер</span>
+      <span class="pill">Запись онлайн</span>
+    </div>
+    <div class="c-link">Открыть</div>
+  </a>
+</div>
+
+<!-- ROW 2 -->
+<div class="rg">
+  <a href="beauty.html" class="csm">
+    <div class="c-num">06</div>
+    <div class="c-cat">Стиль</div>
+    <h2 class="c-title">Салон красоты</h2>
+    <p class="c-desc">Прайс-лист по пяти вкладкам: волосы, ногти, макияж, эпиляция, брови и ресницы. Запись к конкретному мастеру клуба.</p>
+    <div class="pills"><span class="pill">5 вкладок</span><span class="pill">Мастера</span><span class="pill">Цены</span></div>
+    <div class="c-link">Открыть</div>
+  </a>
+
+  <a href="team.html" class="csm">
+    <div class="c-num">07</div>
+    <div class="c-cat">О клубе</div>
+    <h2 class="c-title">Команда</h2>
+    <p class="c-desc">Восемь карточек специалистов — тренеры, косметолог, стилист — с сертификатами и биографиями. Блок видеогида по всем зонам клуба.</p>
+    <div class="pills"><span class="pill">8 специалистов</span><span class="pill">Сертификаты</span><span class="pill">Видеогид</span></div>
+    <div class="c-link">Открыть</div>
+  </a>
+
+  <a href="booking.html" class="csm">
+    <div class="c-num">08</div>
+    <div class="c-cat">Сервис</div>
+    <h2 class="c-title">Бронирование</h2>
+    <p class="c-desc">Шесть форм онлайн-записи: групповая и персональная тренировка, приватная студия, VIP-раздевалка, салон и клиника, аренда шкафчика.</p>
+    <div class="pills"><span class="pill">6 форм</span><span class="pill">Выбор тренера</span><span class="pill">Саммари</span></div>
+    <div class="c-link">Открыть</div>
+  </a>
+</div>
+
+<div class="slabel" style="margin-top:2px">Детали страниц</div>
+
+<div class="dg">
+  <div class="dp">
+    <div class="dp-head"><a href="booking.html">Бронирование — 6 форм записи →</a></div>
+    <a href="booking.html" class="di"><span class="di-n">01</span><div><div class="di-nm">Групповая тренировка</div><div class="di-d">Направление, дата, время. Контакты. Отмена за 6 ч.</div></div></a>
+    <a href="booking.html" class="di"><span class="di-n">02</span><div><div class="di-nm">Персональная тренировка</div><div class="di-d">Выбор из 6 тренеров, цель, уровень, пожелания.</div></div></a>
+    <a href="booking.html" class="di"><span class="di-n">03</span><div><div class="di-nm">Персональная студия</div><div class="di-d">Студии №1–3 по 56 м². От 1 до 2 часов. Со своим тренером или самостоятельно.</div></div></a>
+    <a href="booking.html" class="di"><span class="di-n">04</span><div><div class="di-nm">VIP-раздевалка</div><div class="di-d">День, неделя или месяц. Время визита. Дополнительные пожелания по сервису.</div></div></a>
+    <a href="booking.html" class="di"><span class="di-n">05</span><div><div class="di-nm">Салон и клиника</div><div class="di-d">Направление, специалист, дата. Описание желаемого результата.</div></div></a>
+    <a href="booking.html" class="di"><span class="di-n">06</span><div><div class="di-nm">Аренда шкафчика</div><div class="di-d">Тип, период 1–12 мес, зона. Скидки до 31% при долгосрочной аренде.</div></div></a>
+  </div>
+
+  <div class="dp">
+    <div class="dp-head"><a href="account.html">Личный кабинет — 7 разделов →</a></div>
+    <a href="account.html" class="di"><span class="di-n">01</span><div><div class="di-nm">Карта и статус</div><div class="di-d">Карта Platinum, статистика посещений, прогресс до Diamond.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">02</span><div><div class="di-nm">Мои бронирования</div><div class="di-d">Список активных и завершённых записей со статусами.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">03</span><div><div class="di-nm">Оплаты и история</div><div class="di-d">Таблица всех транзакций: карта, пакеты, процедуры.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">04</span><div><div class="di-nm">Мой шкафчик</div><div class="di-d">Номер, тип, срок аренды. Карта шкафчиков. Продление.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">05</span><div><div class="di-nm">VIP-раздевалка</div><div class="di-d">Следующее бронирование. Быстрая запись на новую дату.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">06</span><div><div class="di-nm">СПА-кабинет</div><div class="di-d">Сеансы в этом месяце из 4 по Platinum. Прогресс-бар.</div></div></a>
+    <a href="account.html" class="di"><span class="di-n">07</span><div><div class="di-nm">Настройки профиля</div><div class="di-d">Личные данные, уровень подготовки, цели и пожелания.</div></div></a>
+  </div>
+</div>
+
+<div class="cta">
+  <div><h2>Начните прямо <em>сейчас</em></h2><p>Запись онлайн — быстро и без звонков</p></div>
+  <div class="cta-btns">
+    <a href="booking.html" class="btn-gld">Записаться на тренировку</a>
+    <a href="spa.html" class="btn-out">Забронировать СПА</a>
+    <a href="account.html" class="btn-out">Личный кабинет</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Венеция. Велнес — Премиальный женский клуб</p>
+  <a href="index.html">На главную →</a>
+</footer>
+
+</body>
+</html>

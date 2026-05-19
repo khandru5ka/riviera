@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<title>СПА и велнес — Венеция. Велнес</title>
+<style>
+:root {
+  --bg: #f0ebe1;
+  --bg2: #e8e2d6;
+  --bg3: #ddd7ca;
+  --card: #ebe5da;
+  --gold: #b8924a;
+  --gold-light: #c9a55a;
+  --gold-dark: #8a6830;
+  --cream: #2a2018;
+  --text: #3a3228;
+  --text-muted: #7a6a55;
+  --border: rgba(184,146,74,0.22);
+  --border-hard: rgba(184,146,74,0.38);
+  --cta: #8b2020;
+  --cta-hover: #a02828;
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* ─── PAGES ─── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ─── HEADER ─── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 40px;
+  height: 88px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--border-hard);
+  background: rgba(240,235,225,0.96);
+  backdrop-filter: blur(16px);
+  transition: all 0.4s;
+}
+.logo {
+  grid-column: 2;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.logo-main {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  line-height: 1;
+  display: block;
+}
+.logo-sub {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: block;
+}
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-right { display: flex; align-items: center; gap: 12px; justify-content: flex-end; }
+.btn-menu {
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--text);
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text); background: none; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-menu:hover { background: var(--text); color: var(--bg); }
+.btn-menu-icon { display: flex; flex-direction: column; gap: 4px; }
+.btn-menu-icon span { width: 16px; height: 1px; background: currentColor; display: block; }
+.btn-msg {
+  width: 40px; height: 40px;
+  border: 1px solid var(--text);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: none;
+  color: var(--text); font-size: 14px;
+  transition: all 0.3s;
+}
+.btn-msg:hover { background: var(--text); color: var(--bg); }
+.btn-lang {
+  width: 40px; height: 40px;
+  border: 1px solid var(--text);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: none;
+  font-family: var(--sans); font-size: 10px;
+  font-weight: 400; letter-spacing: 0.1em;
+  color: var(--text); transition: all 0.3s;
+}
+.btn-lang:hover { background: var(--text); color: var(--bg); }
+nav { display: none; }
+.btn-cta-header {
+  font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: var(--cta); color: #fff;
+  border: none; padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer; transition: all 0.3s;
+  white-space: nowrap;
+}
+.btn-cta-header:hover { background: var(--cta-hover); }
+.menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.menu-toggle span { width: 24px; height: 1px; background: var(--gold); transition: all 0.3s; }
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 50% at 65% 45%, rgba(184,146,74,0.10) 0%, transparent 60%),
+    linear-gradient(160deg, #f4efe5 0%, #ede7da 50%, #f0ebe1 100%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; opacity: 0.025;
+  background-image: 
+    linear-gradient(var(--gold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 80px;
+  max-width: 760px;
+  animation: fadeUp 1.2s ease both;
+}
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 40px; height: 1px; background: var(--gold);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 32px;
+}
+.hero-title em {
+  font-style: italic; color: var(--gold);
+}
+.hero-subtitle {
+  font-size: 14px; font-weight: 300;
+  color: var(--text-muted);
+  max-width: 420px;
+  line-height: 1.9;
+  margin-bottom: 48px;
+}
+.hero-actions { display: flex; gap: 20px; align-items: center; }
+.btn-primary {
+  font-family: var(--sans); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  background: var(--cta); color: #fff;
+  border: none; padding: 16px 40px; cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--cta-hover); }
+.btn-outline {
+  font-family: var(--sans); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  background: none; color: var(--text);
+  border: 1px solid var(--text); padding: 16px 40px; cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-outline:hover { background: var(--text); color: var(--bg); }
+.hero-stats {
+  position: absolute; right: 80px; bottom: 80px; z-index: 2;
+  display: flex; gap: 48px;
+  animation: fadeUp 1.4s ease both;
+}
+.hero-stat-num {
+  font-family: var(--serif);
+  font-size: 42px; font-weight: 300;
+  color: var(--gold); line-height: 1;
+}
+.hero-stat-label {
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-top: 6px;
+}
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-muted); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  cursor: pointer;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s infinite;
+}
+
+/* ─── SECTIONS ─── */
+.section { padding: 100px 80px; }
+.section-sm { padding: 60px 80px; }
+.section-eyebrow {
+  font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.section-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-desc {
+  font-size: 14px; font-weight: 300; color: var(--text-muted);
+  max-width: 560px; line-height: 1.9;
+}
+
+/* ─── PHILOSOPHY ─── */
+.philosophy-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; margin-top: 60px;
+  background: var(--border-hard);
+  border: 1px solid var(--border-hard);
+}
+.philosophy-card:first-child { grid-column: 1 / -1; }
+.philosophy-card {
+  padding: 56px 48px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+  transition: background 0.4s;
+}
+.philosophy-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.5s;
+}
+.philosophy-card:hover::before { transform: scaleX(1); }
+.philosophy-card:hover { background: var(--card); }
+.philosophy-num {
+  font-family: var(--serif); font-size: 72px; font-weight: 300;
+  color: var(--border-hard); line-height: 1;
+  margin-bottom: 24px;
+}
+.philosophy-card h3 {
+  font-family: var(--serif); font-size: 26px; font-weight: 400;
+  margin-bottom: 16px; color: var(--cream);
+}
+.philosophy-card p { font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+
+/* ─── SERVICES GRID ─── */
+.services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-hard);
+  border: 1px solid var(--border-hard);
+}
+.service-card {
+  background: var(--bg);
+  padding: 48px 36px;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative; overflow: hidden;
+}
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.service-card:hover { background: var(--card); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border-hard); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-size: 18px;
+  transition: border-color 0.3s;
+}
+.service-card:hover .service-icon { border-color: var(--gold); }
+.service-card h3 {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  margin-bottom: 12px; color: var(--cream);
+}
+.service-card p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.service-arrow {
+  margin-top: 28px;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 10px;
+}
+.service-arrow::after { content: '→'; transition: transform 0.3s; }
+.service-card:hover .service-arrow::after { transform: translateX(6px); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-hard) 30%, var(--gold) 50%, var(--border-hard) 70%, transparent 100%);
+  margin: 0 80px;
+}
+.divider-ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px; padding: 24px 0;
+  font-family: var(--serif); font-size: 20px; color: var(--gold);
+}
+
+/* ─── FITNESS PAGE ─── */
+.fitness-hero {
+  height: 60vh; min-height: 400px;
+  background: linear-gradient(135deg, #f4efe5 0%, #ede7da 100%);
+  display: flex; align-items: center;
+  padding: 100px 80px 0;
+  position: relative; overflow: hidden;
+}
+.fitness-hero::after {
+  content: 'FITNESS';
+  position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: 220px; font-weight: 300;
+  color: rgba(184,146,74,0.06); line-height: 1;
+  pointer-events: none;
+}
+.page-hero {
+  height: 55vh; min-height: 380px;
+  display: flex; align-items: center;
+  padding: 100px 80px 0;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #f4efe5 0%, #ece6d9 100%);
+}
+.page-hero-bg-text {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: 200px; font-weight: 300;
+  color: rgba(184,146,74,0.05); line-height: 1;
+  pointer-events: none; white-space: nowrap;
+}
+.breadcrumb {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.breadcrumb span { color: var(--gold); cursor: pointer; }
+.breadcrumb span:hover { text-decoration: underline; }
+
+/* ─── FITNESS ZONES ─── */
+.zones-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.zone-card {
+  background: var(--card);
+  border: 1px solid var(--border-hard);
+  padding: 40px 32px;
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: all 0.4s;
+}
+.zone-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(184,146,74,0.12); }
+.zone-badge {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--gold);
+  padding: 4px 12px; margin-bottom: 20px;
+}
+.zone-card h3 {
+  font-family: var(--serif); font-size: 26px; font-weight: 400;
+  margin-bottom: 12px; color: var(--cream);
+}
+.zone-card p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.zone-features { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+.zone-feature {
+  font-size: 11px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 10px;
+}
+.zone-feature::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+/* ─── TRAINING TYPES ─── */
+.training-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-hard); border: 1px solid var(--border-hard); margin-top: 48px; }
+.training-item {
+  background: var(--bg); padding: 40px;
+  display: flex; gap: 24px; align-items: flex-start;
+  cursor: pointer; transition: background 0.3s;
+}
+.training-item:hover { background: var(--card); }
+.training-num {
+  font-family: var(--serif); font-size: 48px; font-weight: 300;
+  color: var(--border-hard); line-height: 1; flex-shrink: 0;
+  min-width: 56px;
+}
+.training-item h4 { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.training-item p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ─── ACCORDION ─── */
+.accordion { margin-top: 40px; }
+.accordion-item { border-bottom: 1px solid var(--border-hard); }
+.accordion-header {
+  padding: 24px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+}
+.accordion-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); }
+.accordion-icon {
+  width: 32px; height: 32px; border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 18px; transition: all 0.3s; flex-shrink: 0;
+}
+.accordion-item.open .accordion-icon { transform: rotate(45deg); border-color: var(--gold); background: var(--gold); color: #fff; }
+.accordion-body { display: none; padding: 0 0 28px; }
+.accordion-item.open .accordion-body { display: block; }
+.accordion-body p { font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+.equipment-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid var(--border-hard); padding: 6px 14px;
+  color: var(--text-muted); transition: all 0.3s; background: var(--bg);
+}
+.tag:hover { border-color: var(--gold); color: var(--gold); background: var(--card); }
+
+/* ─── GROUP SCHEDULE ─── */
+.schedule-tabs { display: flex; gap: 0; margin-bottom: 32px; border: 1px solid var(--border-hard); background: var(--bg2); }
+.sched-tab {
+  flex: 1; padding: 14px 8px; text-align: center;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer; transition: all 0.3s;
+  border-right: 1px solid var(--border-hard);
+}
+.sched-tab:last-child { border-right: none; }
+.sched-tab.active, .sched-tab:hover { background: var(--card); color: var(--gold); }
+.schedule-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.schedule-slot {
+  background: var(--card); border: 1px solid var(--border-hard);
+  padding: 20px 16px;
+}
+.slot-time { font-family: var(--serif); font-size: 24px; color: var(--gold); }
+.slot-name { font-size: 11px; letter-spacing: 0.1em; color: var(--cream); margin: 6px 0 4px; }
+.slot-trainer { font-size: 10px; color: var(--text-muted); }
+.slot-spots { font-size: 9px; color: var(--gold); margin-top: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+.btn-book-small {
+  margin-top: 12px; width: 100%;
+  font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: none; border: 1px solid var(--border-hard); color: var(--gold);
+  padding: 8px; cursor: pointer; transition: all 0.3s;
+}
+.btn-book-small:hover { background: var(--cta); color: #fff; border-color: var(--cta); }
+
+/* ─── SPA PAGE ─── */
+.spa-features {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--border-hard); border: 1px solid var(--border-hard); margin-top: 60px;
+}
+.spa-feature {
+  background: var(--bg); padding: 56px 40px;
+  text-align: center;
+}
+.spa-icon { font-size: 32px; margin-bottom: 24px; opacity: 0.8; }
+.spa-feature h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 16px; color: var(--cream); }
+.spa-feature p { font-size: 12px; color: var(--text-muted); line-height: 1.9; }
+.spa-detail-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; align-items: center; padding: 80px 80px; }
+.spa-detail-content h2 { font-family: var(--serif); font-size: 44px; font-weight: 300; margin-bottom: 24px; color: var(--cream); }
+.spa-detail-visual {
+  aspect-ratio: 3/4;
+  background: var(--card); border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.spa-detail-visual-inner {
+  text-align: center; color: var(--gold);
+  font-family: var(--serif); font-size: 64px;
+}
+.spa-params { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.spa-param { text-align: center; padding: 24px; border: 1px solid var(--border-hard); background: var(--card); }
+.spa-param-val { font-family: var(--serif); font-size: 36px; color: var(--gold); }
+.spa-param-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+
+/* ─── CLINIC / BEAUTY ─── */
+.price-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border-hard); margin-bottom: 48px; }
+.price-tab {
+  padding: 16px 32px;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s; margin-bottom: -1px;
+}
+.price-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.price-category { display: none; }
+.price-category.active { display: block; }
+.price-cat-title {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.price-cat-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table tr { border-bottom: 1px solid var(--border-hard); }
+.price-table tr:hover td { background: var(--card); }
+.price-table td { padding: 20px 16px; font-size: 13px; color: var(--text-muted); }
+.price-table td:first-child { color: var(--cream); font-weight: 400; }
+.price-table td:last-child { color: var(--gold); font-weight: 400; white-space: nowrap; text-align: right; }
+.price-table td.desc { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
+.book-procedure-btn {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: none; border: 1px solid var(--border-hard); color: var(--gold);
+  padding: 8px 20px; cursor: pointer; transition: all 0.3s; white-space: nowrap;
+}
+.book-procedure-btn:hover { background: var(--cta); color: #fff; border-color: var(--cta); }
+
+/* ─── TEAM PAGE ─── */
+.team-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.team-card {
+  background: var(--card); border: 1px solid var(--border-hard);
+  overflow: hidden; cursor: pointer; transition: all 0.4s;
+}
+.team-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(184,146,74,0.12); }
+.team-photo {
+  aspect-ratio: 3/4; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px; color: var(--border-hard);
+  position: relative; overflow: hidden;
+}
+.team-photo-overlay {
+  position: absolute; inset: 0; background: rgba(184,146,74,0.06);
+  opacity: 0; transition: opacity 0.4s;
+}
+.team-card:hover .team-photo-overlay { opacity: 1; }
+.team-info { padding: 24px 20px; }
+.team-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.team-role { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.team-bio { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+.team-cert { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.team-cert span { font-size: 9px; border: 1px solid var(--border-hard); padding: 3px 8px; color: var(--text-muted); background: var(--bg); }
+
+/* ─── BOOKING ─── */
+.booking-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.book-tab {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--card); border: 1px solid var(--border-hard); color: var(--text-muted);
+  padding: 12px 24px; cursor: pointer; transition: all 0.3s;
+}
+.book-tab.active, .book-tab:hover { border-color: var(--gold); color: var(--gold); background: var(--bg2); }
+.booking-form { display: none; }
+.booking-form.active { display: block; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+.form-input, .form-select, .form-textarea {
+  background: var(--bg); border: 1px solid var(--border-hard); color: var(--text);
+  padding: 14px 16px; font-family: var(--sans); font-size: 13px; font-weight: 300;
+  outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-select option { background: var(--bg); color: var(--text); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.btn-submit {
+  margin-top: 32px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.25em;
+  text-transform: uppercase; background: var(--cta); color: #fff;
+  border: none; padding: 18px 56px; cursor: pointer; transition: all 0.3s;
+  border-radius: 4px;
+}
+.btn-submit:hover { background: var(--cta-hover); }
+.booking-summary {
+  background: var(--card); border: 1px solid var(--border-hard);
+  padding: 32px;
+}
+.booking-summary h4 { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 20px; }
+.summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-hard); font-size: 12px; color: var(--text-muted); }
+.summary-row:last-child { border-bottom: none; }
+.summary-val { color: var(--gold); }
+.booking-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+
+/* ─── ACCOUNT ─── */
+.account-layout { display: grid; grid-template-columns: 260px 1fr; gap: 48px; padding-top: 100px; padding-bottom: 60px; padding-left: 80px; padding-right: 80px; min-height: 100vh; }
+.account-sidebar { padding-top: 20px; }
+.account-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 16px;
+}
+.account-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.account-plan { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+.sidebar-link {
+  padding: 12px 16px; font-size: 12px; letter-spacing: 0.1em;
+  color: var(--text-muted); cursor: pointer; transition: all 0.3s;
+  border-left: 2px solid transparent;
+}
+.sidebar-link:hover, .sidebar-link.active { color: var(--gold); border-left-color: var(--gold); background: var(--card); }
+.account-content-pane { display: none; }
+.account-content-pane.active { display: block; }
+.account-section-title { font-family: var(--serif); font-size: 32px; font-weight: 300; margin-bottom: 32px; color: var(--cream); }
+.bookings-list { display: flex; flex-direction: column; gap: 12px; }
+.booking-item { background: var(--card); border: 1px solid var(--border-hard); padding: 24px; display: flex; justify-content: space-between; align-items: center; }
+.booking-item-info h4 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.booking-item-info p { font-size: 11px; color: var(--text-muted); }
+.status-badge {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 6px 14px; border: 1px solid;
+}
+.status-badge.confirmed { border-color: #3a8a4a; color: #3a8a4a; }
+.status-badge.pending { border-color: var(--gold); color: var(--gold); }
+.status-badge.completed { border-color: var(--border-hard); color: var(--text-muted); }
+.payments-table { width: 100%; border-collapse: collapse; }
+.payments-table th { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border-hard); }
+.payments-table td { font-size: 12px; color: var(--text-muted); padding: 16px; border-bottom: 1px solid var(--border-hard); }
+.payments-table td:first-child { color: var(--cream); }
+.membership-card {
+  background: linear-gradient(135deg, #ede5d5, #e5dcc8);
+  border: 1px solid var(--gold);
+  padding: 40px;
+  position: relative; overflow: hidden;
+  margin-bottom: 32px;
+}
+.membership-card::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,146,74,0.10), transparent 70%);
+}
+.membership-level { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.membership-name { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--cream); margin-bottom: 24px; }
+.membership-expires { font-size: 12px; color: var(--text-muted); }
+.membership-num { font-family: var(--serif); font-size: 18px; color: var(--gold); margin-top: 24px; letter-spacing: 0.15em; }
+.vip-locker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.vip-locker {
+  background: var(--card); border: 1px solid var(--border-hard); padding: 24px;
+  text-align: center;
+}
+.vip-locker.mine { border-color: var(--gold); }
+.locker-num { font-family: var(--serif); font-size: 32px; color: var(--gold); }
+.locker-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+.locker-status { font-size: 9px; color: var(--gold); margin-top: 8px; }
+.progress-bar { background: var(--border-hard); height: 2px; margin-top: 16px; }
+.progress-fill { height: 100%; background: var(--gold); transition: width 0.8s ease; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--cream);
+  border-top: 1px solid var(--border-hard);
+  padding: 60px 80px 32px;
+}
+footer, footer a, footer p, footer div { color: #f0ebe1; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; margin-bottom: 48px; }
+.footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 16px; text-transform: uppercase; }
+.footer-tagline { font-size: 12px; color: rgba(240,235,225,0.6); line-height: 1.8; max-width: 280px; }
+.footer-heading { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-link { font-size: 12px; color: rgba(240,235,225,0.55); cursor: pointer; transition: color 0.3s; text-decoration: none; }
+.footer-link:hover { color: var(--gold-light); }
+.footer-bottom { border-top: 1px solid rgba(240,235,225,0.12); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11px; color: rgba(240,235,225,0.3); }
+.footer-socials { display: flex; gap: 16px; }
+.social-link {
+  width: 36px; height: 36px; border: 1px solid rgba(240,235,225,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: rgba(240,235,225,0.5); cursor: pointer;
+  transition: all 0.3s; text-decoration: none;
+}
+.social-link:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(42,32,24,0.7); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg); border: 1px solid var(--border-hard);
+  max-width: 560px; width: 100%; padding: 48px;
+  position: relative; max-height: 90vh; overflow-y: auto;
+  animation: fadeUp 0.4s ease;
+  box-shadow: 0 24px 80px rgba(42,32,24,0.2);
+}
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 36px; height: 36px; border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted); font-size: 18px;
+  transition: all 0.3s; background: none;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+.modal-title { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.modal-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 32px; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 3000;
+  background: var(--cream); border: 1px solid var(--gold);
+  padding: 16px 24px; display: flex; align-items: center; gap: 12px;
+  transform: translateY(100px); opacity: 0; transition: all 0.4s;
+  max-width: 320px;
+  box-shadow: 0 8px 32px rgba(42,32,24,0.15);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-icon { color: var(--gold); font-size: 16px; }
+.toast-text { font-size: 12px; color: #f0ebe1; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; height: 40px; }
+  50% { opacity: 1; height: 60px; }
+}
+
+/* ─── UTILITIES ─── */
+.text-gold { color: var(--gold); }
+.text-muted { color: var(--text-muted); }
+.font-serif { font-family: var(--serif); }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-40 { margin-top: 40px; }
+.mt-48 { margin-top: 48px; }
+.mb-32 { margin-bottom: 32px; }
+.flex { display: flex; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.gap-16 { gap: 16px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+
+/* ─── HIGHLIGHT BOX ─── */
+.highlight-box {
+  background: var(--card); border: 1px solid var(--border-hard);
+  border-left: 3px solid var(--gold);
+  padding: 24px 28px; margin: 32px 0;
+}
+.highlight-box p { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.8; }
+
+/* ─── MEGA NAV OVERLAY ─── */
+.mega-nav {
+  position: fixed; inset: 0; z-index: 1500;
+  background: var(--bg);
+  display: none; flex-direction: column;
+  overflow-y: auto;
+  transform: translateY(-100%);
+  transition: transform 0.55s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.mega-nav.open {
+  display: flex;
+  transform: translateY(0);
+}
+.mega-nav-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 48px;
+  height: 88px;
+  border-bottom: 1px solid var(--border-hard);
+  flex-shrink: 0;
+}
+.mega-nav-close {
+  justify-self: start;
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--text);
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text); background: none; cursor: pointer;
+  transition: all 0.3s;
+}
+.mega-nav-close:hover { background: var(--text); color: var(--bg); }
+.mega-nav-logo {
+  justify-self: center; text-align: center;
+  font-family: var(--serif); font-size: 22px;
+  letter-spacing: 0.32em; color: var(--gold);
+  text-transform: uppercase; cursor: pointer;
+}
+.mega-nav-cta {
+  justify-self: end;
+}
+.mega-nav-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+}
+.mega-nav-sections {
+  padding: 56px 64px 56px 80px;
+  border-right: 1px solid var(--border-hard);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-content: start;
+}
+.mega-nav-col-title {
+  font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 32px;
+  grid-column: 1 / -1;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-hard);
+}
+.mega-section-item {
+  padding: 24px 32px 24px 0;
+  border-bottom: 1px solid var(--border-hard);
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.mega-section-item:hover { padding-left: 8px; }
+.mega-section-item:last-child { border-bottom: none; }
+.mega-section-label {
+  font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.mega-section-title {
+  font-family: var(--serif); font-size: 28px; font-weight: 300;
+  color: var(--cream); line-height: 1.1;
+  transition: color 0.3s;
+  margin-bottom: 8px;
+}
+.mega-section-item:hover .mega-section-title { color: var(--gold); }
+.mega-section-desc {
+  font-size: 11px; color: var(--text-muted); line-height: 1.7;
+  max-width: 240px;
+}
+.mega-section-arrow {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  font-size: 18px; color: var(--border-hard);
+  transition: all 0.3s;
+}
+.mega-section-item:hover .mega-section-arrow { color: var(--gold); transform: translateY(-50%) translateX(4px); }
+.mega-nav-sub {
+  padding: 56px 48px;
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.mega-sub-block { margin-bottom: 40px; }
+.mega-sub-heading {
+  font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border-hard);
+}
+.mega-sub-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0;
+  font-size: 13px; font-weight: 300;
+  color: var(--text); cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.mega-sub-link::before { content: '—'; color: var(--border-hard); font-size: 10px; transition: color 0.3s; }
+.mega-sub-link:hover { color: var(--gold); padding-left: 4px; }
+.mega-sub-link:hover::before { color: var(--gold); }
+.mega-nav-footer-strip {
+  padding: 24px 80px;
+  border-top: 1px solid var(--border-hard);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+  background: var(--card);
+}
+.mega-nav-contact {
+  display: flex; gap: 48px;
+}
+.mega-contact-item { font-size: 12px; color: var(--text-muted); }
+.mega-contact-item strong { display: block; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 4px; }
+@media (max-width: 1024px) {
+  .mega-nav-body { grid-template-columns: 1fr; }
+  .mega-nav-sections { padding: 32px 24px; grid-template-columns: 1fr; border-right: none; }
+  .mega-nav-sub { display: none; }
+  .mega-nav-header { padding: 0 24px; }
+  .mega-nav-footer-strip { padding: 20px 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .mega-nav-contact { gap: 24px; flex-wrap: wrap; }
+  .mega-section-title { font-size: 22px; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  header { padding: 0 24px; height: 72px; grid-template-columns: 1fr auto 1fr; }
+  .logo-main { font-size: 20px; }
+  .btn-cta-header { display: none; }
+  .btn-lang { display: none; }
+  header .btn-outline { display: none; }
+  .section, .section-sm { padding: 60px 24px; }
+  .divider { margin: 0 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .zones-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .account-layout { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+  .account-sidebar { display: flex; flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .spa-detail-grid { grid-template-columns: 1fr; padding: 40px 24px; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+  .philosophy-card:first-child { grid-column: 1; }
+  .training-list { grid-template-columns: 1fr; }
+  [style*="grid-template-columns:1fr 1fr 1fr"][style*="gap:1px"] { grid-template-columns: 1fr !important; }
+  .schedule-grid { grid-template-columns: 1fr 1fr; }
+  .page-hero, .fitness-hero { padding: 100px 24px 0; }
+  footer { padding: 40px 24px 24px; }
+  .hero-stats { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .three-col { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 24px; }
+  .services-intro { grid-template-columns: 1fr; gap: 20px; }
+  .spa-features { grid-template-columns: 1fr; }
+  .price-tabs { flex-wrap: wrap; }
+  .price-tab { padding: 10px 16px; }
+  #page-directory [style*="grid-template-columns:repeat(2"] { grid-template-columns: 1fr !important; }
+  #page-directory [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  #page-directory [style*="padding:72px 80px"] { padding: 88px 24px 40px !important; }
+  #page-directory [style*="padding:64px 80px"] { padding: 40px 24px !important; }
+  #page-directory [style*="padding:48px 80px"] { padding: 32px 24px !important; }
+  #page-directory [style*="padding:56px 48px"] { padding: 32px 24px !important; }
+  #page-directory [style*="padding:40px 36px"] { padding: 28px 20px !important; }
+}
+
+/* ─── PHILOSOPHY ─── */
+.philosophy-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; margin-top: 60px;
+  border: 1px solid var(--border-hard);
+}
+.philosophy-card {
+  padding: 56px 48px;
+  border: 1px solid var(--border-hard);
+  position: relative; overflow: hidden;
+  transition: background 0.4s;
+}
+.philosophy-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.5s;
+}
+.philosophy-card:hover::before { transform: scaleX(1); }
+.philosophy-card:hover { background: var(--card); }
+.philosophy-num {
+  font-family: var(--serif); font-size: 72px; font-weight: 300;
+  color: var(--border-hard); line-height: 1;
+  margin-bottom: 24px;
+}
+.philosophy-card h3 {
+  font-family: var(--serif); font-size: 26px; font-weight: 400;
+  margin-bottom: 16px; color: var(--cream);
+}
+.philosophy-card p { font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+
+/* ─── SERVICES GRID ─── */
+.services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-hard);
+}
+.service-card {
+  background: var(--bg2);
+  padding: 48px 36px;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative; overflow: hidden;
+}
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.service-card:hover { background: var(--bg3); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border-hard); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-size: 18px;
+  transition: border-color 0.3s;
+}
+.service-card:hover .service-icon { border-color: var(--gold); }
+.service-card h3 {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  margin-bottom: 12px; color: var(--cream);
+}
+.service-card p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.service-arrow {
+  margin-top: 28px;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 10px;
+}
+.service-arrow::after { content: '→'; transition: transform 0.3s; }
+.service-card:hover .service-arrow::after { transform: translateX(6px); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-hard) 30%, var(--gold) 50%, var(--border-hard) 70%, transparent 100%);
+  margin: 0 80px;
+}
+.divider-ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px; padding: 24px 0;
+  font-family: var(--serif); font-size: 20px; color: var(--gold);
+}
+
+/* ─── FITNESS PAGE ─── */
+.fitness-hero {
+  height: 60vh; min-height: 400px;
+  background: linear-gradient(135deg, #f4efe5 0%, #ede7da 100%);
+  display: flex; align-items: center;
+  padding: 100px 80px 0;
+  position: relative; overflow: hidden;
+}
+.fitness-hero::after {
+  content: 'FITNESS';
+  position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: 220px; font-weight: 300;
+  color: rgba(200,169,106,0.04); line-height: 1;
+  pointer-events: none;
+}
+.page-hero {
+  height: 55vh; min-height: 380px;
+  display: flex; align-items: center;
+  padding: 100px 80px 0;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #f4efe5 0%, #ece6d9 100%);
+}
+.page-hero-bg-text {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: 200px; font-weight: 300;
+  color: rgba(200,169,106,0.03); line-height: 1;
+  pointer-events: none; white-space: nowrap;
+}
+.breadcrumb {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.breadcrumb span { color: var(--gold); cursor: pointer; }
+.breadcrumb span:hover { text-decoration: underline; }
+
+/* ─── FITNESS ZONES ─── */
+.zones-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.zone-card {
+  background: var(--card);
+  border: 1px solid var(--border-hard);
+  padding: 40px 32px;
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: all 0.4s;
+}
+.zone-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.zone-badge {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--gold);
+  padding: 4px 12px; margin-bottom: 20px;
+}
+.zone-card h3 {
+  font-family: var(--serif); font-size: 26px; font-weight: 400;
+  margin-bottom: 12px; color: var(--cream);
+}
+.zone-card p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.zone-features { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+.zone-feature {
+  font-size: 11px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 10px;
+}
+.zone-feature::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+/* ─── TRAINING TYPES ─── */
+.training-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-hard); margin-top: 48px; }
+.training-item {
+  background: var(--bg); padding: 40px;
+  display: flex; gap: 24px; align-items: flex-start;
+  cursor: pointer; transition: background 0.3s;
+}
+.training-item:hover { background: var(--card); }
+.training-num {
+  font-family: var(--serif); font-size: 48px; font-weight: 300;
+  color: var(--border-hard); line-height: 1; flex-shrink: 0;
+  min-width: 56px;
+}
+.training-item h4 { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.training-item p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+/* ─── ACCORDION ─── */
+.accordion { margin-top: 40px; }
+.accordion-item { border-bottom: 1px solid var(--border-hard); }
+.accordion-header {
+  padding: 24px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+}
+.accordion-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); }
+.accordion-icon {
+  width: 32px; height: 32px; border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 18px; transition: all 0.3s; flex-shrink: 0;
+}
+.accordion-item.open .accordion-icon { transform: rotate(45deg); border-color: var(--gold); }
+.accordion-body { display: none; padding: 0 0 28px; }
+.accordion-item.open .accordion-body { display: block; }
+.accordion-body p { font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+.equipment-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid var(--border-hard); padding: 6px 14px;
+  color: var(--text-muted); transition: all 0.3s;
+}
+.tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── GROUP SCHEDULE ─── */
+.schedule-tabs { display: flex; gap: 0; margin-bottom: 32px; border: 1px solid var(--border-hard); }
+.sched-tab {
+  flex: 1; padding: 14px 8px; text-align: center;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer; transition: all 0.3s;
+  border-right: 1px solid var(--border-hard);
+}
+.sched-tab:last-child { border-right: none; }
+.sched-tab.active, .sched-tab:hover { background: var(--card); color: var(--gold); }
+.schedule-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.schedule-slot {
+  background: var(--card); border: 1px solid var(--border-hard);
+  padding: 20px 16px;
+}
+.slot-time { font-family: var(--serif); font-size: 24px; color: var(--gold-light); }
+.slot-name { font-size: 11px; letter-spacing: 0.1em; color: var(--cream); margin: 6px 0 4px; }
+.slot-trainer { font-size: 10px; color: var(--text-muted); }
+.slot-spots { font-size: 9px; color: var(--gold); margin-top: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+.btn-book-small {
+  margin-top: 12px; width: 100%;
+  font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: none; border: 1px solid var(--border-hard); color: var(--gold);
+  padding: 8px; cursor: pointer; transition: all 0.3s;
+}
+.btn-book-small:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+/* ─── SPA PAGE ─── */
+.spa-features {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--border-hard); margin-top: 60px;
+}
+.spa-feature {
+  background: var(--bg); padding: 56px 40px;
+  text-align: center;
+}
+.spa-icon { font-size: 32px; margin-bottom: 24px; opacity: 0.8; }
+.spa-feature h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 16px; color: var(--cream); }
+.spa-feature p { font-size: 12px; color: var(--text-muted); line-height: 1.9; }
+.spa-detail-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; align-items: center; padding: 80px 80px; }
+.spa-detail-content h2 { font-family: var(--serif); font-size: 44px; font-weight: 300; margin-bottom: 24px; }
+.spa-detail-visual {
+  aspect-ratio: 3/4;
+  background: var(--card); border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.spa-detail-visual-inner {
+  text-align: center; color: var(--gold);
+  font-family: var(--serif); font-size: 64px;
+}
+.spa-params { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.spa-param { text-align: center; padding: 24px; border: 1px solid var(--border-hard); }
+.spa-param-val { font-family: var(--serif); font-size: 36px; color: var(--gold-light); }
+.spa-param-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+
+/* ─── CLINIC / BEAUTY ─── */
+.price-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border-hard); margin-bottom: 48px; }
+.price-tab {
+  padding: 16px 32px;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s; margin-bottom: -1px;
+}
+.price-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.price-category { display: none; }
+.price-category.active { display: block; }
+.price-cat-title {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.price-cat-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table tr { border-bottom: 1px solid var(--border-hard); }
+.price-table tr:hover td { background: var(--card); }
+.price-table td { padding: 20px 16px; font-size: 13px; color: var(--text-muted); }
+.price-table td:first-child { color: var(--cream); font-weight: 400; }
+.price-table td:last-child { color: var(--gold); font-weight: 400; white-space: nowrap; text-align: right; }
+.price-table td.desc { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
+.book-procedure-btn {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: none; border: 1px solid var(--border-hard); color: var(--gold);
+  padding: 8px 20px; cursor: pointer; transition: all 0.3s; white-space: nowrap;
+}
+.book-procedure-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+/* ─── TEAM PAGE ─── */
+.team-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.team-card {
+  background: var(--card); border: 1px solid var(--border-hard);
+  overflow: hidden; cursor: pointer; transition: all 0.4s;
+}
+.team-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.team-photo {
+  aspect-ratio: 3/4; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px; color: var(--border-hard);
+  position: relative; overflow: hidden;
+}
+.team-photo-overlay {
+  position: absolute; inset: 0; background: rgba(200,169,106,0.08);
+  opacity: 0; transition: opacity 0.4s;
+}
+.team-card:hover .team-photo-overlay { opacity: 1; }
+.team-info { padding: 24px 20px; }
+.team-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.team-role { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.team-bio { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+.team-cert { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.team-cert span { font-size: 9px; border: 1px solid var(--border-hard); padding: 3px 8px; color: var(--text-muted); }
+
+/* ─── BOOKING ─── */
+.booking-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.book-tab {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--card); border: 1px solid var(--border-hard); color: var(--text-muted);
+  padding: 12px 24px; cursor: pointer; transition: all 0.3s;
+}
+.book-tab.active, .book-tab:hover { border-color: var(--gold); color: var(--gold); background: var(--bg2); }
+.booking-form { display: none; }
+.booking-form.active { display: block; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+.form-input, .form-select, .form-textarea {
+  background: var(--card); border: 1px solid var(--border-hard); color: var(--text);
+  padding: 14px 16px; font-family: var(--sans); font-size: 13px; font-weight: 300;
+  outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-select option { background: var(--bg3); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.btn-submit {
+  margin-top: 32px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.25em;
+  text-transform: uppercase; background: var(--gold); color: var(--bg);
+  border: none; padding: 18px 56px; cursor: pointer; transition: all 0.3s;
+}
+.btn-submit:hover { background: var(--gold-light); }
+.booking-summary {
+  background: var(--card); border: 1px solid var(--border-hard);
+  padding: 32px;
+}
+.booking-summary h4 { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 20px; }
+.summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-hard); font-size: 12px; }
+.summary-row:last-child { border-bottom: none; }
+.summary-val { color: var(--gold); }
+.booking-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+
+/* ─── ACCOUNT ─── */
+.account-layout { display: grid; grid-template-columns: 260px 1fr; gap: 48px; padding-top: 100px; padding-bottom: 60px; padding-left: 80px; padding-right: 80px; min-height: 100vh; }
+.account-sidebar { padding-top: 20px; }
+.account-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 16px;
+}
+.account-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.account-plan { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+.sidebar-link {
+  padding: 12px 16px; font-size: 12px; letter-spacing: 0.1em;
+  color: var(--text-muted); cursor: pointer; transition: all 0.3s;
+  border-left: 2px solid transparent;
+}
+.sidebar-link:hover, .sidebar-link.active { color: var(--gold); border-left-color: var(--gold); background: var(--card); }
+.account-content-pane { display: none; }
+.account-content-pane.active { display: block; }
+.account-section-title { font-family: var(--serif); font-size: 32px; font-weight: 300; margin-bottom: 32px; color: var(--cream); }
+.bookings-list { display: flex; flex-direction: column; gap: 12px; }
+.booking-item { background: var(--card); border: 1px solid var(--border-hard); padding: 24px; display: flex; justify-content: space-between; align-items: center; }
+.booking-item-info h4 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.booking-item-info p { font-size: 11px; color: var(--text-muted); }
+.status-badge {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 6px 14px; border: 1px solid;
+}
+.status-badge.confirmed { border-color: #4a9a5a; color: #6dba7d; }
+.status-badge.pending { border-color: var(--gold); color: var(--gold); }
+.status-badge.completed { border-color: var(--border-hard); color: var(--text-muted); }
+.payments-table { width: 100%; border-collapse: collapse; }
+.payments-table th { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border-hard); }
+.payments-table td { font-size: 12px; color: var(--text-muted); padding: 16px; border-bottom: 1px solid var(--border-hard); }
+.payments-table td:first-child { color: var(--cream); }
+.membership-card {
+  background: linear-gradient(135deg, var(--card), var(--bg2));
+  border: 1px solid var(--gold);
+  padding: 40px;
+  position: relative; overflow: hidden;
+  margin-bottom: 32px;
+}
+.membership-card::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,106,0.06), transparent 70%);
+}
+.membership-level { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.membership-name { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--cream); margin-bottom: 24px; }
+.membership-expires { font-size: 12px; color: var(--text-muted); }
+.membership-num { font-family: var(--serif); font-size: 18px; color: var(--gold); margin-top: 24px; letter-spacing: 0.15em; }
+.vip-locker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.vip-locker {
+  background: var(--card); border: 1px solid var(--border-hard); padding: 24px;
+  text-align: center;
+}
+.vip-locker.mine { border-color: var(--gold); }
+.locker-num { font-family: var(--serif); font-size: 32px; color: var(--gold-light); }
+.locker-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+.locker-status { font-size: 9px; color: var(--gold); margin-top: 8px; }
+.progress-bar { background: var(--border-hard); height: 2px; margin-top: 16px; }
+.progress-fill { height: 100%; background: var(--gold); transition: width 0.8s ease; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--card); border-top: 1px solid var(--border-hard);
+  padding: 60px 80px 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; margin-bottom: 48px; }
+.footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 16px; text-transform: uppercase; }
+.footer-tagline { font-size: 12px; color: var(--text-muted); line-height: 1.8; max-width: 280px; }
+.footer-heading { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-link { font-size: 12px; color: var(--text-muted); cursor: pointer; transition: color 0.3s; text-decoration: none; }
+.footer-link:hover { color: var(--gold-light); }
+.footer-bottom { border-top: 1px solid var(--border-hard); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; }
+.footer-socials { display: flex; gap: 16px; }
+.social-link {
+  width: 36px; height: 36px; border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text-muted); cursor: pointer;
+  transition: all 0.3s; text-decoration: none;
+}
+.social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(42,32,24,0.7); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg); border: 1px solid var(--border-hard);
+  max-width: 560px; width: 100%; padding: 48px;
+  position: relative; max-height: 90vh; overflow-y: auto;
+  animation: fadeUp 0.4s ease;
+}
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 36px; height: 36px; border: 1px solid var(--border-hard);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted); font-size: 18px;
+  transition: all 0.3s;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+.modal-title { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.modal-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 32px; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 3000;
+  background: var(--card); border: 1px solid var(--gold);
+  padding: 16px 24px; display: flex; align-items: center; gap: 12px;
+  transform: translateY(100px); opacity: 0; transition: all 0.4s;
+  max-width: 320px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-icon { color: var(--gold); font-size: 16px; }
+.toast-text { font-size: 12px; color: var(--text); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; height: 40px; }
+  50% { opacity: 1; height: 60px; }
+}
+
+/* ─── UTILITIES ─── */
+.text-gold { color: var(--gold); }
+.text-muted { color: var(--text-muted); }
+.font-serif { font-family: var(--serif); }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-40 { margin-top: 40px; }
+.mt-48 { margin-top: 48px; }
+.mb-32 { margin-bottom: 32px; }
+.flex { display: flex; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.gap-16 { gap: 16px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+
+/* ─── HIGHLIGHT BOX ─── */
+.highlight-box {
+  background: var(--card); border: 1px solid var(--border-hard);
+  border-left: 3px solid var(--gold);
+  padding: 24px 28px; margin: 32px 0;
+}
+.highlight-box p { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.8; }
+
+/* ─── RESPONSIVE END ─── */
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  header { padding: 0 24px; }
+  nav { display: none; }
+  .menu-toggle { display: flex; }
+  .hero-content { padding: 0 24px; }
+  .hero-stats { right: 24px; bottom: 60px; gap: 24px; }
+  .section, .section-sm { padding: 60px 24px; }
+  .divider { margin: 0 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .zones-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .account-layout { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+  .account-sidebar { display: flex; flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .spa-detail-grid { grid-template-columns: 1fr; padding: 40px 24px; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+  .training-list { grid-template-columns: 1fr; }
+  .schedule-grid { grid-template-columns: 1fr 1fr; }
+  .page-hero, .fitness-hero { padding: 100px 24px 0; }
+  .footer-grid { padding: 0; }
+  footer { padding: 40px 24px 24px; }
+  .hero-stats { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .three-col { grid-template-columns: 1fr; }
+}
+</style>
+<style>
+.page { display: block !important; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-left">
+    <button class="btn-menu" onclick="toggleMobileNav()">
+      <div class="btn-menu-icon"><span></span><span></span><span></span></div>
+      Меню
+    </button>
+    <button class="btn-msg" onclick="showToast('Напишите нам: info@veneciawellness.ru')">✉</button>
+  </div>
+  <a class="logo" onclick="navigate('home')">
+    <span class="logo-main">В Е Н Е Ц И Я</span>
+    <span class="logo-sub">Велнес клуб &amp; СПА</span>
+  </a>
+  <div class="header-right">
+    <button class="btn-lang">RU</button>
+    <button class="btn-outline" style="padding:10px 20px;font-size:10px;border-radius:4px" onclick="navigate('directory')">Все разделы</button>
+    <button class="btn-cta-header" onclick="navigate('booking')">Клубные карты</button>
+    <button class="btn-cta-header" style="background:none;color:var(--cta);border:1px solid var(--cta);border-radius:4px;margin-left:0" onclick="navigate('account')">Кабинет</button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     MEGA NAVIGATION OVERLAY
+════════════════════════════════════════ -->
+<div class="mega-nav" id="megaNav">
+
+  <!-- Header -->
+  <div class="mega-nav-header">
+    <button class="mega-nav-close" onclick="toggleMegaNav()">
+      <span style="font-size:18px;line-height:1">✕</span>
+      Закрыть
+    </button>
+    <div class="mega-nav-logo" onclick="navigate('home');toggleMegaNav()">В Е Н Е Ц И Я</div>
+    <div class="mega-nav-cta">
+      <button class="btn-cta-header" onclick="navigate('booking');toggleMegaNav()">Клубные карты</button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="mega-nav-body">
+
+    <!-- Left: Main sections -->
+    <div class="mega-nav-sections">
+      <div class="mega-nav-col-title">Все разделы клуба</div>
+
+      <div class="mega-section-item" onclick="navigate('fitness');toggleMegaNav()">
+        <div class="mega-section-label">01 · Активность</div>
+        <div class="mega-section-title">Фитнес</div>
+        <div class="mega-section-desc">Тренажёрный зал, групповые программы, персональные студии, бассейн</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+
+      <div class="mega-section-item" onclick="navigate('spa');toggleMegaNav()">
+        <div class="mega-section-label">02 · Восстановление</div>
+        <div class="mega-section-title">СПА и велнес</div>
+        <div class="mega-section-desc">Бассейн 22м, джакузи, хамам со звёздным небом, сауна</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+
+      <div class="mega-section-item" onclick="navigate('clinic');toggleMegaNav()">
+        <div class="mega-section-label">03 · Красота</div>
+        <div class="mega-section-title">Клиника красоты</div>
+        <div class="mega-section-desc">Косметология, инъекции, лазер, аппаратные процедуры</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+
+      <div class="mega-section-item" onclick="navigate('beauty');toggleMegaNav()">
+        <div class="mega-section-label">04 · Стиль</div>
+        <div class="mega-section-title">Салон красоты</div>
+        <div class="mega-section-desc">Волосы, ногти, макияж, эпиляция, брови и ресницы</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+
+      <div class="mega-section-item" onclick="navigate('team');toggleMegaNav()">
+        <div class="mega-section-label">05 · О нас</div>
+        <div class="mega-section-title">Команда</div>
+        <div class="mega-section-desc">Тренеры, косметологи, специалисты — видеогид по клубу</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+
+      <div class="mega-section-item" onclick="navigate('booking');toggleMegaNav()">
+        <div class="mega-section-label">06 · Сервис</div>
+        <div class="mega-section-title">Бронирование</div>
+        <div class="mega-section-desc">Тренировки, СПА, VIP-раздевалка, шкафчики, салон</div>
+        <span class="mega-section-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- Right: Sub-navigation -->
+    <div class="mega-nav-sub">
+
+      <div class="mega-sub-block">
+        <div class="mega-sub-heading">Фитнес — быстрый доступ</div>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('fitness-zones');toggleMegaNav()">Тренажёрный зал 500м²</a>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('fitness-zones');toggleMegaNav()">Бассейн и аквафитнес</a>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('fitness-zones');toggleMegaNav()">Пилатес на реформерах</a>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('fitness-zones');toggleMegaNav()">Ринг и боевые искусства</a>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('fitness-zones');toggleMegaNav()">Персональные студии</a>
+        <a class="mega-sub-link" onclick="navigate('fitness');scrollToId('scheduleGrid');toggleMegaNav()">Расписание занятий →</a>
+      </div>
+
+      <div class="mega-sub-block">
+        <div class="mega-sub-heading">Бронирование</div>
+        <a class="mega-sub-link" onclick="navigate('booking');setBookTab(document.querySelector('.book-tab'),'book-group');toggleMegaNav()">Групповая тренировка</a>
+        <a class="mega-sub-link" onclick="navigate('booking');toggleMegaNav()">Персональная с тренером</a>
+        <a class="mega-sub-link" onclick="navigate('booking');toggleMegaNav()">Персональная студия</a>
+        <a class="mega-sub-link" onclick="navigate('booking');toggleMegaNav()">VIP-раздевалка</a>
+        <a class="mega-sub-link" onclick="navigate('booking');toggleMegaNav()">Запись в салон / клинику</a>
+        <a class="mega-sub-link" onclick="navigate('booking');toggleMegaNav()">Аренда шкафчика</a>
+      </div>
+
+      <div class="mega-sub-block">
+        <div class="mega-sub-heading">Личный кабинет</div>
+        <a class="mega-sub-link" onclick="navigate('account');toggleMegaNav()">Карта и статус</a>
+        <a class="mega-sub-link" onclick="navigate('account');setAccountTab(document.querySelectorAll('.sidebar-link')[1],'acc-bookings');toggleMegaNav()">Мои бронирования</a>
+        <a class="mega-sub-link" onclick="navigate('account');setAccountTab(document.querySelectorAll('.sidebar-link')[4],'acc-vip');toggleMegaNav()">VIP-раздевалка</a>
+        <a class="mega-sub-link" onclick="navigate('account');setAccountTab(document.querySelectorAll('.sidebar-link')[5],'acc-spa');toggleMegaNav()">СПА-кабинет</a>
+      </div>
+
+      <div class="mega-sub-block">
+        <div class="mega-sub-heading">Навигация</div>
+        <a class="mega-sub-link" onclick="navigate('directory');toggleMegaNav()" style="color:var(--gold);font-weight:400">↗ Все разделы клуба</a>
+        <a class="mega-sub-link" onclick="navigate('home');toggleMegaNav()">Главная страница</a>
+        <a class="mega-sub-link" onclick="navigate('team');toggleMegaNav()">Команда и видеогид</a>
+        <a class="mega-sub-link" onclick="navigate('account');toggleMegaNav()">Личный кабинет</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer strip -->
+  <div class="mega-nav-footer-strip">
+    <div class="mega-nav-contact">
+      <div class="mega-contact-item">
+        <strong>Адрес</strong>
+        Москва, наб. Тараса Шевченко
+      </div>
+      <div class="mega-contact-item">
+        <strong>Телефон</strong>
+        +7 (495) 000-00-00
+      </div>
+      <div class="mega-contact-item">
+        <strong>Режим работы</strong>
+        Пн–Пт 07:00–23:00 · Сб–Вс 09:00–22:00
+      </div>
+      <div class="mega-contact-item">
+        <strong>Email</strong>
+        info@veneciawellness.ru
+      </div>
+    </div>
+    <div style="display:flex;gap:12px">
+      <a class="social-link" style="border-color:var(--border-hard);color:var(--text-muted)">✦</a>
+      <a class="social-link" style="border-color:var(--border-hard);color:var(--text-muted)">in</a>
+      <a class="social-link" style="border-color:var(--border-hard);color:var(--text-muted)">tg</a>
+    </div>
+  </div>
+
+</div><!-- /mega-nav -->
+<div class="page active" id="page-spa">
+  <div class="page-hero">
+    <div class="page-hero-bg-text">SPA</div>
+    <div>
+      <div class="breadcrumb"><span onclick="navigate('home')">Главная</span> / СПА и велнес</div>
+      <h1 class="section-title">СПА<br><em>и велнес</em></h1>
+      <p class="section-desc">Пространство тишины и восстановления. Бассейн, джакузи, сауна, хамам — ритуалы, которые наполняют</p>
+      <button class="btn-primary" style="margin-top:32px" onclick="navigate('booking')">Забронировать СПА</button>
+    </div>
+  </div>
+
+  <div class="spa-features">
+    <div class="spa-feature">
+      <div class="spa-icon">🏊</div>
+      <h3>Бассейн</h3>
+      <p>22 метра, две дорожки. Панорамный вид на парк и небоскрёбы Москва-Сити. Гидромассаж и противоток для профессиональных тренировок.</p>
+    </div>
+    <div class="spa-feature">
+      <div class="spa-icon">💧</div>
+      <h3>Джакузи</h3>
+      <p>Зона гидромассажа с ощущением полного уединения. Замедлиться, насладиться моментом и отпустить всё лишнее.</p>
+    </div>
+    <div class="spa-feature">
+      <div class="spa-icon">🌿</div>
+      <h3>Сауна и хамам</h3>
+      <p>Хамам с эффектом «звёздного неба». Финская сауна. Контрастные ритуалы: душ впечатлений и ледяной водопад.</p>
+    </div>
+  </div>
+
+  <!-- POOL DETAIL -->
+  <div class="spa-detail-grid">
+    <div class="spa-detail-content">
+      <div class="section-eyebrow">Бассейн</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(32px,3.5vw,52px);font-weight:300;margin-bottom:20px">
+        Панорамный<br>бассейн <em>22 метра</em>
+      </h2>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.9;max-width:500px">
+        Два дорожки, ласковый свет и завораживающий вид на Москву-реку. Бассейн открыт для свободного плавания, аквафитнеса и персональных тренировок с инструктором.
+      </p>
+      <div class="spa-params">
+        <div class="spa-param">
+          <div class="spa-param-val">22м</div>
+          <div class="spa-param-label">длина</div>
+        </div>
+        <div class="spa-param">
+          <div class="spa-param-val">2</div>
+          <div class="spa-param-label">дорожки</div>
+        </div>
+        <div class="spa-param">
+          <div class="spa-param-val">28°C</div>
+          <div class="spa-param-label">температура</div>
+        </div>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text-muted)">
+          <span style="color:var(--gold)">—</span> Свободное плавание — ежедневно 07:00–22:00
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text-muted)">
+          <span style="color:var(--gold)">—</span> Аквафитнес — по расписанию
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text-muted)">
+          <span style="color:var(--gold)">—</span> Персональный инструктор — по записи
+        </div>
+      </div>
+    </div>
+    <div class="spa-detail-visual">
+      <div class="spa-detail-visual-inner">🏊<br><span style="font-size:14px;letter-spacing:0.2em;text-transform:uppercase">Бассейн 22м</span></div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin:0 80px"><div class="divider-ornament">✦</div></div>
+
+  <!-- SAUNA/HAMMAM -->
+  <section class="section" style="background:var(--card);border-top:1px solid var(--border-hard)">
+    <div class="two-col">
+      <div>
+        <div class="section-eyebrow">Тепловые ритуалы</div>
+        <h2 class="section-title">Хамам<br>со <em>звёздным небом</em></h2>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.9;margin-bottom:28px">
+          Аутентичный хамам с мраморными мозелями, парогенератором с ароматическими маслами и эффектом звёздного неба. Контрастные ритуалы для глубокого очищения и восстановления.
+        </p>
+        <div class="highlight-box">
+          <p>«Хамам — это не просто баня. Это ритуал, уходящий корнями в тысячелетнюю традицию женского ухода. В Венеции мы воссоздали его в современном прочтении.»</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px">
+          <div class="zone-feature">Хамам с эффектом «звёздного неба»</div>
+          <div class="zone-feature">Финская сауна (85–95°C)</div>
+          <div class="zone-feature">Ароматические ритуалы</div>
+          <div class="zone-feature">Душ впечатлений</div>
+          <div class="zone-feature">Ледяной водопад</div>
+          <div class="zone-feature">Лаундж-зона отдыха</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:var(--bg);border:1px solid var(--border-hard);padding:32px">
+          <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Режим работы СПА</div>
+          <div style="font-family:var(--serif);font-size:22px;color:var(--cream);margin-bottom:16px">Ежедневно<br>09:00 – 22:00</div>
+          <p style="font-size:12px;color:var(--text-muted)">СПА-зона доступна держателям всех клубных карт. VIP-кабинет доступен по предварительной записи.</p>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--gold);padding:32px">
+          <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">VIP СПА-кабинет</div>
+          <p style="font-size:12px;color:var(--text-muted);line-height:1.8;margin-bottom:20px">Приватный СПА-кабинет с персональной программой. Массаж, обёртывание, ароматерапия — в вашем личном ритме.</p>
+          <button class="btn-primary" style="width:100%;font-size:10px" onclick="navigate('booking')">Забронировать</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:var(--card);border-top:1px solid var(--border-hard);padding:24px 80px;text-align:center">
+    <p class="footer-copy">© 2025 Венеция. Велнес — <span style="color:var(--gold);cursor:pointer" onclick="navigate('home')">На главную</span></p>
+  </footer>
+</div>
+
+<!-- ─── BOOKING MODAL ─── -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Быстрая запись</div>
+    <div class="modal-title" id="modalTitle">Запись на процедуру</div>
+    <div class="modal-subtitle" id="modalSubtitle">Заполните форму и мы свяжемся с вами</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="form-group"><label class="form-label">Имя</label><input class="form-input" placeholder="Ваше имя"></div>
+      <div class="form-group"><label class="form-label">Телефон</label><input class="form-input" placeholder="+7 (___) ___-__-__"></div>
+      <div class="form-group"><label class="form-label">Желаемая дата</label><input class="form-input" type="date"></div>
+      <div class="form-group"><label class="form-label">Время</label><select class="form-select"><option>10:00</option><option>11:00</option><option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option></select></div>
+      <button class="btn-submit" style="width:100%" onclick="submitModal()">Записаться</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TOAST ─── -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span class="toast-text" id="toastText">Запрос принят!</span>
+</div>
+
+<script>
+
+function navigate(page) {
+  const map = {
+    'home':'index.html','directory':'directory.html','fitness':'fitness.html',
+    'spa':'spa.html','clinic':'clinic.html','beauty':'beauty.html',
+    'team':'team.html','booking':'booking.html','account':'account.html'
+  };
+  if (map[page]) window.location.href = map[page];
+}
+  const a = document.querySelector(`nav a[data-page="${page}"]`);
+  if (a) a.classList.add('active');
+}
+
+// ─── MEGA NAV ───
+function toggleMegaNav() {
+  const nav = document.getElementById('megaNav');
+  const isOpen = nav.classList.contains('open');
+  if (isOpen) {
+    nav.style.transition = 'transform 0.45s cubic-bezier(0.77,0,0.18,1)';
+    nav.style.transform = 'translateY(-100%)';
+    setTimeout(() => { nav.classList.remove('open'); nav.style.transform = ''; }, 450);
+    document.body.style.overflow = '';
+  } else {
+    nav.classList.add('open');
+    nav.style.transform = 'translateY(0)';
+    document.body.style.overflow = 'hidden';
+  }
+}
+function toggleMobileNav() { toggleMegaNav(); }
+
+// ─── ACCORDION ───
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ─── SCHEDULE DAY ───
+function setDay(tab, day) {
+  document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+}
+
+// ─── CLINIC TABS ───
+function setClinicTab(tab, catId) {
+  document.querySelectorAll('#page-clinic .price-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#page-clinic .price-category').forEach(c => c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(catId).classList.add('active');
+}
+
+// ─── BEAUTY TABS ───
+function setBeautyTab(tab, catId) {
+  document.querySelectorAll('#page-beauty .price-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#page-beauty .price-category').forEach(c => c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(catId).classList.add('active');
+}
+
+// ─── BOOKING TABS ───
+function setBookTab(tab, formId) {
+  document.querySelectorAll('.book-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.booking-form').forEach(f => f.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(formId).classList.add('active');
+}
+
+// ─── ACCOUNT TABS ───
+function setAccountTab(link, paneId) {
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.account-content-pane').forEach(p => p.classList.remove('active'));
+  link.classList.add('active');
+  document.getElementById(paneId).classList.add('active');
+}
+
+// ─── MODAL ───
+function openBookingModal(title, time) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalSubtitle').textContent = time !== '—' ? `Время: ${time}` : 'Запишитесь к нашему специалисту';
+  document.getElementById('bookingModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitModal() {
+  closeModal();
+  showToast('Запись оформлена! Ждём вас в клубе.');
+}
+document.getElementById('bookingModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ─── SUBMIT BOOKING ───
+function submitBooking(formId) {
+  const messages = {
+    'book-group': 'Место на групповой тренировке забронировано!',
+    'book-personal': 'Запись к тренеру подтверждена!',
+    'book-studio': 'Студия забронирована! Ждём вас.',
+    'book-vip': 'VIP-раздевалка забронирована!',
+    'book-salon': 'Запись к специалисту принята!',
+    'book-locker': 'Шкафчик арендован!'
+  };
+  showToast(messages[formId] || 'Заявка принята!');
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3800);
+}
+
+// ─── SCROLL TO ───
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  // Set today's date as default for date inputs
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(i => { if (!i.value) i.value = today; });
+  navigate('home');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(i => { if (!i.value) i.value = today; });
+});
+</script>
+</body>
+</html>
