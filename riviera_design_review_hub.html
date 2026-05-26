@@ -1,0 +1,411 @@
+
+<h2 class="sr-only">ТРЦ Ривьера — панель дизайн-ревью для менеджеров. 8 страниц сайта с возможностью оставить комментарий и проставить статус.</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.hub{padding:0}
+.hub-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0 14px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:16px}
+.hub-brand{display:flex;align-items:center;gap:10px}
+.hub-wave{color:#185FA5;font-size:18px}
+.hub-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.hub-sub{font-size:12px;color:var(--color-text-secondary);margin-top:1px}
+.hub-stats{display:flex;gap:8px}
+.hstat{text-align:center;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 12px;min-width:52px}
+.hstat__n{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.hstat__l{font-size:10px;color:var(--color-text-secondary);margin-top:1px}
+
+.filter-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fchip{font-size:12px;padding:5px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);cursor:pointer;color:var(--color-text-secondary);background:var(--color-background-primary);transition:all .15s}
+.fchip.on{background:#185FA5;color:#fff;border-color:#185FA5}
+.fchip:hover:not(.on){background:var(--color-background-secondary)}
+
+.pages-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.page-card{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);overflow:hidden;transition:all .15s}
+.page-card:hover{border-color:var(--color-border-secondary)}
+.page-card.selected{border:1.5px solid #185FA5}
+.pc-preview{height:130px;cursor:pointer;position:relative;overflow:hidden}
+.pc-preview svg{width:100%;height:100%}
+.pc-body{padding:10px 12px}
+.pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.pc-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.pc-desc{font-size:11px;color:var(--color-text-secondary);line-height:1.45;margin-bottom:8px}
+.pc-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.status-pill{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;cursor:pointer;border:none;white-space:nowrap}
+.s-pending  {background:#F1EFE8;color:#5F5E5A}
+.s-review   {background:#E6F1FB;color:#0C447C}
+.s-approved {background:#EAF3DE;color:#27500A}
+.s-changes  {background:#FCEBEB;color:#791F1F}
+.pc-actions{display:flex;align-items:center;gap:6px}
+.btn-comment{font-size:11px;padding:4px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;color:var(--color-text-secondary);display:flex;align-items:center;gap:4px;transition:all .15s}
+.btn-comment:hover{border-color:#185FA5;color:#185FA5}
+.btn-comment.has-comments{color:#185FA5;border-color:#B5D4F4;background:#E6F1FB}
+.btn-open{font-size:11px;padding:4px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;color:var(--color-text-secondary);display:flex;align-items:center;gap:3px;transition:all .15s}
+.btn-open:hover{border-color:var(--color-border-secondary);color:var(--color-text-primary)}
+
+.comment-panel{border-top:0.5px solid var(--color-border-tertiary);padding:10px 12px;background:var(--color-background-secondary);display:none}
+.comment-panel.open{display:block}
+.cp-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.cp-close{cursor:pointer;color:var(--color-text-secondary);font-size:16px;line-height:1;padding:0 2px}
+.cp-close:hover{color:var(--color-text-primary)}
+.comment-list{display:flex;flex-direction:column;gap:7px;margin-bottom:8px;max-height:140px;overflow-y:auto}
+.comment-item{background:var(--color-background-primary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);padding:7px 9px}
+.comment-item__meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.comment-item__avatar{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:#fff;flex-shrink:0}
+.comment-item__name{font-size:11px;font-weight:500;color:var(--color-text-primary)}
+.comment-item__time{font-size:10px;color:var(--color-text-secondary)}
+.comment-item__text{font-size:12px;color:var(--color-text-primary);line-height:1.45}
+.comment-item__del{margin-left:auto;font-size:11px;color:var(--color-text-secondary);cursor:pointer;padding:0 2px}
+.comment-item__del:hover{color:#A32D2D}
+.cp-form{display:flex;gap:6px}
+.cp-name-input{width:90px;font-size:12px;padding:6px 8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);flex-shrink:0}
+.cp-text-input{flex:1;font-size:12px;padding:6px 8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
+.cp-send{background:#185FA5;color:#fff;border:none;border-radius:var(--border-radius-md);padding:6px 12px;font-size:12px;cursor:pointer;flex-shrink:0}
+.cp-send:hover{background:#0C447C}
+.empty-comments{font-size:11px;color:var(--color-text-secondary);text-align:center;padding:8px 0;font-style:italic}
+</style>
+
+<div class="hub">
+
+<div class="hub-header">
+  <div class="hub-brand">
+    <span class="hub-wave"><i class="ti ti-wave-sine" aria-hidden="true"></i></span>
+    <div>
+      <div class="hub-title">РИВЬЕРА — Дизайн-ревью</div>
+      <div class="hub-sub">Редизайн сайта v1.0 · Оставляйте комментарии к каждой странице</div>
+    </div>
+  </div>
+  <div class="hub-stats">
+    <div class="hstat"><div class="hstat__n" id="s-total">8</div><div class="hstat__l">страниц</div></div>
+    <div class="hstat"><div class="hstat__n" id="s-comments">0</div><div class="hstat__l">коммент.</div></div>
+    <div class="hstat"><div class="hstat__n" id="s-approved">0</div><div class="hstat__l">одобрено</div></div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="fchip on" onclick="filterCards(this,'all')">Все страницы</div>
+  <div class="fchip" onclick="filterCards(this,'pending')">Не рассмотрено</div>
+  <div class="fchip" onclick="filterCards(this,'review')">На рассмотрении</div>
+  <div class="fchip" onclick="filterCards(this,'approved')">Одобрено</div>
+  <div class="fchip" onclick="filterCards(this,'changes')">Нужны правки</div>
+</div>
+
+<div class="pages-grid" id="pages-grid"></div>
+</div>
+
+<script>
+const AVATARS = ['#185FA5','#D85A30','#0F6E56','#993556','#534AB7','#854F0B'];
+const PAGES = [
+  {id:'home',    name:'Главная',          url:'index.html',          desc:'Герой, события, акции, календарь, подписка',
+    svg:`<rect width="100%" height="100%" fill="#E6F1FB"/>
+    <rect x="0" y="0" width="100%" height="52" fill="#002EA3"/>
+    <rect x="8" y="10" width="44" height="8" rx="2" fill="#C4EBE5" opacity=".7"/>
+    <rect x="8" y="22" width="80" height="14" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="40" width="34" height="8" rx="2" fill="#FF734D"/>
+    <rect x="46" y="40" width="28" height="8" rx="2" fill="none" stroke="#fff" stroke-width="1" opacity=".5"/>
+    <rect x="0" y="56" width="25%" height="4" fill="#002EA3"/>
+    <rect x="25%" y="56" width="25%" height="4" fill="#248FEB"/>
+    <rect x="50%" y="56" width="25%" height="4" fill="#2994BD"/>
+    <rect x="75%" y="56" width="25%" height="4" fill="#FF734D"/>
+    <rect x="8" y="66" width="60" height="8" rx="2" fill="#185FA5" opacity=".4"/>
+    <rect x="8" y="80" width="84" height="36" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="8" y="80" width="84" height="18" rx="4" fill="#4A429E" opacity=".7"/>
+    <rect x="96" y="80" width="84" height="36" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="96" y="80" width="84" height="18" rx="4" fill="#2994BD" opacity=".7"/>
+    <rect x="8" y="122" width="172" height="6" rx="2" fill="#002EA3" opacity=".15"/>
+    <rect x="8" y="112" width="56" height="7" rx="2" fill="#002EA3" opacity=".3"/>`
+  },
+  {id:'events',  name:'Афиша событий',    url:'events.html',         desc:'Фильтры по категориям, сетка событий, календарь',
+    svg:`<rect width="100%" height="100%" fill="#E6F1FB"/>
+    <rect x="0" y="0" width="100%" height="48" fill="#002EA3"/>
+    <rect x="8" y="10" width="70" height="12" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="26" width="100" height="8" rx="2" fill="#fff" opacity=".45"/>
+    <rect x="8" y="38" width="20" height="6" rx="3" fill="#FF734D" opacity=".9"/>
+    <rect x="32" y="38" width="20" height="6" rx="3" fill="none" stroke="rgba(255,255,255,.4)" stroke-width=".8"/>
+    <rect x="56" y="38" width="20" height="6" rx="3" fill="none" stroke="rgba(255,255,255,.4)" stroke-width=".8"/>
+    <rect x="0" y="50" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="60" width="85" height="48" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="8" y="60" width="85" height="24" rx="4" fill="#533258" opacity=".8"/>
+    <rect x="12" y="63" width="18" height="5" rx="2" fill="#FF73D9" opacity=".9"/>
+    <rect x="12" y="74" width="45" height="7" rx="1" fill="#fff" opacity=".85"/>
+    <rect x="97" y="60" width="85" height="48" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="97" y="60" width="85" height="24" rx="4" fill="#2994BD" opacity=".8"/>
+    <rect x="101" y="63" width="18" height="5" rx="2" fill="#D6B200" opacity=".9"/>
+    <rect x="101" y="74" width="45" height="7" rx="1" fill="#fff" opacity=".85"/>
+    <rect x="8" y="114" width="85" height="14" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="97" y="114" width="85" height="14" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>`
+  },
+  {id:'event',   name:'Лендинг события',  url:'event-open-air.html', desc:'Open-Air: программа, исполнители, форма записи',
+    svg:`<rect width="100%" height="100%" fill="#EEEDFE"/>
+    <rect x="0" y="0" width="100%" height="56" fill="#4A429E"/>
+    <rect x="8" y="8" width="30" height="5" rx="2" fill="#FF73D9" opacity=".9"/>
+    <rect x="8" y="18" width="72" height="14" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="36" width="90" height="7" rx="2" fill="#fff" opacity=".4"/>
+    <rect x="8" y="48" width="30" height="6" rx="2" fill="#FF734D"/>
+    <rect x="42" y="48" width="28" height="6" rx="2" fill="none" stroke="rgba(255,255,255,.4)" stroke-width=".8"/>
+    <rect x="0" y="58" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="66" width="55" height="7" rx="2" fill="#185FA5" opacity=".4"/>
+    <rect x="8" y="78" width="170" height="1" fill="var(--color-border-tertiary)"/>
+    <rect x="8" y="82" width="22" height="7" rx="2" fill="#185FA5" opacity=".6"/>
+    <rect x="34" y="82" width="100" height="7" rx="2" fill="var(--color-border-secondary)"/>
+    <rect x="8" y="94" width="22" height="7" rx="2" fill="#185FA5" opacity=".6"/>
+    <rect x="34" y="94" width="80" height="7" rx="2" fill="var(--color-border-secondary)"/>
+    <rect x="8" y="106" width="22" height="7" rx="2" fill="#185FA5" opacity=".6"/>
+    <rect x="34" y="106" width="120" height="7" rx="2" fill="var(--color-border-secondary)"/>
+    <rect x="8" y="118" width="170" height="1" fill="var(--color-border-tertiary)"/>`
+  },
+  {id:'shops',   name:'Магазины',          url:'shops.html',          desc:'Каталог с поиском и фильтрами по категории',
+    svg:`<rect width="100%" height="100%" fill="#E6F1FB"/>
+    <rect x="0" y="0" width="100%" height="40" fill="#002EA3"/>
+    <rect x="8" y="10" width="55" height="10" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="26" width="100" height="7" rx="12" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.2)" stroke-width=".8"/>
+    <rect x="0" y="42" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="52" width="100%" height="16" rx="0" fill="none"/>
+    <rect x="8" y="52" width="38" height="12" rx="2" fill="#002EA3" opacity=".9"/>
+    <rect x="50" y="52" width="38" height="12" rx="2" fill="#2994BD" opacity=".9"/>
+    <rect x="92" y="52" width="38" height="12" rx="2" fill="#4A429E" opacity=".9"/>
+    <rect x="134" y="52" width="38" height="12" rx="2" fill="#242E7D" opacity=".9"/>
+    <rect x="8" y="70" width="24" height="7" rx="2" fill="rgba(0,0,0,.1)"/>
+    <rect x="36" y="70" width="24" height="7" rx="2" fill="rgba(0,0,0,.1)"/>
+    <rect x="64" y="70" width="24" height="7" rx="2" fill="rgba(0,0,0,.1)"/>
+    <rect x="8" y="84" width="172" height="11" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="11" y="87" width="18" height="5" rx="2" fill="#002EA3" opacity=".7"/>
+    <rect x="8" y="99" width="172" height="11" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="11" y="102" width="18" height="5" rx="2" fill="#2994BD" opacity=".7"/>
+    <rect x="8" y="114" width="172" height="11" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="11" y="117" width="18" height="5" rx="2" fill="#FF734D" opacity=".7"/>`
+  },
+  {id:'map',     name:'Схема ТРЦ',         url:'map.html',            desc:'SVG-план этажей с цветовыми зонами и легендой',
+    svg:`<rect width="100%" height="100%" fill="#C4EBE5" opacity=".4"/>
+    <rect x="0" y="0" width="100%" height="36" fill="#2994BD" opacity=".9"/>
+    <rect x="8" y="10" width="60" height="10" rx="2" fill="#002EA3" opacity=".9"/>
+    <rect x="8" y="40" width="100%" height="2" fill="rgba(0,46,163,.2)"/>
+    <rect x="8" y="48" width="30" height="7" rx="1" fill="#185FA5" opacity=".8"/>
+    <rect x="42" y="48" width="30" height="7" rx="1" fill="rgba(0,0,0,.12)"/>
+    <rect x="76" y="48" width="30" height="7" rx="1" fill="rgba(0,0,0,.12)"/>
+    <rect x="8" y="62" width="170" height="58" rx="4" fill="#EEF4FF" stroke="#C4EBE5" stroke-width="1"/>
+    <rect x="66" y="74" width="48" height="34" rx="3" fill="#fff" stroke="#248FEB" stroke-width="1"/>
+    <rect x="14" y="66" width="22" height="16" rx="2" fill="#002EA3" opacity=".75"/>
+    <rect x="40" y="66" width="20" height="16" rx="2" fill="#002EA3" opacity=".6"/>
+    <rect x="120" y="66" width="22" height="16" rx="2" fill="#FF734D" opacity=".75"/>
+    <rect x="146" y="66" width="24" height="16" rx="2" fill="#533258" opacity=".7"/>
+    <rect x="14" y="100" width="44" height="16" rx="2" fill="#D6B200" opacity=".8"/>
+    <rect x="120" y="100" width="52" height="16" rx="2" fill="#C4EBE5" stroke="#2994BD" stroke-width=".5"/>`
+  },
+  {id:'about',   name:'О нас',             url:'about.html',          desc:'Платформа бренда, ценности, миссия, цифры',
+    svg:`<rect width="100%" height="100%" fill="#EEEDFE"/>
+    <rect x="0" y="0" width="100%" height="60" fill="#242E7D"/>
+    <rect x="8" y="12" width="40" height="6" rx="2" fill="#C4EBE5" opacity=".5"/>
+    <rect x="8" y="22" width="70" height="14" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="40" width="90" height="10" rx="2" fill="#C4EBE5" opacity=".7"/>
+    <path d="M158 14 C162 14 162 50 166 50" stroke="#C4EBE5" stroke-width="3" stroke-linecap="round" fill="none" opacity=".5"/>
+    <rect x="0" y="62" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="72" width="80" height="24" rx="4" fill="#FF734D" opacity=".9"/>
+    <rect x="92" y="72" width="82" height="24" rx="4" fill="#fff" border=".5px"/>
+    <rect x="8" y="102" width="38" height="22" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="50" y="102" width="38" height="22" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="92" y="102" width="38" height="22" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="134" y="102" width="38" height="22" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="13" y="106" width="28" height="5" rx="2" fill="#002EA3" opacity=".25"/>
+    <rect x="55" y="106" width="28" height="5" rx="2" fill="#2994BD" opacity=".25"/>
+    <rect x="97" y="106" width="28" height="5" rx="2" fill="#FF734D" opacity=".25"/>
+    <rect x="139" y="106" width="28" height="5" rx="2" fill="#242E7D" opacity=".25"/>`
+  },
+  {id:'news',    name:'Акции и новости',   url:'news.html',           desc:'Лента с фильтром: акции, события, новости',
+    svg:`<rect width="100%" height="100%" fill="#E6F1FB"/>
+    <rect x="0" y="0" width="100%" height="42" fill="#242E7D"/>
+    <rect x="8" y="12" width="55" height="12" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="28" width="90" height="7" rx="2" fill="#fff" opacity=".35"/>
+    <rect x="0" y="44" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="54" width="24" height="8" rx="2" fill="#002EA3" opacity=".9"/>
+    <rect x="36" y="54" width="24" height="8" rx="2" fill="rgba(0,0,0,.1)"/>
+    <rect x="64" y="54" width="24" height="8" rx="2" fill="rgba(0,0,0,.1)"/>
+    <rect x="8" y="68" width="172" height="18" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="8" y="68" width="42" height="18" rx="4" fill="#002EA3" opacity=".8"/>
+    <rect x="54" y="72" width="80" height="6" rx="1" fill="rgba(0,0,0,.15)"/>
+    <rect x="54" y="81" width="50" height="4" rx="1" fill="rgba(0,0,0,.08)"/>
+    <rect x="8" y="90" width="172" height="18" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="8" y="90" width="42" height="18" rx="4" fill="#4A429E" opacity=".8"/>
+    <rect x="54" y="94" width="70" height="6" rx="1" fill="rgba(0,0,0,.15)"/>
+    <rect x="8" y="112" width="172" height="18" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="8" y="112" width="42" height="18" rx="4" fill="#D6B200" opacity=".8"/>`
+  },
+  {id:'contacts',name:'Контакты',          url:'contacts.html',       desc:'Адрес, часы, FAQ, форма обратной связи',
+    svg:`<rect width="100%" height="100%" fill="#E6F1FB"/>
+    <rect x="0" y="0" width="100%" height="42" fill="#002EA3"/>
+    <rect x="8" y="12" width="55" height="12" rx="2" fill="#fff" opacity=".9"/>
+    <rect x="8" y="28" width="70" height="7" rx="2" fill="#fff" opacity=".35"/>
+    <rect x="0" y="44" width="100%" height="3" fill="#FF734D"/>
+    <rect x="8" y="54" width="38" height="32" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="12" y="58" width="14" height="8" rx="2" fill="#185FA5" opacity=".5"/>
+    <rect x="12" y="70" width="30" height="4" rx="1" fill="rgba(0,0,0,.1)"/>
+    <rect x="50" y="54" width="38" height="32" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="54" y="58" width="14" height="8" rx="2" fill="#2994BD" opacity=".5"/>
+    <rect x="54" y="70" width="30" height="4" rx="1" fill="rgba(0,0,0,.1)"/>
+    <rect x="92" y="54" width="38" height="32" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="96" y="58" width="14" height="8" rx="2" fill="#FF734D" opacity=".5"/>
+    <rect x="96" y="70" width="30" height="4" rx="1" fill="rgba(0,0,0,.1)"/>
+    <rect x="134" y="54" width="38" height="32" rx="4" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="138" y="58" width="14" height="8" rx="2" fill="#242E7D" opacity=".5"/>
+    <rect x="138" y="70" width="30" height="4" rx="1" fill="rgba(0,0,0,.1)"/>
+    <rect x="8" y="92" width="82" height="34" rx="4" fill="#2994BD" opacity=".35"/>
+    <rect x="94" y="92" width="86" height="14" rx="3" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>
+    <rect x="94" y="110" width="86" height="14" rx="3" fill="#fff" stroke="#C4EBE5" stroke-width=".5"/>`
+  },
+];
+
+const STATUS_LABELS = {pending:'Не рассмотрено', review:'На рассмотрении', approved:'Одобрено', changes:'Нужны правки'};
+const STATUS_NEXT   = {pending:'review', review:'approved', approved:'changes', changes:'pending'};
+let state = {};
+PAGES.forEach(p => { state[p.id] = { status:'pending', comments:[] }; });
+
+function renderAll() {
+  renderGrid('all');
+  updateStats();
+}
+
+function renderGrid(filter) {
+  const grid = document.getElementById('pages-grid');
+  grid.innerHTML = '';
+  PAGES.forEach(page => {
+    const s = state[page.id];
+    if (filter !== 'all' && s.status !== filter) return;
+    const commentCount = s.comments.length;
+    const card = document.createElement('div');
+    card.className = 'page-card' + (s.status==='approved' ? ' approved' : '');
+    card.id = 'card-'+page.id;
+    card.innerHTML = `
+      <div class="pc-preview" onclick="openPage('${page.url}')" title="Открыть страницу">
+        <svg viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg">${page.svg}</svg>
+      </div>
+      <div class="pc-body">
+        <div class="pc-top">
+          <span class="pc-name">${page.name}</span>
+          <span class="status-pill s-${s.status}" onclick="cycleStatus('${page.id}',event)">${STATUS_LABELS[s.status]}</span>
+        </div>
+        <div class="pc-desc">${page.desc}</div>
+        <div class="pc-bottom">
+          <div class="pc-actions">
+            <button class="btn-comment ${commentCount>0?'has-comments':''}" onclick="toggleComments('${page.id}')">
+              <i class="ti ti-message" aria-hidden="true"></i> ${commentCount>0 ? commentCount+' комм.' : 'Комментарий'}
+            </button>
+            <button class="btn-open" onclick="openPage('${page.url}')">
+              <i class="ti ti-external-link" aria-hidden="true"></i> Открыть
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="comment-panel" id="cp-${page.id}">
+        <div class="cp-label">
+          <span><i class="ti ti-message-circle" aria-hidden="true"></i> Комментарии к "${page.name}"</span>
+          <span class="cp-close" onclick="toggleComments('${page.id}')" aria-label="Закрыть">×</span>
+        </div>
+        <div class="comment-list" id="cl-${page.id}"></div>
+        <div class="cp-form">
+          <input class="cp-name-input" id="cn-${page.id}" type="text" placeholder="Ваше имя">
+          <input class="cp-text-input" id="ct-${page.id}" type="text" placeholder="Добавить комментарий..." onkeydown="if(event.key==='Enter')addComment('${page.id}')">
+          <button class="cp-send" onclick="addComment('${page.id}')"><i class="ti ti-send" aria-hidden="true"></i></button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    renderComments(page.id);
+  });
+}
+
+function renderComments(pageId) {
+  const list = document.getElementById('cl-'+pageId);
+  if (!list) return;
+  const comments = state[pageId].comments;
+  if (comments.length === 0) {
+    list.innerHTML = '<div class="empty-comments">Пока нет комментариев</div>';
+    return;
+  }
+  list.innerHTML = comments.map((c,i) => `
+    <div class="comment-item">
+      <div class="comment-item__meta">
+        <div class="comment-item__avatar" style="background:${AVATARS[c.colorIdx]}">${c.initials}</div>
+        <span class="comment-item__name">${c.name}</span>
+        <span class="comment-item__time">${c.time}</span>
+        <span class="comment-item__del" onclick="deleteComment('${pageId}',${i})" title="Удалить">
+          <i class="ti ti-trash" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="comment-item__text">${c.text}</div>
+    </div>`).join('');
+}
+
+function toggleComments(pageId) {
+  const panel = document.getElementById('cp-'+pageId);
+  if (!panel) return;
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    setTimeout(()=>{const inp=document.getElementById('ct-'+pageId);if(inp)inp.focus();},50);
+  }
+}
+
+function addComment(pageId) {
+  const nameEl = document.getElementById('cn-'+pageId);
+  const textEl = document.getElementById('ct-'+pageId);
+  const name = (nameEl.value.trim()) || 'Менеджер';
+  const text = textEl.value.trim();
+  if (!text) return;
+  const initials = name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  const colorIdx = state[pageId].comments.length % AVATARS.length;
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  state[pageId].comments.push({ name, text, initials, colorIdx, time });
+  textEl.value = '';
+  renderComments(pageId);
+  const card = document.getElementById('card-'+pageId);
+  if (card) {
+    const btn = card.querySelector('.btn-comment');
+    if (btn) { btn.classList.add('has-comments'); btn.innerHTML = `<i class="ti ti-message" aria-hidden="true"></i> ${state[pageId].comments.length} комм.`; }
+  }
+  updateStats();
+}
+
+function deleteComment(pageId, idx) {
+  state[pageId].comments.splice(idx, 1);
+  renderComments(pageId);
+  const card = document.getElementById('card-'+pageId);
+  if (card) {
+    const btn = card.querySelector('.btn-comment');
+    const count = state[pageId].comments.length;
+    if (btn) {
+      btn.classList.toggle('has-comments', count > 0);
+      btn.innerHTML = `<i class="ti ti-message" aria-hidden="true"></i> ${count > 0 ? count+' комм.' : 'Комментарий'}`;
+    }
+  }
+  updateStats();
+}
+
+function cycleStatus(pageId, e) {
+  e.stopPropagation();
+  const s = state[pageId];
+  s.status = STATUS_NEXT[s.status];
+  const pill = e.target;
+  pill.className = 'status-pill s-'+s.status;
+  pill.textContent = STATUS_LABELS[s.status];
+  updateStats();
+}
+
+function filterCards(el, filter) {
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderGrid(filter);
+}
+
+function openPage(url) {
+  window.open(url, '_blank');
+}
+
+function updateStats() {
+  const totalComments = PAGES.reduce((acc, p) => acc + state[p.id].comments.length, 0);
+  const totalApproved = PAGES.filter(p => state[p.id].status === 'approved').length;
+  const cs = document.getElementById('s-comments');
+  const as = document.getElementById('s-approved');
+  if(cs) cs.textContent = totalComments;
+  if(as) as.textContent = totalApproved;
+}
+
+renderAll();
+</script>
