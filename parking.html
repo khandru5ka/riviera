@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Парковка — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+    .pk-hero{padding:56px 0 48px;position:relative;overflow:hidden}
+    .pk-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.055),rgba(255,255,255,.055) 2px,transparent 2px,transparent 10px);pointer-events:none}
+    .pk-hero__inner{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center;position:relative}
+    .pk-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:3px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:16px}
+    .pk-badge-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+    .pk-title{font-family:var(--font-head);font-size:clamp(28px,5vw,56px);color:#fff;text-transform:uppercase;letter-spacing:1px;line-height:1.05;margin-bottom:10px}
+    .pk-subtitle{font-family:var(--font-head);font-size:clamp(14px,2vw,22px);color:var(--lt-teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+    .pk-desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:24px}
+    .pk-quick{display:flex;gap:10px;flex-wrap:wrap}
+    .pk-quick-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:8px 14px;font-size:13px;color:rgba(255,255,255,.85)}
+    .pk-quick-item i{font-size:16px;color:var(--lt-teal)}
+    .pk-info-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;overflow:hidden}
+    .pk-info-card__header{background:rgba(255,255,255,.12);padding:14px 20px;font-family:var(--font-head);font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#fff}
+    .pk-info-row{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .pk-info-row:last-child{border:none}
+    .pk-info-row i{font-size:20px;color:var(--lt-teal);width:24px;flex-shrink:0}
+    .pk-info-label{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px}
+    .pk-info-val{font-family:var(--font-head);font-size:15px;color:#fff;margin-top:2px;letter-spacing:.3px}
+    .zones-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .zone-card{background:#fff;border-radius:10px;border:1px solid rgba(0,0,0,.07);overflow:hidden;transition:.18s}
+    .zone-card:hover{box-shadow:0 8px 28px rgba(0,46,163,.12);transform:translateY(-3px)}
+    .zone-card__top{padding:20px;display:flex;align-items:center;gap:14px}
+    .zone-card__icon{width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;color:#fff;flex-shrink:0}
+    .zone-card__level{font-family:var(--font-head);font-size:18px;color:var(--text);letter-spacing:.5px;text-transform:uppercase}
+    .zone-card__name{font-size:12px;color:#888;margin-top:2px}
+    .zone-card__body{padding:0 20px 20px;border-top:1px solid #f0f0f0;margin-top:0;padding-top:14px}
+    .zone-card__feature{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;margin-bottom:6px}
+    .zone-card__feature i{font-size:14px;color:var(--blue)}
+    .zone-card__spots{font-family:var(--font-head);font-size:28px;color:var(--blue);margin-top:8px;letter-spacing:1px}
+    .zone-card__spots-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1px}
+    .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .rule-item{background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,.07);padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+    .rule-item i{font-size:22px;flex-shrink:0;margin-top:2px}
+    .rule-item__title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+    .rule-item__desc{font-size:12px;color:#777;line-height:1.5}
+    .access-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .access-card{background:#fff;border-radius:10px;border:1px solid rgba(0,0,0,.07);padding:20px;text-align:center;transition:.15s}
+    .access-card:hover{box-shadow:0 4px 18px rgba(0,46,163,.1);transform:translateY(-2px)}
+    .access-card__icon{font-size:32px;color:var(--blue);margin-bottom:10px}
+    .access-card__title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+    .access-card__desc{font-size:12px;color:#777;line-height:1.5}
+    .pk-map{background:linear-gradient(135deg,var(--lt-teal),#C4EBE5 80%);border-radius:10px;height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .pk-map__icon{font-size:72px;color:var(--blue);opacity:.25}
+    .pk-map__badge{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:8px 20px;border-radius:4px;font-family:var(--font-head);font-size:13px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+    @media(max-width:900px){.pk-hero__inner{grid-template-columns:1fr}.pk-info-card{display:none}.zones-grid{grid-template-columns:1fr 1fr}.access-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.zones-grid,.rules-grid,.access-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-page="parking">
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="pk-hero" style="background:linear-gradient(160deg,var(--navy) 0%,var(--blue) 50%,var(--teal) 100%)">
+  <div class="container">
+    <div class="pk-hero__inner">
+      <div>
+        <div class="pk-badge"><span class="pk-badge-dot"></span>Открыто · Свободные места есть</div>
+        <div class="pk-title">Парковка<br>1000+</div>
+        <div class="pk-subtitle">Бесплатно · ТТК · −1 и −2</div>
+        <div class="pk-desc">Бесплатная парковка на 1000+ мест прямо у Третьего транспортного кольца. Два подземных уровня, выделенные места для инвалидов и семей с детьми.</div>
+        <div class="pk-quick">
+          <div class="pk-quick-item"><i class="ti ti-coin" aria-hidden="true"></i> Бесплатно</div>
+          <div class="pk-quick-item"><i class="ti ti-layers" aria-hidden="true"></i> 2 уровня · −1 и −2</div>
+          <div class="pk-quick-item"><i class="ti ti-clock" aria-hidden="true"></i> Открыта 24/7</div>
+          <div class="pk-quick-item"><i class="ti ti-accessible" aria-hidden="true"></i> Места для МГН</div>
+        </div>
+      </div>
+      <div class="pk-info-card">
+        <div class="pk-info-card__header"><i class="ti ti-parking" aria-hidden="true"></i> Информация</div>
+        <div class="pk-info-row"><i class="ti ti-map-pin"></i><div><div class="pk-info-label">Адрес въезда</div><div class="pk-info-val">Автозаводская ул., 18</div></div></div>
+        <div class="pk-info-row"><i class="ti ti-coin"></i><div><div class="pk-info-label">Стоимость</div><div class="pk-info-val">Бесплатно</div></div></div>
+        <div class="pk-info-row"><i class="ti ti-car"></i><div><div class="pk-info-label">Количество мест</div><div class="pk-info-val">1000+ мест</div></div></div>
+        <div class="pk-info-row"><i class="ti ti-layers"></i><div><div class="pk-info-label">Уровни</div><div class="pk-info-val">−1 этаж и −2 этаж</div></div></div>
+        <div class="pk-info-row"><i class="ti ti-clock"></i><div><div class="pk-info-label">Режим работы</div><div class="pk-info-val">Круглосуточно</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<!-- УРОВНИ ПАРКОВКИ -->
+<section class="section" style="background:#f4f5f7">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Уровни парковки</div></div>
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-card__top">
+          <div class="zone-card__icon" style="background:var(--blue)">−1</div>
+          <div><div class="zone-card__level">Первый подземный</div><div class="zone-card__name">Уровень −1</div></div>
+        </div>
+        <div class="zone-card__body">
+          <div class="zone-card__feature"><i class="ti ti-accessible" aria-hidden="true"></i> Места для инвалидов (32 места)</div>
+          <div class="zone-card__feature"><i class="ti ti-baby-carriage" aria-hidden="true"></i> Места для семей с детьми</div>
+          <div class="zone-card__feature"><i class="ti ti-arrow-up" aria-hidden="true"></i> Выход к главному входу</div>
+          <div class="zone-card__feature"><i class="ti ti-charging-pile" aria-hidden="true"></i> Зарядка для электромобилей</div>
+          <div class="zone-card__spots">520<div class="zone-card__spots-label">мест</div></div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-card__top">
+          <div class="zone-card__icon" style="background:var(--teal)">−2</div>
+          <div><div class="zone-card__level">Второй подземный</div><div class="zone-card__name">Уровень −2</div></div>
+        </div>
+        <div class="zone-card__body">
+          <div class="zone-card__feature"><i class="ti ti-car" aria-hidden="true"></i> Стандартные места</div>
+          <div class="zone-card__feature"><i class="ti ti-arrow-up" aria-hidden="true"></i> Выход к лифтам и эскалаторам</div>
+          <div class="zone-card__feature"><i class="ti ti-camera" aria-hidden="true"></i> Видеонаблюдение</div>
+          <div class="zone-card__feature"><i class="ti ti-brightness" aria-hidden="true"></i> Хорошее освещение</div>
+          <div class="zone-card__spots">480<div class="zone-card__spots-label">мест</div></div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-card__top">
+          <div class="zone-card__icon" style="background:var(--coral)">🌿</div>
+          <div><div class="zone-card__level">Открытая стоянка</div><div class="zone-card__name">Наземная зона</div></div>
+        </div>
+        <div class="zone-card__body">
+          <div class="zone-card__feature"><i class="ti ti-sun" aria-hidden="true"></i> Открытая стоянка</div>
+          <div class="zone-card__feature"><i class="ti ti-truck" aria-hidden="true"></i> Места для микроавтобусов</div>
+          <div class="zone-card__feature"><i class="ti ti-motorbike" aria-hidden="true"></i> Мотопарковка</div>
+          <div class="zone-card__feature"><i class="ti ti-bike" aria-hidden="true"></i> Велопарковка</div>
+          <div class="zone-card__spots">~100<div class="zone-card__spots-label">мест</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КАК ДОБРАТЬСЯ НА МАШИНЕ -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+      <div>
+        <div class="sec-head"><div class="sec-head__title">Как добраться</div></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="rule-item" style="border-left:3px solid var(--blue);border-radius:0 8px 8px 0">
+            <i class="ti ti-map-route" style="color:var(--blue)" aria-hidden="true"></i>
+            <div><div class="rule-item__title">С ТТК (Третье кольцо)</div><div class="rule-item__desc">Съезд на Автозаводскую улицу, направление в сторону Даниловской набережной. Въезд в паркинг с правой стороны здания ТРЦ.</div></div>
+          </div>
+          <div class="rule-item" style="border-left:3px solid var(--teal);border-radius:0 8px 8px 0">
+            <i class="ti ti-arrows-right-left" style="color:var(--teal)" aria-hidden="true"></i>
+            <div><div class="rule-item__title">Из центра и с набережной</div><div class="rule-item__desc">По Автозаводской улице в направлении ТТК. Въезд в паркинг обозначен указателями «РИВЬЕРА» за 300 м.</div></div>
+          </div>
+          <div class="rule-item" style="border-left:3px solid var(--coral);border-radius:0 8px 8px 0">
+            <i class="ti ti-brand-yandex" style="color:var(--coral)" aria-hidden="true"></i>
+            <div><div class="rule-item__title">Навигаторы</div><div class="rule-item__desc">Вбивайте в Яндекс.Навигатор или Google Maps: «ТРЦ Ривьера Москва» или «Автозаводская улица 18, Москва».</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><div class="sec-head__title">На карте</div></div>
+        <div class="pk-map"><i class="ti ti-map-2 pk-map__icon" aria-hidden="true"></i><div class="pk-map__badge"><i class="ti ti-external-link" aria-hidden="true"></i> Открыть в Яндекс.Картах</div></div>
+        <div style="margin-top:12px;padding:14px 16px;background:#EAF3DE;border-radius:8px;display:flex;gap:10px;align-items:center">
+          <i class="ti ti-map-pin" style="font-size:20px;color:#3B6D11;flex-shrink:0" aria-hidden="true"></i>
+          <div style="font-size:13px;color:#27500A"><strong>Москва, Автозаводская, 18</strong><br>м. Автозаводская · 500 м пешком</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ВОЗМОЖНОСТИ -->
+<section class="section" style="background:#f4f5f7">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Возможности паркинга</div></div>
+    <div class="access-grid">
+      <div class="access-card">
+        <div class="access-card__icon"><i class="ti ti-charging-pile" aria-hidden="true"></i></div>
+        <div class="access-card__title">Зарядка электромобилей</div>
+        <div class="access-card__desc">4 зарядные станции на уровне −1. Тип2 и CCS. Оплата через приложение.</div>
+      </div>
+      <div class="access-card">
+        <div class="access-card__icon"><i class="ti ti-accessible" aria-hidden="true"></i></div>
+        <div class="access-card__title">Места для МГН</div>
+        <div class="access-card__desc">32 специализированных места на уровне −1 ближе к лифтам. Широкий проход.</div>
+      </div>
+      <div class="access-card">
+        <div class="access-card__icon"><i class="ti ti-baby-carriage" aria-hidden="true"></i></div>
+        <div class="access-card__title">Для семей с детьми</div>
+        <div class="access-card__desc">Выделенные широкие места для семей с детьми на обоих уровнях.</div>
+      </div>
+      <div class="access-card">
+        <div class="access-card__icon"><i class="ti ti-camera" aria-hidden="true"></i></div>
+        <div class="access-card__title">Видеонаблюдение</div>
+        <div class="access-card__desc">Вся территория паркинга охвачена видеонаблюдением. Круглосуточная охрана.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРАВИЛА -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Правила парковки</div></div>
+    <div class="rules-grid">
+      <div class="rule-item"><i class="ti ti-coin" style="color:var(--teal)" aria-hidden="true"></i><div><div class="rule-item__title">Бесплатно для всех</div><div class="rule-item__desc">Парковка абсолютно бесплатна для всех посетителей ТРЦ Ривьера без ограничений по времени стоянки.</div></div></div>
+      <div class="rule-item"><i class="ti ti-height" style="color:var(--blue)" aria-hidden="true"></i><div><div class="rule-item__title">Ограничение по высоте</div><div class="rule-item__desc">Максимальная высота въезжающих автомобилей — 2,1 м. Микроавтобусы и фургоны — только на наземную стоянку.</div></div></div>
+      <div class="rule-item"><i class="ti ti-alert-triangle" style="color:var(--coral)" aria-hidden="true"></i><div><div class="rule-item__title">Запрещено</div><div class="rule-item__desc">Парковка на пожарных проездах, местах для инвалидов без соответствующего разрешения, блокировка выездов.</div></div></div>
+      <div class="rule-item"><i class="ti ti-phone" style="color:var(--yellow)" aria-hidden="true"></i><div><div class="rule-item__title">Вызов охраны</div><div class="rule-item__desc">Служба безопасности паркинга работает круглосуточно. Телефон: +7 495 269-99-99 (доб. 5).</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script>
+(function(){
+const PAGE=document.body.dataset.page||'';
+const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const CLOSE_H=[22,22,22,22,23,23,22];  // closing hour per weekday (0=Mon)
+const todayDow=(new Date().getDay()+6)%7; // 0=Mon
+
+// ── topbar hours widget ──────────────────────────────────────────────────────
+function hoursWidget(){
+  const rows=DAYS.map((d,i)=>{
+    const cls=i===todayDow?'hw-col hw-today':'hw-col';
+    return`<div class="${cls}"><div class="hw-day">${d}</div><div class="hw-t">10:00</div><div class="hw-t">${CLOSE_H[i]}:00</div></div>`;
+  }).join('');
+  return`<div class="hw-wrap" id="hw-wrap">
+    <div class="topbar__item" onclick="toggleHW(event)" id="hw-trigger">
+      <i class="ti ti-clock"></i>
+      <span>Сегодня 10:00–${CLOSE_H[todayDow]}:00</span>
+      <i class="ti ti-chevron-down" style="font-size:11px;margin-left:2px"></i>
+    </div>
+    <div class="hw-dropdown" id="hw-dropdown">
+      <div class="hw-grid">${rows}</div>
+    </div>
+  </div>`;
+}
+function toggleHW(e){
+  e.stopPropagation();
+  const d=document.getElementById('hw-dropdown');
+  d.classList.toggle('open');
+  document.addEventListener('click',()=>d.classList.remove('open'),{once:true});
+}
+
+// ── nav links ────────────────────────────────────────────────────────────────
+const LINKS=[
+  {h:'shops.html',   l:'Магазины',    k:'shops'},
+  {h:'food.html',    l:'Ривьера Еда', k:'food'},
+  {h:'events.html',  l:'Развлечения', k:'events'},
+  {h:'sport.html',   l:'Спорт',       k:'sport'},
+  {h:'cinema.html',  l:'Кинотеатр',  k:'cinema'},
+  {h:'parking.html', l:'Парковка',    k:'parking'},
+  {h:'map.html',     l:'Схема',       k:'map'},
+  {h:'news.html',    l:'Акции',       k:'news'},
+];
+const nl=LINKS.map(x=>`<a href="${x.h}" class="mn__link${x.k===PAGE?' active':''}">${x.l}</a>`).join('');
+const ml=[{h:'index.html',l:'Главная',k:'home'},...LINKS,
+  {h:'services.html',l:'Сервисы',k:'services'},
+  {h:'about.html',l:'О нас',k:'about'},
+  {h:'contacts.html',l:'Контакты',k:'contacts'}
+].map(x=>`<a href="${x.h}"${x.k===PAGE?' class="active"':''}>${x.l}</a>`).join('');
+
+document.getElementById('nav-placeholder').innerHTML=`
+<div class="topbar">
+  <div class="container">
+    <div class="topbar__inner">
+      <div class="topbar__left">
+        ${hoursWidget()}
+        <span class="tb-div"></span>
+        <a href="contacts.html" class="topbar__item"><i class="ti ti-map-pin"></i><span>Как добраться</span></a>
+        <span class="tb-div"></span>
+        <a href="parking.html" class="topbar__item"><i class="ti ti-parking"></i><span>Парковка</span></a>
+        <span class="tb-div"></span>
+        <a href="services.html" class="topbar__item"><i class="ti ti-heart"></i><span>Сервисы</span></a>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__search"><i class="ti ti-search"></i><span>Поиск</span></div>
+        <div class="topbar__lang"><button class="tl-btn active" onclick="switchLang('RU')">RU</button><button class="tl-btn" onclick="switchLang('EN')">EN</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="mainnav">
+  <div class="container">
+    <div class="mn__inner">
+      <a href="index.html" class="mn__logo">
+        <svg width="26" height="18" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg>
+        <span class="mn__wordmark">РИВЬЕРА</span>
+      </a>
+      <div class="mn__links">${nl}<a href="events.html" class="mn__link mn__cta">Афиша</a></div>
+      <button class="mn__burger" onclick="document.getElementById('mob-nav').classList.toggle('open')" aria-label="Меню"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">${ml}</div>`;
+}
+
+// ── footer ───────────────────────────────────────────────────────────────────
+function renderFooter(){
+  const fp=document.getElementById('footer-placeholder');
+  if(!fp)return;
+  fp.innerHTML=`
+<footer class="footer">
+  <div class="container">
+    <div class="footer__main">
+      <div class="f-col f-col--brand">
+        <div class="f-logo"><svg width="22" height="15" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg><span>РИВЬЕРА</span></div>
+        <div class="f-tagline">Вспоминая будущее</div>
+        <div class="f-addr">Москва, Автозаводская, 18<br>м. Автозаводская<br><br><strong style="color:#fff;font-size:14px">+7 495 269-99-99</strong><br><small>+7 495 269-00-08 (аренда)</small></div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Посетителям</div>
+        <a class="f-link" href="map.html">Схема ТРЦ</a>
+        <a class="f-link" href="shops.html">Магазины</a>
+        <a class="f-link" href="events.html">События</a>
+        <a class="f-link" href="news.html">Акции</a>
+        <a class="f-link" href="parking.html">Парковка</a>
+        <a class="f-link" href="services.html">Сервисы</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Развлечения</div>
+        <a class="f-link" href="cinema.html">Синема Парк</a>
+        <a class="f-link" href="#">World Class</a>
+        <a class="f-link" href="#">Happy City</a>
+        <a class="f-link" href="#">Дубровка</a>
+        <a class="f-link" href="#">Nevel. Падел</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">О центре</div>
+        <a class="f-link" href="about.html">О Ривьере</a>
+        <a class="f-link" href="contacts.html">Контакты</a>
+        <a class="f-link" href="#">Аренда</a>
+        <a class="f-link" href="#">Вакансии</a>
+        <a class="f-link" href="#">Реклама</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Соцсети</div>
+        <a class="f-link" href="https://t.me/rivieramoscow" target="_blank"><i class="ti ti-brand-telegram"></i> Telegram</a>
+        <a class="f-link" href="https://vk.com/rivieramoscow" target="_blank"><i class="ti ti-brand-vk"></i> ВКонтакте</a>
+      </div>
+    </div>
+    <div class="f-tenants">
+      <div class="f-col-title" style="margin-bottom:14px">Режим работы арендаторов с отличным расписанием</div>
+      <div class="f-tenants-grid">
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-movie" style="color:var(--lt-teal)"></i> Синема Парк</div>
+          <div class="f-tenant-hours">пн–чт: 10:00–00:00 · пт–сб: 10:00–01:00 · вс: 10:00–00:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-tennis" style="color:var(--lt-teal)"></i> Nevel. Падел</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 8:00–22:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-run" style="color:var(--lt-teal)"></i> World Class</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 9:00–21:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-masks-theater" style="color:var(--lt-teal)"></i> Дубровка</div>
+          <div class="f-tenant-hours">пн–вс: 10:00–22:00 · касса до 19:00</div>
+        </div>
+      </div>
+      <div class="f-tenant-note">* Основной ТРЦ: пн–чт, вс: 10:00–22:00 · пт–сб: 10:00–23:00</div>
+    </div>
+    <div class="f-bottom">
+      <span>© ТРЦ Ривьера, 2025</span>
+      <div style="display:flex;gap:16px"><a href="#" class="f-bottom-link">Политика конфиденциальности</a><a href="#" class="f-bottom-link">Правила посещения</a></div>
+    </div>
+  </div>
+</footer>`;
+}
+
+// ── countdown ────────────────────────────────────────────────────────────────
+function startCountdown(id,dt){
+  function tick(){
+    const el=document.getElementById(id);if(!el)return;
+    const diff=new Date(dt)-new Date();
+    if(diff<=0){el.innerHTML='<span style="color:var(--coral);font-weight:700">Идёт прямо сейчас!</span>';return;}
+    const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    el.innerHTML=['дней','часов','минут','секунд'].map((l,i)=>`<div class="cnum"><div class="cnum__n">${[d,h,m,s][i]}</div><div class="cnum__l">${l}</div></div>`).join('');
+  }
+  tick();setInterval(tick,1000);
+}
+function switchLang(l){document.querySelectorAll('.tl-btn').forEach(b=>{b.classList.toggle('active',b.textContent===l)});}
+
+renderNav&&renderNav();
+renderFooter&&renderFooter();
+})();
+function renderNav(){}
+</script>
+</body>
+</html>

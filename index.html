@@ -4,197 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ТРЦ Ривьера — Вспоминая будущее</title>
-  <meta name="description" content="ТРЦ Ривьера в Москве — пространство для шопинга, отдыха, культуры и событий. Автозаводская 18.">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
-  <style>
-    /* ===== HERO ===== */
-    .hero {
-      padding: 80px 0 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='40' height='24' viewBox='0 0 40 24' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='2' y='2' width='34' height='18' rx='2' fill='%23fff' fill-opacity='0.06'/%3E%3C/svg%3E")
-        repeat;
-      pointer-events: none;
-    }
-    .hero__inner {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 48px;
-      align-items: center;
-    }
-    .hero__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .hero__dot { width: 7px; height: 7px; background: var(--coral); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .hero__title { margin-bottom: 8px; }
-    .hero__subtitle { font-size: 32px; font-family: var(--font-head); color: var(--lt-teal); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-    .hero__desc { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.65; max-width: 520px; margin-bottom: 32px; }
-    .hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero__right {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-    }
-    .hero__right-title {
-      font-family: var(--font-head);
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .hero__event-featured {
-      background: rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-    .hero__event-img {
-      height: 130px;
-      background: linear-gradient(135deg, var(--mid) 0%, var(--pink) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 14px;
-      position: relative;
-    }
-    .hero__event-date {
-      position: absolute;
-      top: 10px; right: 10px;
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: var(--radius);
-      letter-spacing: 0.5px;
-    }
-    .hero__event-title { font-family: var(--font-head); font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-    .hero__event-body { padding: 10px 14px; }
-    .hero__event-meta { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; gap: 12px; }
-    .hero__mini-events { display: flex; flex-direction: column; gap: 8px; }
-    .hero__mini-event {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      background: rgba(255,255,255,0.07);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .hero__mini-event:hover { background: rgba(255,255,255,0.13); }
-    .hero__mini-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .hero__mini-name { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500; flex: 1; }
-    .hero__mini-date { font-size: 11px; color: rgba(255,255,255,0.45); white-space: nowrap; }
-
-    /* ===== FEATURED SECTION ===== */
-    .event-card__img--concert { background: linear-gradient(135deg, var(--mid), var(--pink)); }
-    .event-card__img--sport   { background: linear-gradient(135deg, var(--teal), var(--lt-teal)); }
-    .event-card__img--kids    { background: linear-gradient(135deg, var(--dark-purple), var(--pink)); }
-    .event-card__img--expo    { background: linear-gradient(135deg, var(--navy), var(--mid)); }
-    .event-card__img--retro   { background: linear-gradient(135deg, var(--navy), var(--coral)); }
-
-    /* ===== PROMO ROW ===== */
-    .promo-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
-    .promo-scroll::-webkit-scrollbar { display: none; }
-    .promo-scroll .promo-card { min-width: 220px; flex-shrink: 0; }
-
-    /* ===== BIG MAP TEASER ===== */
-    .map-teaser {
-      background: linear-gradient(135deg, var(--teal), var(--lt-teal));
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .map-teaser__text h3 { font-family: var(--font-head); font-size: 24px; color: var(--blue); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-    .map-teaser__text p  { font-size: 14px; color: rgba(0,46,163,0.7); line-height: 1.5; }
-    .map-teaser__icon    { font-size: 64px; color: var(--blue); opacity: 0.4; flex-shrink: 0; }
-
-    @media(max-width:900px){
-      .hero__inner { grid-template-columns: 1fr; }
-      .hero__right  { display: none; }
-    }
-    @media(max-width:600px){
-      .map-teaser { flex-direction: column; text-align: center; }
-    }
-  </style>
 </head>
-<body>
-
+<body data-page="home">
 <div id="nav-placeholder"></div>
 
-<!-- HERO -->
+<!-- ════════════════ HERO ════════════════ -->
 <div class="hero hero-grad--blue">
   <div class="container">
-    <div class="hero__inner">
+    <div class="hero__grid">
       <div>
-        <div class="hero__eyebrow">
-          <span class="hero__dot"></span>
-          <span class="label label--light">Москва · Автозаводская 18</span>
-        </div>
-        <div class="hero__title h-display text-white">Энергия.<br>Движение.<br><span style="color:var(--lt-teal)">Завтра.</span></div>
-        <div class="hero__desc">
-          Торгово-развлекательное пространство, которое превращает свободное время в жизненную энергию. 200+ магазинов, события каждую неделю.
-        </div>
+        <div class="hero__eyebrow"><span class="hero__dot"></span><span class="label label--light">Москва · Автозаводская 18 · ТТК</span></div>
+        <div class="hero__title">Энергия.<br>Движение.<br><span style="color:var(--lt-teal)">Завтра.</span></div>
+        <div class="hero__subtitle">Вспоминая будущее</div>
+        <div class="hero__desc">Торгово-развлекательное пространство, объединяющее 200+ брендов, премиальный фитнес, кино, рестораны и события — каждую неделю.</div>
         <div class="hero__btns">
-          <a href="events.html" class="btn btn--primary btn--lg">Афиша событий</a>
-          <a href="map.html"    class="btn btn--secondary btn--lg">Схема ТРЦ</a>
+          <a href="events.html" class="btn btn--primary btn--lg"><i class="ti ti-calendar-event" aria-hidden="true"></i> Афиша событий</a>
+          <a href="map.html" class="btn btn--secondary btn--lg"><i class="ti ti-map-2" aria-hidden="true"></i> Схема ТРЦ</a>
         </div>
         <div class="stats-row">
           <div class="stat"><div class="stat__n">200+</div><div class="stat__l">магазинов</div></div>
-          <div class="stat"><div class="stat__n">12</div><div class="stat__l">событий в мае</div></div>
-          <div class="stat"><div class="stat__n">3</div><div class="stat__l">этажа</div></div>
-          <div class="stat"><div class="stat__n">free</div><div class="stat__l">парковка</div></div>
+          <div class="stat"><div class="stat__n">30+</div><div class="stat__l">ресторанов</div></div>
+          <div class="stat"><div class="stat__n">1000+</div><div class="stat__l">мест парковки</div></div>
+          <div class="stat"><div class="stat__n">free</div><div class="stat__l">вход и парковка</div></div>
         </div>
       </div>
-      <div class="hero__right">
-        <div class="hero__right-title">Главное событие</div>
-        <a href="event-open-air.html" class="hero__event-featured" style="display:block;text-decoration:none">
-          <div class="hero__event-img">
-            <div class="tag tag--free" style="margin-bottom:6px">Вход свободный</div>
-            <div class="hero__event-title">Летний Open-Air</div>
-            <div class="hero__event-date">24 МАЯ<br>19:00</div>
-          </div>
-          <div class="hero__event-body">
-            <div class="hero__event-meta">
-              <span><i class="ti ti-map-pin"></i> Атриум 2 эт.</span>
-              <span><i class="ti ti-clock"></i> 3 часа</span>
+      <div>
+        <div style="background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:22px">
+          <div class="label label--light mb-12">Главное событие</div>
+          <a href="event-open-air.html" style="display:block;border-radius:8px;overflow:hidden;margin-bottom:14px;text-decoration:none">
+            <div style="height:130px;background:linear-gradient(135deg,#4A429E,#FF73D9);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;position:relative">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.07),rgba(255,255,255,.07) 2px,transparent 2px,transparent 10px)"></div>
+              <div class="tag tag--free mb-8" style="position:relative">Вход свободный</div>
+              <div style="font-family:var(--font-head);font-size:18px;color:#fff;text-transform:uppercase;letter-spacing:.5px;position:relative">Летний Open-Air</div>
+              <div style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.4);color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:3px">24 МАЯ · 19:00</div>
             </div>
+          </a>
+          <div class="label label--light mb-8">Ещё в мае</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <a href="events.html" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border-radius:4px;padding:7px 10px;text-decoration:none" onmouseover="this.style.background='rgba(255,255,255,.13)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">
+              <span style="width:7px;height:7px;background:var(--yellow);border-radius:50%;flex-shrink:0"></span>
+              <span style="font-size:12px;color:rgba(255,255,255,.85);flex:1">Спортивный фестиваль</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.4)">16 мая–14 авг</span>
+            </a>
+            <a href="events.html" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border-radius:4px;padding:7px 10px;text-decoration:none" onmouseover="this.style.background='rgba(255,255,255,.13)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">
+              <span style="width:7px;height:7px;background:var(--pink);border-radius:50%;flex-shrink:0"></span>
+              <span style="font-size:12px;color:rgba(255,255,255,.85);flex:1">Конкурс «Моё лето»</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.4)">20–31 мая</span>
+            </a>
+            <a href="events.html" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border-radius:4px;padding:7px 10px;text-decoration:none" onmouseover="this.style.background='rgba(255,255,255,.13)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">
+              <span style="width:7px;height:7px;background:var(--coral);border-radius:50%;flex-shrink:0"></span>
+              <span style="font-size:12px;color:rgba(255,255,255,.85);flex:1">Fashion Day</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.4)">28 мая</span>
+            </a>
           </div>
-        </a>
-        <div class="label label--light mb-8">Ещё события</div>
-        <div class="hero__mini-events">
-          <a href="events.html" class="hero__mini-event">
-            <div class="hero__mini-dot" style="background:var(--yellow)"></div>
-            <div class="hero__mini-name">Спортивный фестиваль</div>
-            <div class="hero__mini-date">16 мая–14 авг</div>
-          </a>
-          <a href="events.html" class="hero__mini-event">
-            <div class="hero__mini-dot" style="background:var(--pink)"></div>
-            <div class="hero__mini-name">Конкурс «Моё лето»</div>
-            <div class="hero__mini-date">20–31 мая</div>
-          </a>
-          <a href="events.html" class="hero__mini-event">
-            <div class="hero__mini-dot" style="background:var(--coral)"></div>
-            <div class="hero__mini-name">Выставка динозавров</div>
-            <div class="hero__mini-date">Постоянно</div>
-          </a>
         </div>
       </div>
     </div>
@@ -202,242 +66,338 @@
 </div>
 <div class="pattern-stripe"></div>
 
-<!-- COUNTDOWN -->
+<!-- ════════════════ COUNTDOWN ════════════════ -->
 <section class="section--sm" style="background:#fff">
   <div class="container">
     <div class="countdown">
-      <div class="countdown__label label label--dark" style="color:var(--coral)">
-        <i class="ti ti-alarm"></i> До ближайшего события
-      </div>
-      <div class="countdown__event">Летний Open-Air · 24 мая, 19:00</div>
+      <div class="countdown__label label" style="color:var(--coral);display:flex;align-items:center;gap:6px"><i class="ti ti-alarm" aria-hidden="true"></i> До ближайшего события</div>
+      <div class="countdown__event">Летний Open-Air · 24 мая, 19:00 · Атриум 2 этаж</div>
       <div class="countdown__nums" id="countdown"></div>
     </div>
   </div>
 </section>
 
-<!-- EVENTS -->
-<section class="section" style="background:#f5f5f7">
+<!-- ════════════════ MANIFEST ════════════════ -->
+<section class="manifest">
+  <div class="container">
+    <div class="manifest__inner">
+      <div>
+        <div class="manifest__label">Ривьера — это</div>
+        <div class="manifest__title">Больше, чем<br>торговый центр.<br><span>Это стиль жизни.</span></div>
+        <div class="manifest__desc">Здесь World Class встречает модный шоурум, а ресторан — беговую дорожку. Ривьера соединяет спорт, культуру, гастрономию и шопинг в одном маршруте — на берегу ТТК.</div>
+        <div class="manifest__pills">
+          <span class="manifest__pill"><i class="ti ti-building" aria-hidden="true"></i> На ТТК</span>
+          <span class="manifest__pill"><i class="ti ti-crown" aria-hidden="true"></i> World Class</span>
+          <span class="manifest__pill"><i class="ti ti-masks-theater" aria-hidden="true"></i> Дубровка</span>
+          <span class="manifest__pill"><i class="ti ti-movie" aria-hidden="true"></i> Синема Парк</span>
+          <span class="manifest__pill"><i class="ti ti-parking" aria-hidden="true"></i> 1000+ мест · free</span>
+        </div>
+      </div>
+      <div class="manifest__nums">
+        <div class="mnum mnum--accent"><div class="mnum__n">200+</div><div class="mnum__label">брендов и магазинов на 3 этажах</div></div>
+        <div class="mnum mnum--yellow"><div class="mnum__n">30+</div><div class="mnum__label">ресторанов, кафе и фудкортов</div></div>
+        <div class="mnum mnum--coral"><div class="mnum__n">40+</div><div class="mnum__label">арендаторов развлечений и спорта</div></div>
+        <div class="mnum"><div class="mnum__n">1000+</div><div class="mnum__label">бесплатных парковочных мест · ТТК</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ СОБЫТИЯ + АКЦИИ ════════════════ -->
+<section class="section" style="background:#f4f5f7">
+  <div class="container">
+    <div class="ep-grid">
+      <div>
+        <div class="sec-head"><div class="sec-head__title">Ближайшие события</div><a href="events.html" class="sec-head__link">Все события →</a></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="event-open-air.html" class="event-card">
+            <div class="event-card__img ec--concert">
+              <div class="tag tag--concert mb-8">Концерт</div>
+              <div class="event-card__title">Летний Open-Air</div>
+              <div class="event-card__date-badge">24 МАЯ<br>19:00</div>
+            </div>
+            <div class="event-card__body">
+              <div class="event-card__desc">Живая музыка, DJ-сет и огненное шоу в атриуме. Бесплатно.</div>
+              <div class="event-card__meta"><span class="event-card__meta-item"><i class="ti ti-users" aria-hidden="true"></i> Свободный вход</span><span class="event-card__meta-item"><i class="ti ti-clock" aria-hidden="true"></i> 3 часа</span></div>
+            </div>
+          </a>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <a href="events.html" class="event-card">
+              <div class="event-card__img ec--sport" style="height:130px">
+                <div class="tag tag--sport mb-8" style="font-size:9px">Спорт</div>
+                <div class="event-card__title" style="font-size:14px">Спортивный Фестиваль</div>
+                <div class="event-card__date-badge" style="font-size:9px">16 МАЯ –<br>14 АВГ</div>
+              </div>
+              <div class="event-card__body" style="padding:10px 12px"><div class="event-card__desc" style="font-size:12px">Мастер-классы и соревнования всё лето.</div></div>
+            </a>
+            <a href="events.html" class="event-card">
+              <div class="event-card__img ec--fashion" style="height:130px">
+                <div class="tag tag--fashion mb-8" style="font-size:9px">Фэшн</div>
+                <div class="event-card__title" style="font-size:14px">Fashion Day</div>
+                <div class="event-card__date-badge" style="font-size:9px">28 МАЯ</div>
+              </div>
+              <div class="event-card__body" style="padding:10px 12px"><div class="event-card__desc" style="font-size:12px">Показы коллекций и скидки от брендов.</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><div class="sec-head__title">Горячие акции</div><a href="news.html" class="sec-head__link">Все →</a></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="promo-card" style="min-width:0;display:grid;grid-template-columns:80px 1fr">
+            <div class="promo-card__top" style="background:#e6f1fb;color:var(--blue);height:auto;min-height:80px">−40%</div>
+            <div class="promo-card__body"><div class="promo-card__store">Original Marines</div><div class="promo-card__name">Клиентские дни — скидки до 40%</div><div class="promo-card__date">19–25 мая</div></div>
+          </div>
+          <div class="promo-card" style="min-width:0;display:grid;grid-template-columns:80px 1fr">
+            <div class="promo-card__top" style="background:#FAEEDA;color:#6E6112;height:auto;min-height:80px">1+1=3</div>
+            <div class="promo-card__body"><div class="promo-card__store">belle you</div><div class="promo-card__name">При покупке 2 вещей — третья в подарок</div><div class="promo-card__date">до 11 мая</div></div>
+          </div>
+          <div class="promo-card" style="min-width:0;display:grid;grid-template-columns:80px 1fr">
+            <div class="promo-card__top" style="background:#EEEDFE;color:var(--mid);height:auto;min-height:80px">🌿</div>
+            <div class="promo-card__body"><div class="promo-card__store">Л'Окситан</div><div class="promo-card__name">Миндальная коллекция — специальные цены</div><div class="promo-card__date">15–31 мая</div></div>
+          </div>
+          <div class="promo-card" style="min-width:0;display:grid;grid-template-columns:80px 1fr">
+            <div class="promo-card__top" style="background:#e6f1fb;color:var(--blue);height:auto;min-height:80px">📱</div>
+            <div class="promo-card__body"><div class="promo-card__store">Samsung</div><div class="promo-card__name">Выгода на смартфоны Galaxy S25</div><div class="promo-card__date">7–18 мая</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ СОБЫТИЯ МЕСЯЦА ════════════════ -->
+<section class="section" style="background:#fff">
   <div class="container">
     <div class="sec-head">
-      <div class="sec-head__title">Ближайшие события</div>
-      <a href="events.html" class="sec-head__link">Вся афиша →</a>
+      <div class="sec-head__title">События месяца</div>
+      <a href="events.html" class="sec-head__link">Полная афиша →</a>
     </div>
-    <div class="grid-3">
-      <a href="event-open-air.html" class="event-card" style="text-decoration:none">
-        <div class="event-card__img event-card__img--concert">
-          <div class="tag tag--concert mb-8">Концерт</div>
-          <div class="event-card__title">Летний<br>Open-Air</div>
-          <div class="event-card__date-badge">24 МАЯ<br>19:00</div>
+    <div class="month-events">
+      <a href="event-open-air.html" class="me-poster me-poster--concert">
+        <div class="me-poster__left"><div class="me-poster__date">24</div><div class="me-poster__month">Мая · Суббота</div></div>
+        <div class="me-poster__right">
+          <div><span class="tag tag--concert">Концерт · Бесплатно</span></div>
+          <div class="me-poster__title">Летний Open-Air в Атриуме</div>
+          <div class="me-poster__desc">Три исполнителя, DJ-сет и финальное огненное шоу. 19:00–22:00.</div>
+          <div class="me-poster__meta"><span class="me-poster__meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i> Атриум 2 эт.</span><span class="me-poster__meta-item"><i class="ti ti-users" aria-hidden="true"></i> Свободный вход</span></div>
         </div>
-        <div class="event-card__body">
-          <div class="event-card__desc">Живая музыка, три исполнителя, летняя атмосфера прямо в атриуме. Бесплатно для всех гостей.</div>
-          <div class="event-card__meta">
-            <span class="event-card__meta-item"><i class="ti ti-map-pin"></i> Атриум 2 эт.</span>
-            <span class="event-card__meta-item"><i class="ti ti-users"></i> Свободный вход</span>
+      </a>
+      <a href="events.html" class="me-poster me-poster--sport">
+        <div class="me-poster__left"><div class="me-poster__date">16</div><div class="me-poster__month">Мая — 14 Авг</div></div>
+        <div class="me-poster__right">
+          <div><span class="tag tag--sport">Спорт</span></div>
+          <div class="me-poster__title">Спортивный Фестиваль «Лето в движении»</div>
+          <div class="me-poster__desc">Мастер-классы, тренировки и соревнования для всей семьи всё лето.</div>
+          <div class="me-poster__meta"><span class="me-poster__meta-item"><i class="ti ti-users" aria-hidden="true"></i> Все возрасты</span><span class="me-poster__meta-item"><i class="ti ti-calendar" aria-hidden="true"></i> По выходным</span></div>
+        </div>
+      </a>
+      <a href="events.html" class="me-poster me-poster--fashion">
+        <div class="me-poster__left"><div class="me-poster__date">28</div><div class="me-poster__month">Мая · Среда</div></div>
+        <div class="me-poster__right">
+          <div><span class="tag tag--fashion">Фэшн</span></div>
+          <div class="me-poster__title">Fashion Day в Ривьере</div>
+          <div class="me-poster__desc">Показы новых коллекций от брендов ТРЦ, стилисты и эксклюзивные скидки.</div>
+          <div class="me-poster__meta"><span class="me-poster__meta-item"><i class="ti ti-shirt" aria-hidden="true"></i> Все этажи</span></div>
+        </div>
+      </a>
+      <a href="events.html" class="me-poster me-poster--kids">
+        <div class="me-poster__left"><div class="me-poster__date">20–31</div><div class="me-poster__month">Мая</div></div>
+        <div class="me-poster__right">
+          <div><span class="tag tag--kids">Для детей</span></div>
+          <div class="me-poster__title">Конкурс рисунков «Моё Лето»</div>
+          <div class="me-poster__desc">Конкурс для детей до 12 лет. Лучшие работы украсят стены ТРЦ. Призы победителям.</div>
+          <div class="me-poster__meta"><span class="me-poster__meta-item"><i class="ti ti-gift" aria-hidden="true"></i> Призы</span><span class="me-poster__meta-item"><i class="ti ti-palette" aria-hidden="true"></i> До 12 лет</span></div>
+        </div>
+      </a>
+      <a href="events.html" class="me-poster me-poster--retro">
+        <div class="me-poster__left"><div class="me-poster__date">10</div><div class="me-poster__month">Мая · Суббота</div></div>
+        <div class="me-poster__right">
+          <div><span class="tag tag--concert">Авто-шоу</span></div>
+          <div class="me-poster__title">Ретро-пробег «Круг Победы»</div>
+          <div class="me-poster__desc">Парад ретро-автомобилей на парковке ТРЦ. Фото с легендарными машинами.</div>
+          <div class="me-poster__meta"><span class="me-poster__meta-item"><i class="ti ti-car" aria-hidden="true"></i> Парковка</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ НОВЫЕ АРЕНДАТОРЫ ════════════════ -->
+<section class="section" style="background:#f4f5f7">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Новые арендаторы</div><a href="shops.html" class="sec-head__link">Все магазины →</a></div>
+    <div class="nt-grid">
+      <a href="shops.html" class="nt-card" style="background:var(--blue)"><div class="nt-card__new">Новый</div><div class="nt-card__name">EKONIKA</div><div class="nt-card__floor">Обувь · 1 этаж</div></a>
+      <a href="shops.html" class="nt-card" style="background:var(--teal)"><div class="nt-card__new">Новый</div><div class="nt-card__name">STICKS SUSHI</div><div class="nt-card__floor">Ресторан · 3 этаж</div></a>
+      <a href="shops.html" class="nt-card" style="background:var(--mid)"><div class="nt-card__new">Новый</div><div class="nt-card__name">NEVEL.</div><div class="nt-card__floor">Падел-клуб · 3 этаж</div></a>
+      <a href="shops.html" class="nt-card" style="background:var(--navy)"><div class="nt-card__new">Новый</div><div class="nt-card__name">SELA</div><div class="nt-card__floor">Одежда · 1–2 этаж</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ СПОРТ И РАЗВЛЕЧЕНИЯ ════════════════ -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="sec-head"><div class="sec-head__title">Спорт и развлечения</div><a href="events.html" class="sec-head__link">Подробнее →</a></div>
+    <div class="se-grid">
+      <a href="#" class="se-card" style="text-decoration:none">
+        <div class="se-card__img" style="background:linear-gradient(135deg,#002EA3,#248FEB)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06),rgba(255,255,255,.06) 2px,transparent 2px,transparent 9px)"></div>
+          <div style="position:relative"><div class="se-card__label">Премиальный фитнес</div><div class="se-card__name">World Class</div></div>
+        </div>
+        <div class="se-card__body">
+          <div class="se-card__desc">Премиальный фитнес-клуб с бассейном, спа и более 200 групповых занятий в неделю.</div>
+          <div class="se-card__link">Расписание <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        </div>
+      </a>
+      <a href="#" class="se-card" style="text-decoration:none">
+        <div class="se-card__img" style="background:linear-gradient(135deg,#4A429E,#A696F7)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06),rgba(255,255,255,.06) 2px,transparent 2px,transparent 9px)"></div>
+          <div style="position:relative"><div class="se-card__label">Падел-теннис</div><div class="se-card__name">Nevel.</div></div>
+        </div>
+        <div class="se-card__body">
+          <div class="se-card__desc">Современный падел-клуб с профессиональными кортами. Уроки и корпоративные тренировки.</div>
+          <div class="se-card__link">Записаться <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        </div>
+      </a>
+      <a href="#" class="se-card" style="text-decoration:none">
+        <div class="se-card__img" style="background:linear-gradient(135deg,#2994BD,#C4EBE5)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06),rgba(255,255,255,.06) 2px,transparent 2px,transparent 9px)"></div>
+          <div style="position:relative"><div class="se-card__label">Развлечения для детей и взрослых</div><div class="se-card__name">Happy City</div></div>
+        </div>
+        <div class="se-card__body">
+          <div class="se-card__desc">Батуты, аттракционы, лазертаг и зоны для праздников. 3 этаж.</div>
+          <div class="se-card__link">Узнать больше <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        </div>
+      </a>
+      <a href="#" class="se-card" style="text-decoration:none">
+        <div class="se-card__img" style="background:linear-gradient(135deg,#533258,#FF73D9)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06),rgba(255,255,255,.06) 2px,transparent 2px,transparent 9px)"></div>
+          <div style="position:relative"><div class="se-card__label">Театр и шоу</div><div class="se-card__name">Дубровка</div></div>
+        </div>
+        <div class="se-card__body">
+          <div class="se-card__desc">Культовый театральный комплекс — мюзиклы, шоу и концерты круглый год.</div>
+          <div class="se-card__link">Афиша <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ КИНОТЕАТР ════════════════ -->
+<section class="cinema-section">
+  <div class="container">
+    <div class="cinema-header">
+      <div>
+        <div style="font-size:11px;color:var(--lt-teal);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px">3 этаж · ТРЦ Ривьера</div>
+        <div class="cinema-title"><i class="ti ti-movie" aria-hidden="true"></i> Синема Парк</div>
+      </div>
+      <a href="cinema.html" class="cinema-link">Все сеансы →</a>
+    </div>
+    <div class="cinema-grid">
+      <a href="cinema.html" class="film-card">
+        <div class="film-card__poster" style="background:linear-gradient(135deg,#1a1a2e,#4A429E)">
+          <div class="film-card__genre">Фантастика · 12+</div>
+          <div class="film-card__title">Звёздный Горизонт</div>
+        </div>
+        <div class="film-card__body">
+          <div class="film-card__rating">★ 8.2 · 2 ч 28 мин</div>
+          <div class="film-card__times">
+            <span class="film-card__time">10:30</span>
+            <span class="film-card__time">13:15</span>
+            <span class="film-card__time">16:40</span>
+            <span class="film-card__time">20:00</span>
           </div>
         </div>
       </a>
-      <a href="events.html" class="event-card" style="text-decoration:none">
-        <div class="event-card__img event-card__img--sport">
-          <div class="tag tag--sport mb-8">Спорт</div>
-          <div class="event-card__title">Спортивный Фестиваль</div>
-          <div class="event-card__date-badge">16 МАЯ –<br>14 АВГ</div>
+      <a href="cinema.html" class="film-card">
+        <div class="film-card__poster" style="background:linear-gradient(135deg,#533258,#FF734D)">
+          <div class="film-card__genre">Экшн · 16+</div>
+          <div class="film-card__title">Красный Горизонт</div>
         </div>
-        <div class="event-card__body">
-          <div class="event-card__desc">Всё лето — тренировки, соревнования и мастер-классы для всей семьи на площадках ТРЦ.</div>
-          <div class="event-card__meta">
-            <span class="event-card__meta-item"><i class="ti ti-map-pin"></i> Разные зоны</span>
-            <span class="event-card__meta-item"><i class="ti ti-users"></i> Все возрасты</span>
+        <div class="film-card__body">
+          <div class="film-card__rating">★ 7.5 · 2 ч 05 мин</div>
+          <div class="film-card__times">
+            <span class="film-card__time">11:00</span>
+            <span class="film-card__time">14:20</span>
+            <span class="film-card__time">19:10</span>
+            <span class="film-card__time">22:00</span>
           </div>
         </div>
       </a>
-      <a href="events.html" class="event-card" style="text-decoration:none">
-        <div class="event-card__img event-card__img--kids">
-          <div class="tag tag--kids mb-8">Дети</div>
-          <div class="event-card__title">Конкурс «Моё Лето»</div>
-          <div class="event-card__date-badge">20–31<br>МАЯ</div>
+      <a href="cinema.html" class="film-card">
+        <div class="film-card__poster" style="background:linear-gradient(135deg,#1a7a3f,#2994BD)">
+          <div class="film-card__genre">Мультфильм · 0+</div>
+          <div class="film-card__title">Приключения Мурки</div>
         </div>
-        <div class="event-card__body">
-          <div class="event-card__desc">Конкурс детских рисунков. Лучшие работы украсят стены ТРЦ. Призы для победителей.</div>
-          <div class="event-card__meta">
-            <span class="event-card__meta-item"><i class="ti ti-palette"></i> Дети до 12 лет</span>
-            <span class="event-card__meta-item"><i class="ti ti-gift"></i> Призы</span>
+        <div class="film-card__body">
+          <div class="film-card__rating">★ 9.0 · 1 ч 42 мин</div>
+          <div class="film-card__times">
+            <span class="film-card__time">10:00</span>
+            <span class="film-card__time">12:00</span>
+            <span class="film-card__time">14:00</span>
+            <span class="film-card__time">16:20</span>
+          </div>
+        </div>
+      </a>
+      <a href="cinema.html" class="film-card">
+        <div class="film-card__poster" style="background:linear-gradient(135deg,#242E7D,#D6B200)">
+          <div class="film-card__genre">Драма · 18+</div>
+          <div class="film-card__title">Последний Вечер</div>
+        </div>
+        <div class="film-card__body">
+          <div class="film-card__rating">★ 8.7 · 2 ч 15 мин</div>
+          <div class="film-card__times">
+            <span class="film-card__time">12:30</span>
+            <span class="film-card__time">17:00</span>
+            <span class="film-card__time">21:00</span>
           </div>
         </div>
       </a>
     </div>
+    <div class="cinema-info">
+      <span class="cinema-info__item"><i class="ti ti-map-pin" aria-hidden="true"></i> <strong>3 этаж ТРЦ Ривьера</strong></span>
+      <span class="cinema-info__item"><i class="ti ti-clock" aria-hidden="true"></i> пн–чт 10:00–00:00 · пт–сб 10:00–01:00 · вс 10:00–00:00</span>
+      <span class="cinema-info__item"><i class="ti ti-armchair" aria-hidden="true"></i> IMAX · 4DX · VIP</span>
+      <span class="cinema-info__item"><i class="ti ti-ticket" aria-hidden="true"></i> <strong>Купить билеты →</strong></span>
+    </div>
   </div>
 </section>
 
-<!-- CALENDAR -->
-<section class="section--sm" style="background:#fff">
+<!-- ════════════════ СЕРВИСЫ ════════════════ -->
+<section class="section" style="background:#f4f5f7">
   <div class="container">
-    <div class="sec-head">
-      <div class="sec-head__title">Афиша мая</div>
-      <a href="events.html" class="sec-head__link">Полная →</a>
-    </div>
-    <div class="cal">
-      <div class="cal__head"><div class="cal__month">Май 2026</div></div>
-      <div class="cal__grid">
-        <div class="cal__dow">Пн</div><div class="cal__dow">Вт</div><div class="cal__dow">Ср</div>
-        <div class="cal__dow">Чт</div><div class="cal__dow">Пт</div><div class="cal__dow">Сб</div><div class="cal__dow">Вс</div>
-        <div class="cal__day cal__day--past"></div><div class="cal__day cal__day--past"></div><div class="cal__day cal__day--past"></div>
-        <div class="cal__day cal__day--past">1</div><div class="cal__day cal__day--past">2</div><div class="cal__day cal__day--past">3</div><div class="cal__day cal__day--past">4</div>
-        <div class="cal__day cal__day--past">5</div><div class="cal__day cal__day--past">6</div><div class="cal__day cal__day--past">7</div>
-        <div class="cal__day cal__day--event cal__day--past" title="Открытие фестиваля">8</div>
-        <div class="cal__day cal__day--past">9</div>
-        <div class="cal__day cal__day--event cal__day--past" title="Ретро-пробег">10</div>
-        <div class="cal__day cal__day--past">11</div>
-        <div class="cal__day cal__day--past">12</div><div class="cal__day cal__day--past">13</div><div class="cal__day cal__day--past">14</div>
-        <div class="cal__day cal__day--past">15</div>
-        <div class="cal__day cal__day--event cal__day--past" title="Лето в движении">16</div>
-        <div class="cal__day cal__day--past">17</div><div class="cal__day cal__day--past">18</div>
-        <div class="cal__day cal__day--today">19</div>
-        <div class="cal__day">20</div><div class="cal__day">21</div>
-        <div class="cal__day cal__day--event" title="Конкурс рисунков">22</div>
-        <div class="cal__day">23</div>
-        <a href="event-open-air.html" class="cal__day cal__day--event" style="text-decoration:none" title="Open-Air концерт">24</a>
-        <div class="cal__day">25</div>
-        <div class="cal__day">26</div><div class="cal__day">27</div>
-        <div class="cal__day cal__day--event">28</div>
-        <div class="cal__day">29</div><div class="cal__day">30</div>
-        <div class="cal__day cal__day--event">31</div>
-        <div class="cal__day"></div>
-      </div>
+    <div class="sec-head"><div class="sec-head__title">Сервисы для посетителей</div><a href="services.html" class="sec-head__link">Все сервисы →</a></div>
+    <div class="services-grid">
+      <a href="services.html" class="service-item"><div class="service-item__icon"><i class="ti ti-baby-carriage" aria-hidden="true"></i></div><div class="service-item__name">Детские коляски</div><div class="service-item__sub">Бесплатно</div></a>
+      <a href="services.html" class="service-item"><div class="service-item__icon"><i class="ti ti-heart" aria-hidden="true"></i></div><div class="service-item__name">Комната мамы и малыша</div><div class="service-item__sub">1 и 3 этаж</div></a>
+      <a href="parking.html" class="service-item"><div class="service-item__icon"><i class="ti ti-parking" aria-hidden="true"></i></div><div class="service-item__name">Парковка 1000+ мест</div><div class="service-item__sub">Бесплатно · −1 и −2</div></a>
+      <a href="services.html" class="service-item"><div class="service-item__icon"><i class="ti ti-wifi" aria-hidden="true"></i></div><div class="service-item__name">Бесплатный Wi-Fi</div><div class="service-item__sub">Riviera_Free</div></a>
+      <a href="services.html" class="service-item"><div class="service-item__icon"><i class="ti ti-info-square" aria-hidden="true"></i></div><div class="service-item__name">Информационная стойка</div><div class="service-item__sub">1 этаж · Атриум</div></a>
+      <a href="services.html" class="service-item"><div class="service-item__icon"><i class="ti ti-coin" aria-hidden="true"></i></div><div class="service-item__name">Банкоматы</div><div class="service-item__sub">Все этажи</div></a>
     </div>
   </div>
 </section>
 
-<!-- PROMOS -->
-<section class="section" style="background:#f5f5f7">
-  <div class="container">
-    <div class="sec-head">
-      <div class="sec-head__title">Горячие акции</div>
-      <a href="news.html" class="sec-head__link">Все акции →</a>
-    </div>
-    <div class="promo-scroll">
-      <div class="promo-card">
-        <div class="promo-card__top" style="background:#e6f1fb;color:var(--blue)">−40%</div>
-        <div class="promo-card__body">
-          <div class="promo-card__store">Original Marines</div>
-          <div class="promo-card__name">Клиентские дни — скидки до 40%</div>
-          <div class="promo-card__date">19–25 мая 2026</div>
-          <div class="tag tag--promo mt-12">Акция</div>
-        </div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-card__top" style="background:#FAEEDA;color:#6E6112">1+1=3</div>
-        <div class="promo-card__body">
-          <div class="promo-card__store">belle you</div>
-          <div class="promo-card__name">При покупке 2 вещей — третья в подарок</div>
-          <div class="promo-card__date">до 11 мая 2026</div>
-          <div class="tag tag--sport mt-12">Акция</div>
-        </div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-card__top" style="background:#FBEAF0;color:var(--dark-purple)">🌿</div>
-        <div class="promo-card__body">
-          <div class="promo-card__store">Л'Окситан</div>
-          <div class="promo-card__name">Миндальная коллекция — специальные цены</div>
-          <div class="promo-card__date">15–31 мая 2026</div>
-          <div class="tag tag--fashion mt-12">Акция</div>
-        </div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-card__top" style="background:#e6f1fb;color:var(--blue)">📱</div>
-        <div class="promo-card__body">
-          <div class="promo-card__store">Samsung</div>
-          <div class="promo-card__name">Выгода на смартфон Samsung Galaxy</div>
-          <div class="promo-card__date">7–18 мая 2026</div>
-          <div class="tag tag--promo mt-12">Акция</div>
-        </div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-card__top" style="background:#EAF3DE;color:#3B6D11">Лего</div>
-        <div class="promo-card__body">
-          <div class="promo-card__store">Мир Кубиков</div>
-          <div class="promo-card__name">Новинки LEGO — первые в Москве</div>
-          <div class="promo-card__date">18–31 мая 2026</div>
-          <div class="tag tag--free mt-12" style="background:#3B6D11">Новинка</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEW SHOPS -->
-<section class="section--sm" style="background:#fff">
-  <div class="container">
-    <div class="sec-head">
-      <div class="sec-head__title">Новые магазины</div>
-      <a href="shops.html" class="sec-head__link">Все →</a>
-    </div>
-    <div class="grid-4">
-      <div style="background:var(--blue);border-radius:var(--radius-lg);padding:20px;text-align:center;color:#fff">
-        <div style="font-family:var(--font-head);font-size:18px;letter-spacing:2px">EKONIKA</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:0.5px">ОБУВЬ · 1 ЭТ.</div>
-        <div class="tag tag--new" style="margin-top:10px">Новый</div>
-      </div>
-      <div style="background:var(--teal);border-radius:var(--radius-lg);padding:20px;text-align:center;color:#fff">
-        <div style="font-family:var(--font-head);font-size:18px;letter-spacing:2px">STICKS SUSHI</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:0.5px">РЕСТОРАН · 3 ЭТ.</div>
-        <div class="tag tag--new" style="margin-top:10px">Новый</div>
-      </div>
-      <div style="background:var(--mid);border-radius:var(--radius-lg);padding:20px;text-align:center;color:#fff">
-        <div style="font-family:var(--font-head);font-size:18px;letter-spacing:2px">NEVEL.</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:0.5px">ПАДЕЛ · 3 ЭТ.</div>
-        <div class="tag tag--new" style="margin-top:10px">Новый</div>
-      </div>
-      <div style="background:var(--navy);border-radius:var(--radius-lg);padding:20px;text-align:center;color:#fff">
-        <div style="font-family:var(--font-head);font-size:18px;letter-spacing:2px">SELA</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:0.5px">ОДЕЖДА · 1–2 ЭТ.</div>
-        <div class="tag tag--new" style="margin-top:10px">Новый</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MAP TEASER -->
-<section class="section--sm" style="background:#f5f5f7">
-  <div class="container">
-    <div class="map-teaser">
-      <div class="map-teaser__text">
-        <h3>Интерактивная схема ТРЦ</h3>
-        <p>3 этажа, 200+ магазинов. Найдите нужный бренд, кафе или зону развлечений.</p>
-        <a href="map.html" class="btn btn--blue mt-20">Открыть схему →</a>
-      </div>
-      <i class="ti ti-map-2 map-teaser__icon" aria-hidden="true"></i>
-    </div>
-  </div>
-</section>
-
-<!-- SUBSCRIBE -->
+<!-- ════════════════ ПОДПИСКА ════════════════ -->
 <section class="section--sm" style="background:#fff">
   <div class="container">
     <div class="subscribe">
-      <div class="grid-2" style="align-items:center;gap:32px">
+      <div style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
         <div>
           <div class="subscribe__title">Не пропустите событие</div>
-          <div class="subscribe__sub">Подпишитесь — первыми узнавайте о концертах, акциях и конкурсах</div>
-          <div class="subscribe__form">
-            <input class="subscribe__input" type="email" placeholder="ваш e-mail">
-            <button class="subscribe__btn">OK</button>
-          </div>
-          <div class="subscribe__socials" style="margin-top:14px">
-            <a class="soc-link" href="https://t.me/rivieramoscow" target="_blank">
-              <i class="ti ti-brand-telegram"></i>Telegram
-            </a>
-            <a class="soc-link" href="https://vk.com/rivieramoscow" target="_blank">
-              <i class="ti ti-brand-vk"></i>ВКонтакте
-            </a>
+          <div class="subscribe__sub">Анонсы концертов, акции и новые арендаторы — первым на почту</div>
+          <div class="subscribe__form"><input class="subscribe__input" type="email" placeholder="ваш e-mail"><button class="subscribe__btn">Подписаться</button></div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <a class="soc-link" href="https://t.me/rivieramoscow" target="_blank"><i class="ti ti-brand-telegram" aria-hidden="true"></i> Telegram</a>
+            <a class="soc-link" href="https://vk.com/rivieramoscow" target="_blank"><i class="ti ti-brand-vk" aria-hidden="true"></i> ВКонтакте</a>
           </div>
         </div>
-        <div style="text-align:center">
-          <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
-            <path d="M10 60 C25 60 25 20 60 20 C95 20 95 60 110 60" stroke="var(--lt-teal)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.5"/>
-            <path d="M10 50 C25 50 25 10 60 10 C95 10 95 50 110 50" stroke="var(--bright)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.35"/>
-          </svg>
-        </div>
+        <svg width="100" height="70" viewBox="0 0 120 80" fill="none" aria-hidden="true" style="opacity:.35">
+          <path d="M10 60 C25 60 25 20 60 20 C95 20 95 60 110 60" stroke="#C4EBE5" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M10 50 C25 50 25 10 60 10 C95 10 95 50 110 50" stroke="#248FEB" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -445,11 +405,185 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="shared.js"></script>
 <script>
-  renderNav('home');
-  renderFooter();
-  startCountdown('countdown', '2026-05-24T19:00:00');
+(function(){
+const PAGE=document.body.dataset.page||'';
+const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const CLOSE_H=[22,22,22,22,23,23,22];  // closing hour per weekday (0=Mon)
+const todayDow=(new Date().getDay()+6)%7; // 0=Mon
+
+// ── topbar hours widget ──────────────────────────────────────────────────────
+function hoursWidget(){
+  const rows=DAYS.map((d,i)=>{
+    const cls=i===todayDow?'hw-col hw-today':'hw-col';
+    return`<div class="${cls}"><div class="hw-day">${d}</div><div class="hw-t">10:00</div><div class="hw-t">${CLOSE_H[i]}:00</div></div>`;
+  }).join('');
+  return`<div class="hw-wrap" id="hw-wrap">
+    <div class="topbar__item" onclick="toggleHW(event)" id="hw-trigger">
+      <i class="ti ti-clock"></i>
+      <span>Сегодня 10:00–${CLOSE_H[todayDow]}:00</span>
+      <i class="ti ti-chevron-down" style="font-size:11px;margin-left:2px"></i>
+    </div>
+    <div class="hw-dropdown" id="hw-dropdown">
+      <div class="hw-grid">${rows}</div>
+    </div>
+  </div>`;
+}
+function toggleHW(e){
+  e.stopPropagation();
+  const d=document.getElementById('hw-dropdown');
+  d.classList.toggle('open');
+  document.addEventListener('click',()=>d.classList.remove('open'),{once:true});
+}
+
+// ── nav links ────────────────────────────────────────────────────────────────
+const LINKS=[
+  {h:'shops.html',   l:'Магазины',    k:'shops'},
+  {h:'food.html',    l:'Ривьера Еда', k:'food'},
+  {h:'events.html',  l:'Развлечения', k:'events'},
+  {h:'sport.html',   l:'Спорт',       k:'sport'},
+  {h:'cinema.html',  l:'Кинотеатр',  k:'cinema'},
+  {h:'parking.html', l:'Парковка',    k:'parking'},
+  {h:'map.html',     l:'Схема',       k:'map'},
+  {h:'news.html',    l:'Акции',       k:'news'},
+];
+const nl=LINKS.map(x=>`<a href="${x.h}" class="mn__link${x.k===PAGE?' active':''}">${x.l}</a>`).join('');
+const ml=[{h:'index.html',l:'Главная',k:'home'},...LINKS,
+  {h:'services.html',l:'Сервисы',k:'services'},
+  {h:'about.html',l:'О нас',k:'about'},
+  {h:'contacts.html',l:'Контакты',k:'contacts'}
+].map(x=>`<a href="${x.h}"${x.k===PAGE?' class="active"':''}>${x.l}</a>`).join('');
+
+document.getElementById('nav-placeholder').innerHTML=`
+<div class="topbar">
+  <div class="container">
+    <div class="topbar__inner">
+      <div class="topbar__left">
+        ${hoursWidget()}
+        <span class="tb-div"></span>
+        <a href="contacts.html" class="topbar__item"><i class="ti ti-map-pin"></i><span>Как добраться</span></a>
+        <span class="tb-div"></span>
+        <a href="parking.html" class="topbar__item"><i class="ti ti-parking"></i><span>Парковка</span></a>
+        <span class="tb-div"></span>
+        <a href="services.html" class="topbar__item"><i class="ti ti-heart"></i><span>Сервисы</span></a>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__search"><i class="ti ti-search"></i><span>Поиск</span></div>
+        <div class="topbar__lang"><button class="tl-btn active" onclick="switchLang('RU')">RU</button><button class="tl-btn" onclick="switchLang('EN')">EN</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="mainnav">
+  <div class="container">
+    <div class="mn__inner">
+      <a href="index.html" class="mn__logo">
+        <svg width="26" height="18" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg>
+        <span class="mn__wordmark">РИВЬЕРА</span>
+      </a>
+      <div class="mn__links">${nl}<a href="events.html" class="mn__link mn__cta">Афиша</a></div>
+      <button class="mn__burger" onclick="document.getElementById('mob-nav').classList.toggle('open')" aria-label="Меню"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">${ml}</div>`;
+}
+
+// ── footer ───────────────────────────────────────────────────────────────────
+function renderFooter(){
+  const fp=document.getElementById('footer-placeholder');
+  if(!fp)return;
+  fp.innerHTML=`
+<footer class="footer">
+  <div class="container">
+    <div class="footer__main">
+      <div class="f-col f-col--brand">
+        <div class="f-logo"><svg width="22" height="15" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg><span>РИВЬЕРА</span></div>
+        <div class="f-tagline">Вспоминая будущее</div>
+        <div class="f-addr">Москва, Автозаводская, 18<br>м. Автозаводская<br><br><strong style="color:#fff;font-size:14px">+7 495 269-99-99</strong><br><small>+7 495 269-00-08 (аренда)</small></div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Посетителям</div>
+        <a class="f-link" href="map.html">Схема ТРЦ</a>
+        <a class="f-link" href="shops.html">Магазины</a>
+        <a class="f-link" href="events.html">События</a>
+        <a class="f-link" href="news.html">Акции</a>
+        <a class="f-link" href="parking.html">Парковка</a>
+        <a class="f-link" href="services.html">Сервисы</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Развлечения</div>
+        <a class="f-link" href="cinema.html">Синема Парк</a>
+        <a class="f-link" href="#">World Class</a>
+        <a class="f-link" href="#">Happy City</a>
+        <a class="f-link" href="#">Дубровка</a>
+        <a class="f-link" href="#">Nevel. Падел</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">О центре</div>
+        <a class="f-link" href="about.html">О Ривьере</a>
+        <a class="f-link" href="contacts.html">Контакты</a>
+        <a class="f-link" href="#">Аренда</a>
+        <a class="f-link" href="#">Вакансии</a>
+        <a class="f-link" href="#">Реклама</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Соцсети</div>
+        <a class="f-link" href="https://t.me/rivieramoscow" target="_blank"><i class="ti ti-brand-telegram"></i> Telegram</a>
+        <a class="f-link" href="https://vk.com/rivieramoscow" target="_blank"><i class="ti ti-brand-vk"></i> ВКонтакте</a>
+      </div>
+    </div>
+    <div class="f-tenants">
+      <div class="f-col-title" style="margin-bottom:14px">Режим работы арендаторов с отличным расписанием</div>
+      <div class="f-tenants-grid">
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-movie" style="color:var(--lt-teal)"></i> Синема Парк</div>
+          <div class="f-tenant-hours">пн–чт: 10:00–00:00 · пт–сб: 10:00–01:00 · вс: 10:00–00:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-tennis" style="color:var(--lt-teal)"></i> Nevel. Падел</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 8:00–22:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-run" style="color:var(--lt-teal)"></i> World Class</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 9:00–21:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-masks-theater" style="color:var(--lt-teal)"></i> Дубровка</div>
+          <div class="f-tenant-hours">пн–вс: 10:00–22:00 · касса до 19:00</div>
+        </div>
+      </div>
+      <div class="f-tenant-note">* Основной ТРЦ: пн–чт, вс: 10:00–22:00 · пт–сб: 10:00–23:00</div>
+    </div>
+    <div class="f-bottom">
+      <span>© ТРЦ Ривьера, 2025</span>
+      <div style="display:flex;gap:16px"><a href="#" class="f-bottom-link">Политика конфиденциальности</a><a href="#" class="f-bottom-link">Правила посещения</a></div>
+    </div>
+  </div>
+</footer>`;
+}
+
+// ── countdown ────────────────────────────────────────────────────────────────
+function startCountdown(id,dt){
+  function tick(){
+    const el=document.getElementById(id);if(!el)return;
+    const diff=new Date(dt)-new Date();
+    if(diff<=0){el.innerHTML='<span style="color:var(--coral);font-weight:700">Идёт прямо сейчас!</span>';return;}
+    const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    el.innerHTML=['дней','часов','минут','секунд'].map((l,i)=>`<div class="cnum"><div class="cnum__n">${[d,h,m,s][i]}</div><div class="cnum__l">${l}</div></div>`).join('');
+  }
+  tick();setInterval(tick,1000);
+}
+function switchLang(l){document.querySelectorAll('.tl-btn').forEach(b=>{b.classList.toggle('active',b.textContent===l)});}
+
+renderNav&&renderNav();
+renderFooter&&renderFooter();
+})();
+function renderNav(){}
+</script>
+<script>
+startCountdown('countdown','2026-05-24T19:00:00');
 </script>
 </body>
 </html>

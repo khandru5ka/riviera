@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Сервисы — ТРЦ Ривьера</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+  <style>
+    .srv-hero{padding:52px 0 44px}
+    .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .srv-card{background:#fff;border-radius:12px;border:1px solid rgba(0,0,0,.07);padding:28px 24px;transition:.18s}
+    .srv-card:hover{box-shadow:0 8px 28px rgba(0,46,163,.1);transform:translateY(-3px)}
+    .srv-card__icon{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px}
+    .srv-card__title{font-family:var(--font-head);font-size:15px;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+    .srv-card__desc{font-size:13px;color:#555;line-height:1.6;margin-bottom:10px}
+    .srv-card__meta{display:flex;flex-direction:column;gap:5px}
+    .srv-meta-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#888}
+    .srv-meta-item i{font-size:14px;color:var(--teal)}
+    .srv-cat-title{font-family:var(--font-head);font-size:18px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin:40px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--lt-teal)}
+    .srv-cat-title:first-child{margin-top:0}
+    @media(max-width:900px){.srv-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.srv-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-page="services">
+<div id="nav-placeholder"></div>
+
+<div class="srv-hero hero-grad--teal">
+  <div class="container">
+    <div class="label mb-8" style="color:rgba(0,46,163,.6)">ТРЦ Ривьера</div>
+    <div style="font-family:var(--font-head);font-size:clamp(26px,4vw,48px);color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Сервисы<br>для посетителей</div>
+    <div style="font-size:15px;color:rgba(0,46,163,.7);max-width:520px">Всё, что делает ваш визит в Ривьеру комфортным — от детских колясок до медпункта.</div>
+  </div>
+</div>
+<div class="pattern-stripe"></div>
+
+<section class="section" style="background:#f4f5f7">
+  <div class="container">
+
+    <div class="srv-cat-title">Для детей и семей</div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-baby-carriage" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Детские коляски</div>
+        <div class="srv-card__desc">Бесплатный прокат детских колясок для посетителей с маленькими детьми.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>Информационная стойка · 1 этаж</div>
+          <div class="srv-meta-item"><i class="ti ti-coin" aria-hidden="true"></i>Бесплатно · Залог 500 ₽</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#FBEAF0"><i class="ti ti-heart" style="color:var(--dark-purple)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Комната мамы и малыша</div>
+        <div class="srv-card__desc">Уютные комнаты для кормления и пеленания. Пеленальные столики, кресла, микроволновая печь для разогрева питания.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 этаж (у эскалатора А) · 3 этаж</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>В часы работы ТРЦ</div>
+          <div class="srv-meta-item"><i class="ti ti-coin" aria-hidden="true"></i>Бесплатно</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#EAF3DE"><i class="ti ti-playground" style="color:#3B6D11" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Детская игровая зона</div>
+        <div class="srv-card__desc">Безопасная игровая зона для детей до 10 лет. Присмотр воспитателя.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>3 этаж · рядом с Happy City</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>10:00 – 21:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="srv-cat-title">Навигация и информация</div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-info-square" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Информационная стойка</div>
+        <div class="srv-card__desc">Помощь с навигацией, схема ТРЦ, ответы на вопросы, бронирование залов и организация мероприятий.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 этаж · Атриум</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>10:00 – 21:00</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-wifi" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Бесплатный Wi-Fi</div>
+        <div class="srv-card__desc">Высокоскоростной Wi-Fi доступен по всему ТРЦ. Без ограничений по трафику и времени.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-wifi" aria-hidden="true"></i>Сеть: Riviera_Free</div>
+          <div class="srv-meta-item"><i class="ti ti-lock-open" aria-hidden="true"></i>Без пароля · SMS-авторизация</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#FAEEDA"><i class="ti ti-map-2" style="color:var(--yellow)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Интерактивная схема</div>
+        <div class="srv-card__desc">Сенсорные терминалы-навигаторы на каждом этаже. Поиск магазина, кафе или сервиса.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>Все этажи · у эскалаторов</div>
+          <div class="srv-meta-item"><i class="ti ti-accessible" aria-hidden="true"></i>Адаптированы для МГН</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="srv-cat-title">Финансовые сервисы</div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-building-bank" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Банкоматы</div>
+        <div class="srv-card__desc">Банкоматы Сбербанка, ВТБ и Альфа-Банка на всех этажах. Снятие и пополнение без комиссии в своём банке.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 эт. (×3), 2 эт. (×2), 3 эт. (×1)</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>Круглосуточно</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#EAF3DE"><i class="ti ti-arrows-exchange" style="color:#3B6D11" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Обмен валюты</div>
+        <div class="srv-card__desc">Пункт обмена валюты с конкурентными курсами. Наличный и безналичный обмен.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 этаж · рядом с главным входом</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>10:00 – 21:00</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#FAEEDA"><i class="ti ti-receipt" style="color:var(--yellow)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Tax Free</div>
+        <div class="srv-card__desc">Оформление Tax Free для иностранных туристов в магазинах-участниках. Список магазинов на информационной стойке.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>Информационная стойка</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="srv-cat-title">Безопасность и здоровье</div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#FCEBEB"><i class="ti ti-first-aid-kit" style="color:#A32D2D" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Медицинский пункт</div>
+        <div class="srv-card__desc">Медпункт с квалифицированным персоналом. Первая помощь, АЭД (дефибриллятор), аптечка.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 этаж · за информационной стойкой</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>10:00 – 22:00</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-shield-check" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Служба безопасности</div>
+        <div class="srv-card__desc">Круглосуточная охрана и видеонаблюдение по всему ТРЦ и парковке.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-phone" aria-hidden="true"></i>+7 495 269-99-99 (доб. 5)</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>Круглосуточно</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#EAF3DE"><i class="ti ti-package" style="color:#3B6D11" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Камера хранения</div>
+        <div class="srv-card__desc">Автоматические камеры хранения для покупок и личных вещей. Различные размеры ячеек.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>1 этаж у главного входа · −1 паркинг</div>
+          <div class="srv-meta-item"><i class="ti ti-coin" aria-hidden="true"></i>от 50 ₽/час</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="srv-cat-title">Транспорт и мобильность</div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#e6f1fb"><i class="ti ti-car" style="color:var(--blue)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Парковка 1000+ мест</div>
+        <div class="srv-card__desc">Бесплатный подземный паркинг на уровнях −1 и −2. Видеонаблюдение, зарядка электромобилей.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-coin" aria-hidden="true"></i>Бесплатно</div>
+          <div class="srv-meta-item"><i class="ti ti-clock" aria-hidden="true"></i>Круглосуточно</div>
+          <a href="parking.html" style="font-size:12px;font-weight:700;color:var(--bright);margin-top:4px;display:inline-flex;align-items:center;gap:4px">Подробнее о парковке <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#FAEEDA"><i class="ti ti-taxi" style="color:var(--yellow)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Зона высадки такси</div>
+        <div class="srv-card__desc">Выделенная зона для заказного транспорта и такси у главного входа. Доступ для Яндекс.Такси и других сервисов.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>Главный вход · Автозаводская ул.</div>
+        </div>
+      </div>
+      <div class="srv-card">
+        <div class="srv-card__icon" style="background:#C4EBE5"><i class="ti ti-bike" style="color:var(--teal)" aria-hidden="true"></i></div>
+        <div class="srv-card__title">Велопарковка</div>
+        <div class="srv-card__desc">Охраняемая велопарковка у главного входа. Велозамки прилагаются.</div>
+        <div class="srv-card__meta">
+          <div class="srv-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>Главный вход · наземная зона</div>
+          <div class="srv-meta-item"><i class="ti ti-coin" aria-hidden="true"></i>Бесплатно</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script>
+(function(){
+const PAGE=document.body.dataset.page||'';
+const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const CLOSE_H=[22,22,22,22,23,23,22];  // closing hour per weekday (0=Mon)
+const todayDow=(new Date().getDay()+6)%7; // 0=Mon
+
+// ── topbar hours widget ──────────────────────────────────────────────────────
+function hoursWidget(){
+  const rows=DAYS.map((d,i)=>{
+    const cls=i===todayDow?'hw-col hw-today':'hw-col';
+    return`<div class="${cls}"><div class="hw-day">${d}</div><div class="hw-t">10:00</div><div class="hw-t">${CLOSE_H[i]}:00</div></div>`;
+  }).join('');
+  return`<div class="hw-wrap" id="hw-wrap">
+    <div class="topbar__item" onclick="toggleHW(event)" id="hw-trigger">
+      <i class="ti ti-clock"></i>
+      <span>Сегодня 10:00–${CLOSE_H[todayDow]}:00</span>
+      <i class="ti ti-chevron-down" style="font-size:11px;margin-left:2px"></i>
+    </div>
+    <div class="hw-dropdown" id="hw-dropdown">
+      <div class="hw-grid">${rows}</div>
+    </div>
+  </div>`;
+}
+function toggleHW(e){
+  e.stopPropagation();
+  const d=document.getElementById('hw-dropdown');
+  d.classList.toggle('open');
+  document.addEventListener('click',()=>d.classList.remove('open'),{once:true});
+}
+
+// ── nav links ────────────────────────────────────────────────────────────────
+const LINKS=[
+  {h:'shops.html',   l:'Магазины',    k:'shops'},
+  {h:'food.html',    l:'Ривьера Еда', k:'food'},
+  {h:'events.html',  l:'Развлечения', k:'events'},
+  {h:'sport.html',   l:'Спорт',       k:'sport'},
+  {h:'cinema.html',  l:'Кинотеатр',  k:'cinema'},
+  {h:'parking.html', l:'Парковка',    k:'parking'},
+  {h:'map.html',     l:'Схема',       k:'map'},
+  {h:'news.html',    l:'Акции',       k:'news'},
+];
+const nl=LINKS.map(x=>`<a href="${x.h}" class="mn__link${x.k===PAGE?' active':''}">${x.l}</a>`).join('');
+const ml=[{h:'index.html',l:'Главная',k:'home'},...LINKS,
+  {h:'services.html',l:'Сервисы',k:'services'},
+  {h:'about.html',l:'О нас',k:'about'},
+  {h:'contacts.html',l:'Контакты',k:'contacts'}
+].map(x=>`<a href="${x.h}"${x.k===PAGE?' class="active"':''}>${x.l}</a>`).join('');
+
+document.getElementById('nav-placeholder').innerHTML=`
+<div class="topbar">
+  <div class="container">
+    <div class="topbar__inner">
+      <div class="topbar__left">
+        ${hoursWidget()}
+        <span class="tb-div"></span>
+        <a href="contacts.html" class="topbar__item"><i class="ti ti-map-pin"></i><span>Как добраться</span></a>
+        <span class="tb-div"></span>
+        <a href="parking.html" class="topbar__item"><i class="ti ti-parking"></i><span>Парковка</span></a>
+        <span class="tb-div"></span>
+        <a href="services.html" class="topbar__item"><i class="ti ti-heart"></i><span>Сервисы</span></a>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__search"><i class="ti ti-search"></i><span>Поиск</span></div>
+        <div class="topbar__lang"><button class="tl-btn active" onclick="switchLang('RU')">RU</button><button class="tl-btn" onclick="switchLang('EN')">EN</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="mainnav">
+  <div class="container">
+    <div class="mn__inner">
+      <a href="index.html" class="mn__logo">
+        <svg width="26" height="18" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg>
+        <span class="mn__wordmark">РИВЬЕРА</span>
+      </a>
+      <div class="mn__links">${nl}<a href="events.html" class="mn__link mn__cta">Афиша</a></div>
+      <button class="mn__burger" onclick="document.getElementById('mob-nav').classList.toggle('open')" aria-label="Меню"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">${ml}</div>`;
+}
+
+// ── footer ───────────────────────────────────────────────────────────────────
+function renderFooter(){
+  const fp=document.getElementById('footer-placeholder');
+  if(!fp)return;
+  fp.innerHTML=`
+<footer class="footer">
+  <div class="container">
+    <div class="footer__main">
+      <div class="f-col f-col--brand">
+        <div class="f-logo"><svg width="22" height="15" viewBox="0 0 44 28" fill="none"><path d="M2 24 C9 24 9 4 22 4 C35 4 35 24 42 24" stroke="#C4EBE5" stroke-width="3.5" stroke-linecap="round" fill="none"/></svg><span>РИВЬЕРА</span></div>
+        <div class="f-tagline">Вспоминая будущее</div>
+        <div class="f-addr">Москва, Автозаводская, 18<br>м. Автозаводская<br><br><strong style="color:#fff;font-size:14px">+7 495 269-99-99</strong><br><small>+7 495 269-00-08 (аренда)</small></div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Посетителям</div>
+        <a class="f-link" href="map.html">Схема ТРЦ</a>
+        <a class="f-link" href="shops.html">Магазины</a>
+        <a class="f-link" href="events.html">События</a>
+        <a class="f-link" href="news.html">Акции</a>
+        <a class="f-link" href="parking.html">Парковка</a>
+        <a class="f-link" href="services.html">Сервисы</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Развлечения</div>
+        <a class="f-link" href="cinema.html">Синема Парк</a>
+        <a class="f-link" href="#">World Class</a>
+        <a class="f-link" href="#">Happy City</a>
+        <a class="f-link" href="#">Дубровка</a>
+        <a class="f-link" href="#">Nevel. Падел</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">О центре</div>
+        <a class="f-link" href="about.html">О Ривьере</a>
+        <a class="f-link" href="contacts.html">Контакты</a>
+        <a class="f-link" href="#">Аренда</a>
+        <a class="f-link" href="#">Вакансии</a>
+        <a class="f-link" href="#">Реклама</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Соцсети</div>
+        <a class="f-link" href="https://t.me/rivieramoscow" target="_blank"><i class="ti ti-brand-telegram"></i> Telegram</a>
+        <a class="f-link" href="https://vk.com/rivieramoscow" target="_blank"><i class="ti ti-brand-vk"></i> ВКонтакте</a>
+      </div>
+    </div>
+    <div class="f-tenants">
+      <div class="f-col-title" style="margin-bottom:14px">Режим работы арендаторов с отличным расписанием</div>
+      <div class="f-tenants-grid">
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-movie" style="color:var(--lt-teal)"></i> Синема Парк</div>
+          <div class="f-tenant-hours">пн–чт: 10:00–00:00 · пт–сб: 10:00–01:00 · вс: 10:00–00:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-tennis" style="color:var(--lt-teal)"></i> Nevel. Падел</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 8:00–22:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-run" style="color:var(--lt-teal)"></i> World Class</div>
+          <div class="f-tenant-hours">пн–пт: 7:00–23:00 · сб–вс: 9:00–21:00</div>
+        </div>
+        <div class="f-tenant-item">
+          <div class="f-tenant-name"><i class="ti ti-masks-theater" style="color:var(--lt-teal)"></i> Дубровка</div>
+          <div class="f-tenant-hours">пн–вс: 10:00–22:00 · касса до 19:00</div>
+        </div>
+      </div>
+      <div class="f-tenant-note">* Основной ТРЦ: пн–чт, вс: 10:00–22:00 · пт–сб: 10:00–23:00</div>
+    </div>
+    <div class="f-bottom">
+      <span>© ТРЦ Ривьера, 2025</span>
+      <div style="display:flex;gap:16px"><a href="#" class="f-bottom-link">Политика конфиденциальности</a><a href="#" class="f-bottom-link">Правила посещения</a></div>
+    </div>
+  </div>
+</footer>`;
+}
+
+// ── countdown ────────────────────────────────────────────────────────────────
+function startCountdown(id,dt){
+  function tick(){
+    const el=document.getElementById(id);if(!el)return;
+    const diff=new Date(dt)-new Date();
+    if(diff<=0){el.innerHTML='<span style="color:var(--coral);font-weight:700">Идёт прямо сейчас!</span>';return;}
+    const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    el.innerHTML=['дней','часов','минут','секунд'].map((l,i)=>`<div class="cnum"><div class="cnum__n">${[d,h,m,s][i]}</div><div class="cnum__l">${l}</div></div>`).join('');
+  }
+  tick();setInterval(tick,1000);
+}
+function switchLang(l){document.querySelectorAll('.tl-btn').forEach(b=>{b.classList.toggle('active',b.textContent===l)});}
+
+renderNav&&renderNav();
+renderFooter&&renderFooter();
+})();
+function renderNav(){}
+</script>
+</body>
+</html>
